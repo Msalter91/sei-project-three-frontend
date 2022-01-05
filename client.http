@@ -1,0 +1,5 @@
+
+@baseUrl = '/api/XXXXXXXX.json'
+
+GET ALL XXXXXX
+GET {{baseUrl}}/api/XXXXXX.json
