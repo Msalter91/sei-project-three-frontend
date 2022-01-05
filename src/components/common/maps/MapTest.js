@@ -10,14 +10,17 @@ const trip = {
   ],
 }
 
-const render = () => {
-  return <h1>{Status}</h1>
-}
-function MapTest () {
+function MapTest (tripData = trip) {
+  const render = (status = Status) => {
+    return <h1>{status}</h1>
+  }
   return (
-    <Wrapper apiKey='' render={render}>
-      <RenderMap />
-    </Wrapper>
+    <>
+      <h1>map wrapper</h1>
+      <Wrapper apiKey={process.env.REACT_APP_MAPS_API_KEY} render={render}>
+        <RenderMap locations={tripData.memories}/>
+      </Wrapper>
+    </>
   )
 }
 
