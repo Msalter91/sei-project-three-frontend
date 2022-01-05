@@ -1,3 +1,5 @@
+import { Wrapper, Status } from '@googlemaps/react-wrapper'
+import RenderMap from './RenderMap'
 
 const trip = {
   memories: [
@@ -8,9 +10,14 @@ const trip = {
   ],
 }
 
+const render = () => {
+  return <h1>{Status}</h1>
+}
 function MapTest () {
   return (
-    'Im a map'
+    <Wrapper apiKey='' render={render}>
+      <RenderMap />
+    </Wrapper>
   )
 }
 
