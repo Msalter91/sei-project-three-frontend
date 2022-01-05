@@ -18,9 +18,7 @@ function App() {
         <Route path="/aboutus"><AboutUs/></Route>
         <Route path="/register"><Register/></Route>
         <Route path="/login"><Login/></Route>
-        <Route path="/maptest">
-          <MapTest />
-        </Route>
+        <Route path="/maptest"><MapTest /></Route>
       </Switch>
     </BrowserRouter>
   )
