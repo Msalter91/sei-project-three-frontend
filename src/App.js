@@ -6,7 +6,7 @@ import Nav from './components/common/Nav'
 
 import Register from './components/auth/Register'
 import Login from './components/auth/Login'
-import MapTest from './components/common/MapTest'
+import MapTest from './components/common/maps/MapTest'
 
 function App() {
   return (
