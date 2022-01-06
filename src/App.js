@@ -6,7 +6,7 @@ import AboutUs from './components/common/AboutUs'
 import Profile from './components/common/Profile'
 import Register from './components/auth/Register'
 import Login from './components/auth/Login'
-import MapTest from './components/common/maps/MapTest'
+import MapTest from './components/common/maps/MapTestPage'
 
 function App() {
   return (

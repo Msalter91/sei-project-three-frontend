@@ -1,5 +1,5 @@
 import { Wrapper, Status } from '@googlemaps/react-wrapper'
-import RenderMap from './RenderMap'
+import React from 'react'
 
 const trip = {
   memories: [
@@ -19,7 +19,33 @@ function findCenterOfLocationArray (array){
   return { lat: locationSum.lat / count, lng: locationSum.lng / count }
 }
 
-function MapTest ({ tripData = trip, zoom = 4 , width = 500, height = 500 }) {
+function RenderMap ({ ...options }) {
+  const mapContainerRef = React.useRef(null)
+  const [map, setMap] = React.useState(null)
+
+  React.useEffect(()=>{
+    if (mapContainerRef.current && !map) {
+      setMap(new window.google.maps.Map(mapContainerRef.current, {}))
+    }
+  },[mapContainerRef, map])
+
+  if (map) {
+    map.setOptions(options)
+  }
+
+  return (
+    <div ref={mapContainerRef} 
+      style= { { width: '100%', height: '100%' }}>
+    </div>
+  )
+}
+
+function Map ({ 
+  tripData = trip, 
+  zoom = 4 , 
+  // width = '100%', 
+  // height = '100%',
+}) {
   const render = (status = Status) => {
     return <h1>{status}</h1>
   }
@@ -27,12 +53,10 @@ function MapTest ({ tripData = trip, zoom = 4 , width = 500, height = 500 }) {
   const tripCenter = findCenterOfLocationArray(tripData.memories)
   
   return (
-    <div style={{ width: width, height: height }}>
-      <Wrapper apiKey={process.env.REACT_APP_MAPS_API_KEY} render={render}>
-        <RenderMap center={tripCenter} zoom={zoom} />
-      </Wrapper>
-    </div>
+    <Wrapper apiKey={process.env.REACT_APP_MAPS_API_KEY} render={render}>
+      <RenderMap center={tripCenter} zoom={zoom} />
+    </Wrapper>
   )
 }
 
-export default MapTest
+export default Map
