@@ -39,7 +39,7 @@ function RenderMap ({
     longitude: center.lng,
     zoom: initZoom,
     bearing: 0,
-    pitch: 0,
+    pitch: 50,
     height: 500,
     width: 500,
   })
@@ -55,7 +55,7 @@ function RenderMap ({
         [locationStats.lngMax, locationStats.latMax]
       ],
       {
-        padding: 40,
+        padding: 60,
       }
     )
     console.log('zoom:', fittedZoom)
