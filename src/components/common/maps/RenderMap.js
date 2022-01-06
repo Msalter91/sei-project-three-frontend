@@ -40,6 +40,8 @@ function RenderMap ({
     zoom: initZoom,
     bearing: 0,
     pitch: 0,
+    height: 500,
+    width: 500,
   })
 
   function fitViewPort () {
@@ -53,7 +55,7 @@ function RenderMap ({
         [locationStats.lngMax, locationStats.latMax]
       ],
       {
-        padding: 0,
+        padding: 40,
       }
     )
     console.log('zoom:', fittedZoom)
@@ -61,18 +63,18 @@ function RenderMap ({
       ...viewport,
       latitude: fittedLat,
       longitude: fittedLng,
-      zoom: -fittedZoom })
+      zoom: fittedZoom })
   }
   useEffect(()=>{
     fitViewPort()
-  },[])
+  }, [])
 
   return (
     <div className="map-container" style={{ height: '100%', width: '100%' }}>
       <ReactMapGL
         mapboxApiAccessToken={process.env.REACT_APP_MAPS_API_KEY}
-        height="100%"
-        width="100%"
+        // height="100%"
+        // width="100%"
         mapStyle='mapbox://styles/mapbox/outdoors-v11'
         {...viewport}
         onViewportChange={newViewport => setViewport(newViewport)}
