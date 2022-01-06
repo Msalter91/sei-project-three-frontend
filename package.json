@@ -3,6 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@googlemaps/js-api-loader": "^1.13.1",
+    "@googlemaps/react-wrapper": "^1.1.19",
     "axios": "^0.21.1",
     "bootstrap": "^5.1.3",
     "eslint-plugin-jsx-a11y": "^6.4.1",
