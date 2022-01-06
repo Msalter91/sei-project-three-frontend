@@ -3,16 +3,16 @@ import RenderMap from './RenderMap'
 
 const trip = {
   memories: [
-    { location: { lat: -25.344, lng: 131.036 } },
-    { location: { lat: -26.344, lng: 130.036 } },
-    { location: { lat: -24.344, lng: 131.036 } },
-    { location: { lat: -25.344, lng: 132.036 } }
+    { lat: -25.344, lng: 131.036 },
+    { lat: -26.344, lng: 130.036 },
+    { lat: -24.344, lng: 131.036 },
+    { lat: -28.344, lng: 138.036 }
   ],
 }
 function findCenterOfLocationArray (array){
   const locationSum = array.reduce((acc, cur)=>{
-    acc.lat += cur.location.lat
-    acc.lng += cur.location.lng
+    acc.lat += cur.lat
+    acc.lng += cur.lng
     return acc
   }, { lat: 0, lng: 0 })
   const count = array.length
