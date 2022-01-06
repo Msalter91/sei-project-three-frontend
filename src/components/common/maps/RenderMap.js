@@ -85,7 +85,7 @@ function RenderMap ({
             latitude={location.lat}
             longitude={location.lng}
           >
-            <span role="img" aria-label="map-marker" className="marker">{'A'}</span>
+            <span role="img" aria-label="map-marker" className="marker">{'📸'}</span>
           </Marker>
         ))}
         {/* <MapController onClick={handleNewLocation}/> */}
