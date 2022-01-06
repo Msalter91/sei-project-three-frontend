@@ -43,7 +43,14 @@ function RenderMap ({
   })
 
   return (
-    <div ref={mapContainer} className='map-container' style={{ height: '100%', width: '100%' }} />
+    <div style={{ position: 'relative', height: '100%', width: '100%' }}>
+      <div className="sidebar">
+Longitude: {lng} | Latitude: {lat} | Zoom: {zoom}
+      </div>
+      <div ref={mapContainer} className='map-container'
+        style={{ position: 'absolute', left: 0, top: 0,height: '100%', width: '100%' }
+        }/>
+    </div>
   )
 }
 
