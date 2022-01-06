@@ -1,9 +1,9 @@
 // import React from 'react'
 import { BrowserRouter, Switch, Route } from 'react-router-dom'
 import Home from './components/common/Home'
-import AboutUs from './components/common/AboutUs'
 import Nav from './components/common/Nav'
-
+import AboutUs from './components/common/AboutUs'
+import Profile from './components/common/Profile'
 import Register from './components/auth/Register'
 import Login from './components/auth/Login'
 
@@ -15,8 +15,10 @@ function App() {
       <Switch>
         <Route exact path="/"><Home /></Route>
         <Route path="/aboutus"><AboutUs/></Route>
+        <Route path="/profile"><Profile/></Route>
         <Route path="/register"><Register/></Route>
         <Route path="/login"><Login/></Route>
+
       </Switch>
     </BrowserRouter>
   )
