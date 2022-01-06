@@ -4,20 +4,20 @@ import ReactMapGL, { Marker, WebMercatorViewport } from 'react-map-gl'
 function getLocationArrayStats (array){
   const locationAggregates = array.reduce((acc, cur)=>{
     acc.lat += cur.lat
-    acc.lng += cur.lng
+    acc.long += cur.long
     if (cur.lat > acc.latMax) acc.latMax = cur.lat
     if (cur.lat < acc.latMin) acc.latMin = cur.lat
-    if (cur.lng > acc.lngMax) acc.lngMax = cur.lng
-    if (cur.lng < acc.lngMin) acc.lngMin = cur.lng
+    if (cur.long > acc.longMax) acc.longMax = cur.long
+    if (cur.long < acc.longMin) acc.longMin = cur.long
     return acc
-  }, { lat: 0, lng: 0 , latMax: -180, latMin: 180, lngMax: -180, lngMin: 180 })
+  }, { lat: 0, long: 0 , latMax: -180, latMin: 180, longMax: -180, longMin: 180 })
   const count = array.length
   return {
     ...locationAggregates,
     lat: locationAggregates.lat / count, 
-    lng: locationAggregates.lng / count , 
+    long: locationAggregates.long / count , 
     latRng: locationAggregates.latMax - locationAggregates.latMin ,
-    lngRng: locationAggregates.lngMax - locationAggregates.lngMin ,
+    longRng: locationAggregates.longMax - locationAggregates.longMin ,
   }
 }
 
@@ -28,7 +28,7 @@ function RenderMap ({
 }) {
   const locationStats = getLocationArrayStats(data.memories)
   if (!center){
-    center = { lat: locationStats.lat, lng: locationStats.lng }
+    center = { lat: locationStats.lat, long: locationStats.long }
   }
   if (!initZoom) {
     initZoom = 3
@@ -36,7 +36,7 @@ function RenderMap ({
 
   const [viewport, setViewport] = useState({
     latitude: center.lat,
-    longitude: center.lng,
+    longitude: center.long,
     zoom: initZoom,
     bearing: 0,
     pitch: 50,
@@ -48,21 +48,20 @@ function RenderMap ({
     const fittedVp = new WebMercatorViewport(viewport)
     const { 
       latitude: fittedLat, 
-      longitude: fittedLng, 
+      longitude: fittedlong, 
       zoom: fittedZoom } = fittedVp.fitBounds(
       [
-        [locationStats.lngMin, locationStats.latMin],
-        [locationStats.lngMax, locationStats.latMax]
+        [locationStats.longMin, locationStats.latMin],
+        [locationStats.longMax, locationStats.latMax]
       ],
       {
         padding: 60,
       }
     )
-    console.log('zoom:', fittedZoom)
     setViewport({ 
       ...viewport,
       latitude: fittedLat,
-      longitude: fittedLng,
+      longitude: fittedlong,
       zoom: fittedZoom })
   }
   useEffect(()=>{
@@ -83,7 +82,7 @@ function RenderMap ({
           <Marker
             key={location.id}
             latitude={location.lat}
-            longitude={location.lng}
+            longitude={location.long}
           >
             <span role="img" aria-label="map-marker" className="marker">{'📸'}</span>
           </Marker>
