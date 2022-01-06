@@ -1,11 +1,26 @@
 
-@baseUrl = 'https://api.teleport.org/api/,'
+# @baseUrl = 'https://api.teleport.org/api/,'
 
-GET ALL https://api.teleport.org/api/countries/
-
-
+GET https://countriesnow.space/api/v0.1/countries/capital
 
 
+#==================================================================
+# WORKING API'S
+#==================================================================
+# https://restcountries.com/v2/all
+# (country names, flag images)
+
+# https://documenter.getpostman.com/view/1134062/T1LJjU52#abee09ea-aeb9-479c-b970-81d909c2a58c
+#Population /Location / Flag / Currencies / Capital / Cities / Codes / Filter / States / More
+# https://countriesnow.space/api/v0.1/countries/population/cities
+# https://countriesnow.space/api/v0.1/countries/currency
+# https://countriesnow.space/api/v0.1/countries/capital
 
 
-http://developers.teleport.org/api/getting_started/#photos_ua
+# https://restcountries.eu/rest/v2/ *** DID NOT WORK
+
+
+
+
+
+
