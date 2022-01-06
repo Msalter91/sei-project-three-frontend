@@ -1,5 +1,5 @@
-import React, { useState } from 'react'
-import ReactMapGL, { Marker } from 'react-map-gl'
+import React, { useEffect, useState } from 'react'
+import ReactMapGL, { Marker, WebMercatorViewport } from 'react-map-gl'
 
 function getLocationArrayStats (array){
   const locationAggregates = array.reduce((acc, cur)=>{
@@ -12,7 +12,8 @@ function getLocationArrayStats (array){
     return acc
   }, { lat: 0, lng: 0 , latMax: -180, latMin: 180, lngMax: -180, lngMin: 180 })
   const count = array.length
-  return { 
+  return {
+    ...locationAggregates,
     lat: locationAggregates.lat / count, 
     lng: locationAggregates.lng / count , 
     latRng: locationAggregates.latMax - locationAggregates.latMin ,
@@ -30,14 +31,41 @@ function RenderMap ({
     center = { lat: locationStats.lat, lng: locationStats.lng }
   }
   if (!initZoom) {
-    // const latZoom = 2
     initZoom = 3
   }
+
   const [viewport, setViewport] = useState({
     latitude: center.lat,
     longitude: center.lng,
     zoom: initZoom,
+    bearing: 0,
+    pitch: 0,
   })
+
+  function fitViewPort () {
+    const fittedVp = new WebMercatorViewport(viewport)
+    const { 
+      latitude: fittedLat, 
+      longitude: fittedLng, 
+      zoom: fittedZoom } = fittedVp.fitBounds(
+      [
+        [locationStats.lngMin, locationStats.latMin],
+        [locationStats.lngMax, locationStats.latMax]
+      ],
+      {
+        padding: 0,
+      }
+    )
+    console.log('zoom:', fittedZoom)
+    setViewport({ 
+      ...viewport,
+      latitude: fittedLat,
+      longitude: fittedLng,
+      zoom: -fittedZoom })
+  }
+  useEffect(()=>{
+    fitViewPort()
+  },[])
 
   return (
     <div className="map-container" style={{ height: '100%', width: '100%' }}>
