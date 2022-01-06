@@ -1,4 +1,5 @@
-import React from 'react'
+import React, { useState } from 'react'
+import ReactMapGL, { Marker } from 'react-map-gl'
 
 function findCenterOfLocationArray (array){
   const locationSum = array.reduce((acc, cur)=>{
@@ -14,11 +15,33 @@ function RenderMap ({
   data, 
   center = findCenterOfLocationArray(data.memories), 
 }) {
-  
+  const [viewport, setViewport] = useState({
+    latitude: center.lat,
+    longitude: center.lng,
+    zoom: 3,
+  })
+
   return (
-    <div style={{ position: 'relative', height: '100%', width: '100%' }}>
-      {center.lat}
-      {center.lng}
+    <div className="map-container" style={{ height: '100%', width: '100%' }}>
+      <ReactMapGL
+        mapboxApiAccessToken={process.env.REACT_APP_MAPS_API_KEY}
+        height="100%"
+        width="100%"
+        mapStyle='mapbox://styles/mapbox/outdoors-v11'
+        {...viewport}
+        onViewportChange={newViewport => setViewport(newViewport)}
+      >
+        {data.memories.map(location => (
+          <Marker
+            key={location.id}
+            latitude={location.lat}
+            longitude={location.lng}
+          >
+            <span role="img" aria-label="map-marker" className="marker">{'A'}</span>
+          </Marker>
+        ))}
+        {/* <MapController onClick={handleNewLocation}/> */}
+      </ReactMapGL>
     </div>
   )
 }
