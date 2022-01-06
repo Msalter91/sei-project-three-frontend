@@ -1,5 +1,11 @@
 
-@baseUrl = '/api/XXXXXXXX.json'
+@baseUrl = 'https://api.teleport.org/api/,'
 
-GET ALL XXXXXX
-GET {{baseUrl}}/api/XXXXXX.json
+GET ALL https://api.teleport.org/api/countries/
+
+
+
+
+
+
+http://developers.teleport.org/api/getting_started/#photos_ua
