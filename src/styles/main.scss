@@ -192,7 +192,14 @@ form {
   border: 1px solid black;
 }
 
+//* * * * * MEMORY SHOW  * * * * *
 
+.memory-image-holder{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
 
 //* * * * * L O G  I N  * * * * * 
 
