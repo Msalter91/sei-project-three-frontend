@@ -42,10 +42,12 @@ function TripCreate () {
               type="text"
               name="title"
               id="title"
-              className="form-control"
+              className={
+                `form-control ${formErrors.countryVisited ? 'invalid-feedback' : ''}`}
               value={formData.title}
               onChange={handleChange}
             />
+            {formErrors.title && <p className="invalid-feedback">{formErrors.title}</p>  }
           </div>
           <div className="form-group">
             <label htmlFor="countryVisited">Where did you start?</label>
@@ -53,22 +55,28 @@ function TripCreate () {
               type="text" 
               name="countryVisited"
               id="countryVisited"
-              className="form-control"
+              className={
+                `form-control ${formErrors.countryVisited ? 'invalid-feedback' : ''}`}
               value={formData.countryVisited}
               onChange={handleChange} 
             />
+            {formErrors.countryVisited && <p className="invalid-feedback">{formErrors.countryVisited}</p>  }
           </div>
           <div className="form-group">
             <label htmlFor="notes">Tell the world about your trip!</label>
             <textarea 
               name="notes"
               id="notes"
-              className="form-control"
+              className={
+                `form-control 
+                ${(maxLengthNotes - formData.notes.length < 0 ||
+                  formErrors.notes ) ? 'invalid-feedback' : ''}`}
               value={formData.notes}
               onChange={handleChange} />
             <div className='row'>
               <small className="form-text text-muted ml-auto text-end">{maxLengthNotes - formData.notes.length} characters remaining</small>
             </div>
+            {formErrors.notes && <p className="invalid-feedback">{formErrors.notes}</p>  }
           </div>
           <div>
             <RenderMap />
