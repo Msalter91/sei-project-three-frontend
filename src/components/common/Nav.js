@@ -1,7 +1,14 @@
 import { Link } from 'react-router-dom'
+import { isAuthenticated, removeToken } from '../../lib/auth'
 import { Navbar } from 'react-bootstrap'
 
 function Nav() {
+  const isAuth = isAuthenticated()
+  const handleLogout = () => {
+    removeToken()
+    location.reload()
+  }
+
 
   return (
     <Navbar bg="" variant="light" expand="md">
@@ -26,15 +33,17 @@ function Nav() {
         </ul>
             
         <ul className="navbar-nav ms-auto">   
-
-          <div className="nav-item auth">
-            <li className="nav-item">
-              <Link to="/register" className="nav-link active">REGISTER</Link></li>
-            <li className="nav-item">
-              <Link to="/login" className="nav-link active">LOGIN</Link></li>
+          {isAuth ? (
+            <Link to="/" className="navbar-item nav-link active" onClick={handleLogout}>LOG OUT</Link>
+          ) : (
+            <div className="nav-item auth">
+              <li className="nav-item">
+                <Link to="/register" className="nav-link active">REGISTER</Link></li>
+              <li className="nav-item">
+                <Link to="/login" className="nav-link active">LOGIN</Link></li>
               
-          </div>
-                
+            </div>
+          )}      
         </ul>
       </Navbar.Collapse>
     </Navbar>   
