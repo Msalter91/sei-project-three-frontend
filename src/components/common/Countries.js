@@ -4,6 +4,7 @@ import axios from 'axios'
 function Countries() {
   
   const [countries, setCountries] = React.useState(null)
+  const [searchValue, setSearchValue] = React.useState('')
 
   React.useEffect(()=> {
     const getCountryData = async() => {
@@ -17,6 +18,19 @@ function Countries() {
     getCountryData()
   },[])
 
+  const handleSearch = (e) => {
+    setSearchValue(e.target.value)
+  }
+
+  const filteredCountries = (countries) => {
+    
+    return countries.filter(country => {
+      return (
+        country.name.toLowerCase().includes(searchValue.toLowerCase()) 
+      )
+    })
+  }
+
   return (
     <div className='container-fluid h-100' style={{ border: '1px solid red' }}>
       <div className='row header-wrapper'style={{ border: '1px solid green' }}>
@@ -29,7 +43,10 @@ function Countries() {
       <div className='row' style={{ border: '1px solid blue' }}>
         <div className='col'>
           <div className='country-search'>
-            <input>
+            <input
+              placeholder='Search by country'
+              onChange={handleSearch}
+            >
             </input>
           </div>
         </div>
@@ -37,7 +54,7 @@ function Countries() {
       <div className=' row card-container' style={{ border: '1px solid black' }}>
         {
           countries && (
-            countries.map(country=> {
+            filteredCountries(countries).map(country=> {
               return <div className='col-3' key={country.name}>
                 <div className="card">
                   <img className='' src='https://images.unsplash.com/photo-1500382017468-9049fed747ef?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1332&q=80' alt="Card image cap"></ img>
