@@ -7,14 +7,10 @@ function Profile() {
         className="banner" alt="Antarctica-img" /> */}
 
       <img src="https://imgur.com/PBLhrzp.jpg" className="img-fluid banner" alt="Antarctica-img" />
-      <h5 className="home-subtitle">travel, capture, share</h5>
+      <img src ="https://i.imgur.com/40qrX76.png" className="" alt="" />
 
 
-
-
-
-
-    </div><p>profile</p></>
+    </div><p>hmmmm</p></>
 
 
 
