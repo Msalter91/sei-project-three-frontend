@@ -12,13 +12,19 @@ const initialState = {
 
 function TripCreate () {
   return (
-    <section className="section container-fluid row">
-      <div className="col-7" 
-        style={{ background: 'antiquewhite' }}
-      >left</div>
-      <div className="col"
-        style={{ background: 'khaki' }}
-      >right</div>
+    <section className="section">
+      <form
+        className="container-fluid row"
+        // onSubmit={handleSubmit}
+      >
+        <div className="col-7" 
+          style={{ background: 'antiquewhite' }}>
+            
+        </div>
+        <div className="col"
+          style={{ background: 'khaki' }}
+        >right</div>
+      </form>
     </section>
   )
 }
