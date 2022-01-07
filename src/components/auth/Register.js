@@ -1,24 +1,59 @@
 import React from 'react'
+// import { useHistory } from 'react-router/'
 import { Link } from 'react-router-dom'
+// import { registerUser } from '../../lib/api'
+
+// const initialState = {
+//   displayName: '',
+//   email: '',
+//   password: '',
+//   passwordConfirmation: '',
+// }``
 
 function Register() {
+//   const [formData, setFormData] = React.useState(initialState)
+//   const [formErrors, setFormErrors] = React.useState(initialState)
+  // const history = useHistory()
+
+  // const handleChange = (e) => {
+  //   setFormData({ ...formData, [e.target.name]: e.target.value })
+  //   setFormErrors({ ...formErrors, [e.target.name]: '' })
+  // }
+
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+
+    // try {
+    //   await registerUser(formData)
+    //   history.push('/login')
+    // } catch (err) {
+    //   setFormErrors(err.response.data.errors)
+    // }
+  }
+
+  // console.log('form errors', formErrors)
 
   return (
     <section className="section registration">
       <div className="card mx-auto mb-5 shadow-sm mb-2 bg-body rounded col">
 
-        <form className="col-3 mx-auto">
-          <div className="field-floating  mb-3">
-            <label className="label" htmlFor="displayname">
-                  Displayname
+        <form className="col-3 mx-auto" onSubmit={handleSubmit}>
+          <div className="field-floating mb-3">
+            <label className="label" htmlFor="displayName">
+                  Display name
             </label>
             <div className="control">
               <input
+                // className={`input ${formErrors.displayName ? 'is-danger' : '' }`}
                 placeholder="Display Name"
-                name="displayname"
-                id="displayname"
+                name="displayName"
+                id="displayName"
+                // onChange={handleChange}
               />
             </div>
+            {/* {formErrors.displayname && (
+              <p className="is-danger">{formErrors.displayName}</p>
+            )} */}
           </div>
 
           <div className="field-floating mb-3">
