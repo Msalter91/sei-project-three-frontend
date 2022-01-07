@@ -175,6 +175,32 @@ form {
   text-align: center;
 }
 
+//* * * * * SINGLE COUNTRY  * * * * * 
+.header-splash-single {
+  height: 20vh;
+  overflow: hidden;
+  img{
+    width: 100%;
+  }
+}
+
+.info-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid black;
+}
+
+//* * * * * MEMORY SHOW  * * * * *
+
+.memory-image-holder{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
 //* * * * * L O G  I N  * * * * * 
 
 //* * * * * P R O F I L E  * * * * * 

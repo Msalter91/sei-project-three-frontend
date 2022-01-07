@@ -2,11 +2,17 @@
 import { BrowserRouter, Switch, Route } from 'react-router-dom'
 import Home from './components/common/Home'
 import Nav from './components/common/Nav'
-import Countries from './components/common/Countries'
+
+import Countries from './components/Countries/Countries'
+import CountryShow from './components/Countries/CountryShow'
+
+import MemoryShow from './components/common/memories/MemoryShow'
+
 import AboutUs from './components/common/AboutUs'
 import Profile from './components/common/Profile'
 import Register from './components/auth/Register'
 import Login from './components/auth/Login'
+
 import MapTest from './components/common/maps/MapTest'
 
 function App() {
@@ -17,11 +23,18 @@ function App() {
       <Switch>
         <Route exact path="/"><Home /></Route>
         <Route path="/aboutus"><AboutUs/></Route>
+
         <Route path="/profile"><Profile/></Route>
-        <Route path="/countries"><Countries/></Route>
+
+        <Route exact path="/countries"><Countries/></Route>
+        <Route path="/countries/:countryId"><CountryShow/></Route>
+        
         <Route path="/register"><Register/></Route>
         <Route path="/login"><Login/></Route>
+        
         <Route path="/maptest"><MapTest /></Route>
+
+        <Route path="/memories/:memoryId"><MemoryShow /></Route>
 
       </Switch>
     </BrowserRouter>
