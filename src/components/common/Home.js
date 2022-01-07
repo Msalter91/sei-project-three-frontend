@@ -7,7 +7,7 @@ function Home() {
       <div className=""> 
         <div className="text-center">
 
-          <img src="https://i.imgur.com/HW8ql1x.png" className="hp-logo" alt="placebookmain-blk"/>
+          <img src="https://i.imgur.com/NDdG8BY.png" className="hp-logo" alt="placebookmain-blk"/>
           <h5 className="home-subtitle">travel, capture, share</h5>
           {/* <h5 className="home-subtitle">travel 🛩️  capture 📷  share ❤️</h5> */}
           <p className="project-text">General Assembly SEI 60</p> 

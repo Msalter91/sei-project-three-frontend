@@ -15,7 +15,7 @@ function Nav() {
     
       <Link to="/" className="homeIcon navbar-nav">
         <img alt="logo" className="logo-home nav-link me-auto"
-          src ="https://i.imgur.com/uy2mA47.png"/></Link>
+          src ="https://i.imgur.com/ElzRumx.png"/></Link>
       
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
       <Navbar.Collapse id="basic-navbar-nav">

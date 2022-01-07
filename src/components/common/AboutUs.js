@@ -1,7 +1,7 @@
 function AboutUs() {
   return (
     <div className="aboutus-bg clearfix">
-      <img src="https://i.imgur.com/LpuXLvR.png" 
+      <img src="https://i.imgur.com/tNUbHb2.png" 
         className="img-fluid history-img col-md-5 float-md-end mb-5 ms-md-1 " alt="aboutus-img" />
 
       <div className="aboutus-text">
@@ -19,7 +19,7 @@ function AboutUs() {
               className="card shadow mb-5 bg-body rounded"
               data-bs-toggle="modal" 
               data-bs-target="#exampleModal1">
-              <img src="https://i.imgur.com/lvnxDH2b.png" className="card-img-top" alt="girl"/>
+              <img src="https://i.imgur.com/zEhltnDb.jpg" className="card-img-top" alt="rainbowsky"/>
               <div className="card-body">
                 <p className="card-text"></p>
               </div>
@@ -30,11 +30,11 @@ function AboutUs() {
             <div className="modal-dialog modal-dialog-centered">
               <div className="modal-content">
                 <div className="modal-header">
-                  <h5 className="modal-title">Beautiful Expression</h5>
+                  <h5 className="modal-title">Rainbow Mountains</h5>
                   <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div className="modal-body">
-                  <img src= "https://i.imgur.com/lvnxDH2.png" width="100%" height="100%" className = "modal-img" alt="modal img" />
+                  <img src= "https://i.imgur.com/zEhltnD.jpg" width="100%" height="100%" className = "modal-img" alt="modal img" />
                 </div>
               </div>
             </div>
@@ -42,10 +42,10 @@ function AboutUs() {
             
           <div className="col">
             <button 
-              className="card shadow mb-2 bg-body rounded" 
+              className="card shadow mb-5 bg-body rounded" 
               data-bs-toggle="modal" 
               data-bs-target="#exampleModal2">
-              <img src="https://i.imgur.com/0uSsBhgb.png?1" className="card-img-top" alt="beach" />
+              <img src="https://i.imgur.com/bYxhlZ0b.png" className="card-img-top" alt="girl" />
               <div className="card-body">
                 <p className="card-text"></p>
               </div>
@@ -60,7 +60,7 @@ function AboutUs() {
                   <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div className="modal-body">
-                  <img src= "https://i.imgur.com/0uSsBhg.png" width="100%" height="100%" className = "modal-img" alt="modal img" />
+                  <img src= "https://i.imgur.com/bYxhlZ0.png" width="100%" height="100%" className = "modal-img" alt="modal img" />
                 </div>
               </div>
             </div>
@@ -68,10 +68,10 @@ function AboutUs() {
 
           <div className="col">
             <button
-              className="card shadow mb-2 bg-body rounded" 
+              className="card shadow mb-5 bg-body rounded" 
               data-bs-toggle="modal" 
               data-bs-target="#exampleModal3">
-              <img src="https://i.imgur.com/WVq88Eqb.png?1" className="card-img-top" alt="puppy" />
+              <img src="https://i.imgur.com/PrLhxXeb.jpg" className="card-img-top" alt="noseehearspeak" />
               <div className="card-body">
                 <p className="card-text"></p>
               </div>
@@ -82,12 +82,12 @@ function AboutUs() {
             <div className="modal-dialog modal-dialog-centered">
               <div className="modal-content">
                 <div className="modal-header">
-                  <h5 className="modal-title">Capture Precious Moments</h5>
+                  <h5 className="modal-title">Mr Monopoly Street Art</h5>
                   <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                   
                 </div>
                 <div className="modal-body">
-                  <img src= "https://i.imgur.com/WVq88Eq.png" width="100%" height="100%" className = "modal-img" alt="modal img" />
+                  <img src= "https://i.imgur.com/PrLhxXe.jpg" width="100%" height="100%" className = "modal-img" alt="modal img" />
                 </div>
               </div>
             </div>
