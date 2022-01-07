@@ -1,7 +1,7 @@
 // import axios from 'axios'
 // import { getToken } from './auth'
 
-// const baseUrl = '/api'
+export const baseUrl = process.env.REACT_APP_API_BASE_URL
 
 // function headers() {
 //   return {

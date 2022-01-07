@@ -2,6 +2,7 @@
 import { BrowserRouter, Switch, Route } from 'react-router-dom'
 import Home from './components/common/Home'
 import Nav from './components/common/Nav'
+import Countries from './components/common/Countries'
 import AboutUs from './components/common/AboutUs'
 import Profile from './components/common/Profile'
 import Register from './components/auth/Register'
@@ -17,6 +18,7 @@ function App() {
         <Route exact path="/"><Home /></Route>
         <Route path="/aboutus"><AboutUs/></Route>
         <Route path="/profile"><Profile/></Route>
+        <Route path="/countries"><Countries/></Route>
         <Route path="/register"><Register/></Route>
         <Route path="/login"><Login/></Route>
         <Route path="/maptest"><MapTest /></Route>
