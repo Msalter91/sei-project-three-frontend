@@ -1,29 +1,55 @@
 import React from 'react'
+import { useHistory } from 'react-router'
 import { Link } from 'react-router-dom'
-
-
-
+import { loginUser } from '../../lib/api'
+import { setToken } from '../../lib/auth'
 
 function Login() {
+  const history = useHistory()
+  const [formData, setFormData] = React.useState({
+    email: '',
+    password: '',
+  })
 
-  const [isError] = React.useState(false)
+  const [isError, setIsError] = React.useState(false)
+  
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value })
+  }
+
+  console.log('formdata', formData)
+
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+
+    try {
+      const res = await loginUser(formData)
+      console.log(res.data.token)
+      setToken(res.data.token)
+      history.push('/profile')
+      location.reload()
+    } catch (err) {
+      console.log(err.response.data)
+      setIsError(true)
+    }
+  }
 
   return (
     <section className="section login">
       <div className="card mb-5 shadow-sm mb-2 bg-body rounded">
         <div className="row">
           <div className="col">
-            <form className="col">
+            <form className="col" onSubmit={handleSubmit}>
 
               <div className="field-floating mb-3">
                 <label className="label" htmlFor="email">Email</label>
                 <div className="control">
                   <input
-
+                    className={`input ${isError.email ? 'is-danger' : ''}`}
                     placeholder="Email Address"
                     name="email"
                     id="email"
-
+                    onChange={handleChange}
                   />
                 </div>
               </div>
@@ -33,11 +59,11 @@ function Login() {
                 <div className="control">
                   <input
                     type="password"
-
+                    className={`input ${isError.password ? 'is-danger' : ''}`}
                     placeholder="Password"
                     name="password"
                     id="password"
-
+                    onChange={handleChange}
                   />
                 </div>
               </div>

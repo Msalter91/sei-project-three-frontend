@@ -17,11 +17,10 @@ export function registerUser(formData) {
   return axios.post(`${baseUrl}/register`, formData)
 }
 
-// export function loginUser(formData) {
-//   return axios.post(`${baseUrl}/login`, formData)
-// }
+export function loginUser(formData) {
+  return axios.post(`${baseUrl}/login`, formData)
+}
 
-
-// export function getUser(userId) {
-//   return axios.get(`${baseUrl}/profile/${userId}`)
-// }
+export function getUser(userId) {
+  return axios.get(`${baseUrl}/profile/${userId}`)
+}
