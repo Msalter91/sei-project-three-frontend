@@ -23,18 +23,18 @@ function getLocationArrayStats (array){
 
 function RenderMap ({ 
   data, 
-  center,
-  initZoom,
+  center = { lat: 0, long: 0 },
+  initZoom = 1,
   maph = 500,
   mapw = 500,
 }) {
-  const locationStats = getLocationArrayStats(data.memories)
-  if (!center){
-    center = { lat: locationStats.lat, long: locationStats.long }
-  }
-  if (!initZoom) {
-    initZoom = 3
-  }
+  let locationStats = {}
+  if (data){
+    locationStats = getLocationArrayStats(data.memories)
+    if (!center){
+      center = { lat: locationStats.lat, long: locationStats.long }
+    }
+  } 
 
   const [viewport, setViewport] = useState({
     latitude: center.lat,
@@ -67,7 +67,9 @@ function RenderMap ({
       zoom: fittedZoom })
   }
   useEffect(()=>{
-    fitViewPort()
+    if (data){
+      fitViewPort()
+    }
   }, [])
 
   return (
@@ -80,7 +82,7 @@ function RenderMap ({
         {...viewport}
         onViewportChange={newViewport => setViewport(newViewport)}
       >
-        {data.memories.map(location => (
+        {data && data.memories.map(location => (
           <Marker
             key={location.id}
             latitude={location.lat}
