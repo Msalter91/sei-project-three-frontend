@@ -1,7 +1,7 @@
-// import axios from 'axios'
+import axios from 'axios'
 // import { getToken } from './auth'
 
-export const baseUrl = process.env.REACT_APP_API_BASE_URL
+export const baseUrl = '/api'
 
 // function headers() {
 //   return {
@@ -11,4 +11,17 @@ export const baseUrl = process.env.REACT_APP_API_BASE_URL
 
 // export function getAllTrips() {
 //   return axios.get(`${baseUrl}/trips`)
+// }
+
+export function registerUser(formData) {
+  return axios.post(`${baseUrl}/register`, formData)
+}
+
+// export function loginUser(formData) {
+//   return axios.post(`${baseUrl}/login`, formData)
+// }
+
+
+// export function getUser(userId) {
+//   return axios.get(`${baseUrl}/profile/${userId}`)
 // }
