@@ -1,16 +1,16 @@
 
-const tokenName = 'token'
+const placeBookLoginToken = 'token'
 
 export function setToken(token) {
-  window.localStorage.setItem(tokenName, token)
+  window.localStorage.setItem(placeBookLoginToken, token)
 }
 
 export function getToken() {
-  return window.localStorage.getItem(tokenName)
+  return window.localStorage.getItem(placeBookLoginToken)
 }
 
 export function removeToken() {
-  window.localStorage.removeItem(tokenName)
+  window.localStorage.removeItem(placeBookLoginToken)
 }
 
 function getPayload() {
@@ -24,7 +24,7 @@ function getPayload() {
     removeToken()
     return false
   }
-  return JSON.parse(atob(parts[1]))
+  return JSON.parse(Buffer.from(parts[1], 'base64'))
 }
 
 export function isAuthenticated() {
