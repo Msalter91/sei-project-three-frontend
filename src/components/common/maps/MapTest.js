@@ -12,9 +12,11 @@ const trip = {
 function MapTest ({ tripData = trip }){
   
   return (
-    <div style={{ height: 500, width: 500 }}>
+    <div >
       <RenderMap 
-        data={tripData} 
+        data={tripData}
+        maph={800} 
+        mapw={800}
       />
     </div>
   )

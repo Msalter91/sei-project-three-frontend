@@ -25,6 +25,8 @@ function RenderMap ({
   data, 
   center,
   initZoom,
+  maph = 500,
+  mapw = 500,
 }) {
   const locationStats = getLocationArrayStats(data.memories)
   if (!center){
@@ -40,8 +42,8 @@ function RenderMap ({
     zoom: initZoom,
     bearing: 0,
     pitch: 50,
-    height: 500,
-    width: 500,
+    height: maph,
+    width: mapw,
   })
 
   function fitViewPort () {
@@ -55,7 +57,7 @@ function RenderMap ({
         [locationStats.longMax, locationStats.latMax]
       ],
       {
-        padding: 60,
+        padding: mapw * 0.15,
       }
     )
     setViewport({ 
