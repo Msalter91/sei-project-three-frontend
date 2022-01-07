@@ -21,33 +21,42 @@ function TripCreate () {
         <div className="col-7" 
           style={{ background: 'antiquewhite' }}>
           <div className="form-group">
-            <label htmlFor="tripTitle"></label>
+            <label htmlFor="title"></label>
             <input 
-              type="text" 
-              id="tripTitle"
+              type="text"
+              name="title"
+              id="title"
               className="form-control"></input>
           </div>
           <div className="form-group">
-            <label htmlFor="tripCountry">Where did you start?</label>
+            <label htmlFor="countryVisited">Where did you start?</label>
             <input 
               type="text" 
-              id="tripCountry"
+              name="countryVisited"
+              id="countryVisited"
               className="form-control"></input>
           </div>
           <div className="form-group">
-            <label htmlFor="tripNotes">Tell the world about your trip!</label>
+            <label htmlFor="notes">Tell the world about your trip!</label>
             <textarea 
-              id="tripNotes"
+              name="notes"
+              id="notes"
               className="form-control"></textarea>
           </div>
           <div>
             <RenderMap />
           </div>
         </div>
-        <div className="col"
+        <div className="col d-flex flex-column"
           style={{ background: 'khaki' }}>
           {/* TODO: create memory component */}
           {/* TODO: add new create memory component */}
+        </div>
+        <div className='row'>
+          <button 
+            type="submit"
+            className="btn btn-success ml-auto"
+          >Save your trip</button>
         </div>
       </form>
     </section>
