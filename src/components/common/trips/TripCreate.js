@@ -19,8 +19,14 @@ function TripCreate () {
   
   const handleChange = e =>{
     const value = e.target.value
+    // if user is editing title field and exceed length, do not accept new characters
+    if (
+      e.target.name === 'title' &&
+      e.target.value.length > maxLengthTitle
+    ) {
+      return
+    }
     setFormData({ ...formData, [e.target.name]: value })
-    console.log(formData)
   }
 
   const handleSubmit = async e =>{
