@@ -5,12 +5,12 @@ function Register() {
 
   return (
     <section className="section registration">
-      <div className="card mb-5 shadow-sm mb-2 bg-body rounded">
-        <div className="row">
+      <div className="card mx-auto mb-5 shadow-sm mb-2 bg-body rounded">
+        <div className="row mx-auto w-75">
           <div className="col">
 
-            <form className="col">
-              <div className="field-floating mb-3">
+            <form className="col-3 ">
+              <div className="field-floating  mb-3">
                 <label className="label" htmlFor="displayname">
                   Displayname
                 </label>
@@ -54,7 +54,7 @@ function Register() {
                 </div>
               </div>
 
-              <div className="mb-5">
+              <div className="mb-4">
                 <button type="submit" className="btn btn-dark btn-outline-warning btn-lg">
                   Register Me!
                 </button>
@@ -63,7 +63,7 @@ function Register() {
           </div>
 
           <p className="alt-login">
-            Already have an account?<Link to="/login">Log In Here</Link>
+            Already have an account? <Link to="/login"> Log In Here</Link>
           </p>
         </div>
       </div>

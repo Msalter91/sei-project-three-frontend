@@ -1,28 +1,113 @@
 @import "~bootstrap/scss/bootstrap";
+@import url('https://fonts.googleapis.com/css2?family=Gochi+Hand&display=swap');
 
 //* * * * * N A V    B A R  * * * * * 
+
+.navbar {
+  font-family: 'Gochi Hand', cursive;
+  font-size: 15px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  align-content: center;
+  }
+
 .logo-home {
-  height: 90px;
-  width: 75px;
+  height: 100%;
+  width: 100%;
 }
+
+.homeIcon {
+  margin-left: 10px;
+  width: 7%;
+  }
+
+  .navbar-toggler {
+    border: none;
+    margin-right: 10px;
+  }
+  
+  .nav-link {
+    margin-right: 5px;
+    margin-left: 10px;
+  }
 
 
 //* * * * * H O M E * * * * * 
 
+.hp-logo {
+  height: 40%;
+  width: 40%;
+  padding-top: 50px;
+  padding-bottom: 20px;
+}
+
+.home-subtitle {
+  font-family: 'Gochi Hand', cursive;
+  font-size: 20px;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  padding-bottom: 150px;
+}
+
+.project-text {
+  font-family: 'Gochi Hand', cursive;
+  font-size: 12px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  }
+
 
 
 //* * * * * A B O U T   U S * * * * * 
+.aboutus-bg { 
+  padding: 20px;
+  margin-top: 0px;
+  }
+  
+  .aboutus-text{
+  padding-top: 0px;
+  padding-left: 10px;
+  padding-right: 10px;
+  font-size: 13px;
+  }
+  
+  .aboutus-img { 
+  padding-left: 10px;
+  padding-right: 10px;
+  align-items: center;
+  }
+  
+  .modal-img {
+  align-content: center;
+  }
 
 
 
 //* * * * * R E G I S T R A T I O N  * * * * * 
 
 .alt-login {
+  font-family: 'Gochi Hand', cursive;
+  font-size: 12px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
   text-align: center;
   font-size: smaller;
   }
-  
+
+  .label {
+  font-family: 'Gochi Hand', cursive;
+  font-size: 14px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  align-items: center;
+  }
+
+  .control {
+  font-size: 11px;
+  }
+
   .section.registration {
+align-self: center;
   margin: 20px;
   }
   
@@ -34,9 +119,17 @@
   width: 300px;
   }
   
+form {
+  justify-content: center;
+  align-self: center;
+}
+
   .card.mb-5 {
     border-style: none;
   }
 
+  .card-img-top {
+    margin-top: 10px;
+  }
 
 //* * * * * L O G  I N  * * * * * 

@@ -1,7 +1,9 @@
 
 # @baseUrl = 'https://api.teleport.org/api/,'
 
-GET https://countriesnow.space/api/v0.1/countries/capital
+GET https://countriesnow.space/api/v0.1/countries/
+
+
 
 
 #==================================================================
@@ -19,8 +21,10 @@ GET https://countriesnow.space/api/v0.1/countries/capital
 
 # https://restcountries.eu/rest/v2/ *** DID NOT WORK
 
+########### POTENTIAL API - BUT COULD NOT WORK OUT HOW TO ACCESS...
 
-
+#https://www.programmableweb.com/api/clickbank-images-rest-api-v13
+#The ClickBank Images API generates lists of images related to particular accounts. ClickBank is a worldwide digital sales portal for products created by entrepreneurs. The company distributes a wide variety of digital lifestyle products to more than 190 countries. The API returns responses in JSON or XML format.
 
 
 
