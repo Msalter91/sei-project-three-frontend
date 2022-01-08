@@ -1,8 +1,12 @@
 import { useHistory } from 'react-router-dom'
 import { tripCreate } from '../../../lib/api'
+import { isAuthenticated } from '../../../lib/auth'
 
 function TripCreate(){
   const history = useHistory()
+
+  //TODO : convert next line to PrivateRoute component
+  if (!isAuthenticated()) history.push('/login')
 
   const getNewTripId = async () => {
     const res = await tripCreate()
