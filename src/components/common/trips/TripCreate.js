@@ -57,11 +57,11 @@ function TripCreate () {
               name="title"
               id="title"
               className={
-                `form-control ${formErrors.countryVisited ? 'invalid-feedback' : ''}`}
+                `form-control ${formErrors.countryVisited ? 'border-danger' : ''}`}
               value={formData.title}
               onChange={handleChange}
             />
-            {formErrors.title && <p className="invalid-feedback">{formErrors.title}</p>  }
+            {formErrors.title && <p className="text-danger">{formErrors.title}</p>  }
           </div>
           <div className="form-group">
             <label htmlFor="countryVisited">Where did you start?</label>
@@ -70,11 +70,11 @@ function TripCreate () {
               name="countryVisited"
               id="countryVisited"
               className={
-                `form-control ${formErrors.countryVisited ? 'invalid-feedback' : ''}`}
+                `form-control ${formErrors.countryVisited ? 'border-danger' : ''}`}
               value={formData.countryVisited}
               onChange={handleChange} 
             />
-            {formErrors.countryVisited && <p className="invalid-feedback">{formErrors.countryVisited}</p>  }
+            {formErrors.countryVisited && <p className="text-danger">{formErrors.countryVisited}</p>  }
           </div>
           <div className="form-group">
             <label htmlFor="notes">Tell the world about your trip!</label>
@@ -84,19 +84,20 @@ function TripCreate () {
               className={
                 `form-control 
                 ${(maxLengthNotes - formData.notes.length < 0 ||
-                  formErrors.notes ) ? 'invalid-feedback' : ''}`}
+                  formErrors.notes ) ? 'border-danger' : ''}`}
               value={formData.notes}
               onChange={handleChange} />
             <div className='row'>
               <small className="form-text text-muted ml-auto text-end">{maxLengthNotes - formData.notes.length} characters remaining</small>
             </div>
-            {formErrors.notes && <p className="invalid-feedback">{formErrors.notes}</p>  }
+            {formErrors.notes && <p className="text-danger">{formErrors.notes}</p>  }
           </div>
           <div>
             <RenderMap />
           </div>
         </div>
-        <div className="col d-flex flex-column"
+        <div 
+          className="col d-flex flex-column"
           style={{ background: 'khaki' }}>
           {/* TODO: create memory component */}
           {/* TODO: add new create memory component */}
