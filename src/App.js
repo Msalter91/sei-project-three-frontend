@@ -10,6 +10,7 @@ import MemoryShow from './components/common/memories/MemoryShow'
 
 import AboutUs from './components/common/AboutUs'
 import Profile from './components/common/Profile'
+import ProfileEdit from './components/common/ProfileEdit'
 import Register from './components/auth/Register'
 import Login from './components/auth/Login'
 
@@ -25,6 +26,7 @@ function App() {
         <Route path="/aboutus"><AboutUs/></Route>
 
         <Route path="/profile"><Profile/></Route>
+        <Route path="/profileEdit"><ProfileEdit/></Route>
 
         <Route exact path="/countries"><Countries/></Route>
         <Route path="/countries/:countryId"><CountryShow/></Route>
@@ -35,6 +37,7 @@ function App() {
         <Route path="/maptest"><MapTest /></Route>
 
         <Route path="/memories/:memoryId"><MemoryShow /></Route>
+
 
       </Switch>
     </BrowserRouter>
