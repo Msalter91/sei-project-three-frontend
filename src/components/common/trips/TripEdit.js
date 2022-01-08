@@ -4,6 +4,7 @@ import { useParams } from 'react-router-dom'
 
 import RenderMap from '../maps/RenderMap'
 import Error from '../Error'
+import MemoryCreate from '../memories/MemoryCreate'
 
 const maxLengthTitle = 50
 const maxLengthNotes = 300
@@ -28,13 +29,15 @@ function TripEdit () {
   React.useEffect(()=>{
     (async ()=>{
       try {
-        setFormData(
-          await tripGetById(tripId)
-        )
+        const getTripRes = await tripGetById(tripId)
+        const newFormData = { ...formData,...getTripRes.data }
+        setFormData(newFormData)
       } catch (err){
         setIsError(true)
       }
     })()
+    // Do NOT want this hook to re-render on formData change, therefore accept non-exhaustive dependency
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [tripId])
   
   const handleChange = e =>{
@@ -123,6 +126,8 @@ function TripEdit () {
           <div 
             className="col d-flex flex-column"
             style={{ background: 'khaki' }}>
+            <MemoryCreate />
+            <MemoryCreate />
             {/* TODO: create memory component */}
             {/* TODO: add new create memory component */}
           </div>

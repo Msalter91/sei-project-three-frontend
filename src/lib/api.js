@@ -37,5 +37,5 @@ export function tripEdit(tripId, formData){
 }
 
 export function tripGetById(tripId){
-  return axios.get(`${baseUrl}/profile/${tripId}`)
+  return axios.get(`${baseUrl}/trips/${tripId}`)
 }
