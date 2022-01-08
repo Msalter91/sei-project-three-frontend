@@ -1,13 +1,12 @@
 import axios from 'axios'
-// import { getToken } from './auth'
+import { getToken } from './auth'
 
 export const baseUrl = '/api'
-
-// function headers() {
-//   return {
-//     headers: { Authorization: `Bearer ${getToken()}` },
-//   }
-// }
+function authHeader () {
+  return {
+    headers: { Authorization: `Bearer ${getToken()}` },
+  }
+}
 
 // export function getAllTrips() {
 //   return axios.get(`${baseUrl}/trips`)
@@ -23,4 +22,17 @@ export function loginUser(formData) {
 
 export function getUser(userId) {
   return axios.get(`${baseUrl}/profile/${userId}`)
+}
+// export function getUser(userId) {
+//   return axios.get(`${baseUrl}/profile/${userId}`)
+// }
+
+// Trips
+export function tripCreate(formData){
+  return axios.post(`${baseUrl}/trips/`, formData, authHeader())
+}
+
+
+export function tripEdit(tripId, formData){
+  return axios.put(`${baseUrl}/trips/${tripId}`, formData, authHeader())
 }
