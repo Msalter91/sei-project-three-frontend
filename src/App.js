@@ -35,7 +35,7 @@ function App() {
         <Route path="/login"><Login/></Route>
 
         <Route path="/trips/:tripId/edit"><TripEdit /></Route>
-        <Route path="/trips/create"><TripCreate /></Route>
+        <Route path="/trips/new"><TripCreate /></Route>
         
         <Route path="/maptest"><MapTest /></Route>
 
