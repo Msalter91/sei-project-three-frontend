@@ -4,7 +4,7 @@ import { useParams } from 'react-router-dom'
 
 import RenderMap from '../maps/RenderMap'
 import Error from '../Error'
-import MemoryCreate from '../memories/MemoryCreate'
+import MemoryEdit from '../memories/MemoryEdit'
 
 const maxLengthTitle = 50
 const maxLengthNotes = 300
@@ -126,8 +126,7 @@ function TripEdit () {
           <div 
             className="col d-flex flex-column"
             style={{ background: 'khaki' }}>
-            <MemoryCreate />
-            <MemoryCreate />
+            <MemoryEdit />
             {/* TODO: create memory component */}
             {/* TODO: add new create memory component */}
           </div>

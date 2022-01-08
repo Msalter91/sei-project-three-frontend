@@ -39,3 +39,8 @@ export function tripEdit(tripId, formData){
 export function tripGetById(tripId){
   return axios.get(`${baseUrl}/trips/${tripId}`)
 }
+
+// Memories
+export function memoryEdit(memoryId, formData){
+  return axios.put(`${baseUrl}/memories/${memoryId}`, formData, authHeader())
+}
