@@ -42,7 +42,7 @@ function Profile() {
               <div className="d-flex-body mb-5 text-white">
                 <h4 className="mt-0 mb-0">{user && user.displayName}</h4>
                 <p className="small mb-4">
-                  <i className="fas fa-map-marker-alt mr-2"></i>{!user.location ? <p>edit profile to show location</p> : user.location}</p>
+                  <i className="fas fa-map-marker-alt mr-2"></i>{user && user.location}</p>
               </div>
             </div>
           </div>
@@ -57,7 +57,7 @@ function Profile() {
           <div className="px-4 py-3">
             <h5 className="mb-0">About</h5>
             <div className="p-4 rounded shadow-sm bg-light">
-              <p className="font-italic mb-0"> {!user.about ? <p>edit profile to tell us about you</p> : user.about}</p>
+              <p className="font-italic mb-0"> {user && user.about}</p>
               <button>
                 <Link to="/profileEdit" className="btn btn-outline-info btn-sm">Edit Profile</Link>
                 {/* {`/profile/${user_Id}/edit`} */}
