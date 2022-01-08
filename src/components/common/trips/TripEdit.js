@@ -1,4 +1,4 @@
-import React from 'react'
+import { useState, useEffect } from 'react'
 import { tripGetById, tripEdit } from '../../../lib/api'
 import { useParams } from 'react-router-dom'
 
@@ -18,15 +18,15 @@ const initialState = {
 }
 
 function TripEdit () {
-  const [formData, setFormData] = React.useState(initialState)
+  const [formData, setFormData] = useState(initialState)
   const notesRemainingChars = maxLengthNotes - formData.notes.length
-  const [formErrors, setFormErrors] = React.useState(initialState)
+  const [formErrors, setFormErrors] = useState(initialState)
   const { tripId } = useParams()
-  const [isError, setIsError] = React.useState(false)
+  const [isError, setIsError] = useState(false)
 
   // populate initial data
 
-  React.useEffect(()=>{
+  useEffect(()=>{
     (async ()=>{
       try {
         const getTripRes = await tripGetById(tripId)
