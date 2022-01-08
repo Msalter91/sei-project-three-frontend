@@ -1,5 +1,6 @@
 import React from 'react'
-import { createTrip } from '../../../lib/api'
+import { tripEdit } from '../../../lib/api'
+import { useParams } from 'react-router-dom'
 
 import RenderMap from '../maps/RenderMap'
 
@@ -14,10 +15,10 @@ const initialState = {
   memories: [],
 }
 
-function TripCreate () {
+function TripEdit () {
   const [formData, setFormData] = React.useState(initialState)
   const [formErrors, setFormErrors] = React.useState(initialState)
-  const [tripId, setTripId] = React.useState('')
+  const { tripId } = useParams()
   
   const handleChange = e =>{
     const value = e.target.value
@@ -35,13 +36,13 @@ function TripCreate () {
     e.preventDefault()
     console.log('submitting:', formData)
     try {
-      const res = await createTrip(formData)
-      setTripId(res.data._id)
+      const res = await tripEdit(tripId, formData)
+      console.log('Editing return:',res)
     } catch (err) {
       setFormErrors(err.response.data.errors)
     }
   }
-
+  
   return (
     <section className="section">
       <form
@@ -113,4 +114,4 @@ function TripCreate () {
   )
 }
 
-export default TripCreate
+export default TripEdit

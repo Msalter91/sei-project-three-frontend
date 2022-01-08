@@ -28,6 +28,11 @@ export function getUser(userId) {
 // }
 
 // Trips
-export function createTrip(formData){
+export function tripCreate(formData){
   return axios.post(`${baseUrl}/trips/`, formData, authHeader())
+}
+
+
+export function tripEdit(tripId, formData){
+  return axios.put(`${baseUrl}/trips/${tripId}`, formData, authHeader())
 }
