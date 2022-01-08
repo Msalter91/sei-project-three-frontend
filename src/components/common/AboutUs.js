@@ -2,7 +2,7 @@ function AboutUs() {
   return (
     <div className="aboutus-bg clearfix">
       <img src="https://i.imgur.com/tNUbHb2.png" 
-        className="img-fluid history-img col-md-5 float-md-end mb-5 ms-md-1 " alt="aboutus-img" />
+        className="img-fluid history-img col-md-4 float-md-end mb-5 ms-md-1 " alt="aboutus-img" />
 
       <div className="aboutus-text">
         <h2>Placebook</h2>
