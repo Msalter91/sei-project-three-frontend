@@ -5,7 +5,7 @@ function Profile() {
 
   return (
     <div className="row py-5 px-4">
-      <div className="col-md-5 mx-auto">
+      <div className="col-md-7 mx-auto">
     
         {/* <!-- Profile widget --> */}
     
@@ -15,16 +15,32 @@ function Profile() {
               <div className="profile mr-3"><img src="https://i.imgur.com/4zrA1gBb.jpg" alt="..." width="150" className="rounded mb-2 img-thumbnail"/>              
               </div>
 
+<<<<<<< HEAD
               {/* {isOwner(wine.user._id) &&  */}
+=======
+
+>>>>>>> ed86998 (staged minor changes)
 
               <div className="d-flex-body mb-5 text-white">
-                <h4 className="mt-0 mb-0">Alex</h4>
+                <h4 className="mt-0 mb-0 ms-3">Alex</h4>
                 <p className="small mb-4">
-                  <i className="fas fa-map-marker-alt mr-2"></i>United Kingdom</p>
+                  <i className="fas fa-map-marker-alt mr-2 ms-3"></i>United Kingdom</p>
+
+                <div className = "ms-3">
+                  {/* {isOwner(wine.user._id) &&  */}
+                  <button> 
+                    <Link to="/profileEdit" className="btn-outline-dark btn-sm btn-block ">Edit Profile</Link>
+                    {/* {`/profile/${user_Id}/edit`} */}
+                 
+                  </button>
+                </div>
               </div>
                 
             </div>
           </div>
+
+         
+          
           <div className="bg-light p-4 d-flex justify-content-end text-center">
             <ul className="list-inline mb-0">
               <li className="list-inline-item">
