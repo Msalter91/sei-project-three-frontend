@@ -39,7 +39,6 @@ function TripEdit () {
   const handleChange = e =>{
     const value = e.target.value
     // if user is editing title field and exceeds length, do not accept new characters.
-    // allow 
     if (
       e.target.name === 'title' &&
       e.target.value.length > maxLengthTitle
