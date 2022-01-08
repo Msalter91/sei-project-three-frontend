@@ -1,4 +1,5 @@
 import React from 'react'
+import { createTrip } from '../../../lib/api'
 
 import RenderMap from '../maps/RenderMap'
 
@@ -16,6 +17,7 @@ const initialState = {
 function TripCreate () {
   const [formData, setFormData] = React.useState(initialState)
   const [formErrors, setFormErrors] = React.useState(initialState)
+  const [tripId, setTripId] = React.useState('')
   
   const handleChange = e =>{
     const value = e.target.value
@@ -32,6 +34,12 @@ function TripCreate () {
   const handleSubmit = async e =>{
     e.preventDefault()
     console.log('submitting:', formData)
+    try {
+      const res = await createTrip(formData)
+      setTripId(res.data._id)
+    } catch (err) {
+      setFormErrors(err.response.data.errors)
+    }
   }
 
   return (
