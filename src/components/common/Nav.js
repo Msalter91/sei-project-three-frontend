@@ -26,22 +26,27 @@ function Nav() {
             About Us</Link></li>
           <li className="nav-item active">
             <Link to="/countries" className="nav-link active">
-            Inspire Me</Link></li>
-          <li className="nav-item active">
-            <Link to="/profile" className="nav-link active">
-            Profile</Link></li>
+            Inspire Me</Link></li> 
         </ul>
             
         <ul className="navbar-nav ms-auto">   
           {isAuth ? (
-            <Link to="/" className="navbar-item nav-link active" onClick={handleLogout}>LOG OUT</Link>
+            <>
+              <Link to="/profile" className="nav-link active">
+                Profile
+              </Link>
+              <Link to="/" className="navbar-item nav-link active" onClick={handleLogout}>
+                LOG OUT
+              </Link>
+            </>
           ) : (
             <div className="nav-item auth">
               <li className="nav-item">
-                <Link to="/register" className="nav-link active">REGISTER</Link></li>
+                <Link to="/register" className="nav-link active">REGISTER</Link>
+              </li>
               <li className="nav-item">
-                <Link to="/login" className="nav-link active">LOGIN</Link></li>
-              
+                <Link to="/login" className="nav-link active">LOGIN</Link>
+              </li>
             </div>
           )}      
         </ul>

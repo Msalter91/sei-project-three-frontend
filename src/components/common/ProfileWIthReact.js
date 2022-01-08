@@ -1,7 +1,29 @@
+import axios from 'axios'
+import { Link, useParams } from 'react-router-dom'
 
-import { Link } from 'react-router-dom'
+import React from 'react'
+import { getUserId } from '../../lib/auth'
+
 
 function Profile() {
+
+  const userId = useParams()
+  console.log(getUserId())
+
+  const [user, setUser] = React.useState(null)
+
+  React.useEffect( ()=>{
+    const getUser = async () => {
+      try {
+        const userData = await axios.get(`/api/profile/${getUserId()}`)
+        setUser(userData.data)
+      } catch (err) {
+        console.log(err)
+      }
+    }
+    getUser()
+  }, [userId] )
+  console.log(user)
 
   return (
     <div className="row py-5 px-4">
@@ -18,11 +40,10 @@ function Profile() {
               {/* {isOwner(wine.user._id) &&  */}
 
               <div className="d-flex-body mb-5 text-white">
-                <h4 className="mt-0 mb-0">Alex</h4>
+                <h4 className="mt-0 mb-0">{user && user.displayName}</h4>
                 <p className="small mb-4">
-                  <i className="fas fa-map-marker-alt mr-2"></i>United Kingdom</p>
+                  <i className="fas fa-map-marker-alt mr-2"></i>{!user.location ? <p>edit profile to show location</p> : user.location}</p>
               </div>
-                
             </div>
           </div>
           <div className="bg-light p-4 d-flex justify-content-end text-center">
@@ -36,7 +57,7 @@ function Profile() {
           <div className="px-4 py-3">
             <h5 className="mb-0">About</h5>
             <div className="p-4 rounded shadow-sm bg-light">
-              <p className="font-italic mb-0"> Fashion & Graphic Designer currently studying General Assembly Software Engineering Immersive course.  Lives in London</p>
+              <p className="font-italic mb-0"> {!user.about ? <p>edit profile to tell us about you</p> : user.about}</p>
               <button>
                 <Link to="/profileEdit" className="btn btn-outline-info btn-sm">Edit Profile</Link>
                 {/* {`/profile/${user_Id}/edit`} */}

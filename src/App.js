@@ -10,6 +10,7 @@ import MemoryShow from './components/common/memories/MemoryShow'
 
 import AboutUs from './components/common/AboutUs'
 import Profile from './components/common/Profile'
+import ProfileWithReact from './components/common/ProfileWIthReact'
 import ProfileEdit from './components/common/ProfileEdit'
 import Register from './components/auth/Register'
 import Login from './components/auth/Login'
@@ -25,7 +26,8 @@ function App() {
         <Route exact path="/"><Home /></Route>
         <Route path="/aboutus"><AboutUs/></Route>
 
-        <Route path="/profile"><Profile/></Route>
+        <Route exact path="/profile"><Profile/></Route>
+        <Route path ="/profile/:usedId"><ProfileWithReact /></Route>
         <Route path="/profileEdit"><ProfileEdit/></Route>
 
         <Route exact path="/countries"><Countries/></Route>

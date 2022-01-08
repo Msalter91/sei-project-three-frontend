@@ -48,3 +48,8 @@ export function isOwner(id) {
   }
   return id === payload.sub
 }
+
+export function getUserId() {
+  const payload = getPayload()
+  return payload.sub
+}

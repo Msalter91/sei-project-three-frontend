@@ -2,7 +2,7 @@ import React from 'react'
 import { useHistory } from 'react-router'
 import { Link } from 'react-router-dom'
 import { loginUser } from '../../lib/api'
-import { setToken } from '../../lib/auth'
+import { getUserId, setToken } from '../../lib/auth'
 
 function Login() {
   const history = useHistory()
@@ -24,10 +24,9 @@ function Login() {
 
     try {
       const res = await loginUser(formData)
-      console.log(res.data.token)
       setToken(res.data.token)
-      history.push('/profile')
-      location.reload()
+      getUserId()
+      history.push(`/profile/${getUserId()}`)
     } catch (err) {
       console.log(err.response.data)
       setIsError(true)
