@@ -32,7 +32,10 @@ export function tripCreate(formData){
   return axios.post(`${baseUrl}/trips/`, formData, authHeader())
 }
 
-
 export function tripEdit(tripId, formData){
   return axios.put(`${baseUrl}/trips/${tripId}`, formData, authHeader())
+}
+
+export function tripGetById(tripId){
+  return axios.get(`${baseUrl}/profile/${tripId}`)
 }

@@ -1,5 +1,5 @@
 import React from 'react'
-import { tripEdit } from '../../../lib/api'
+import { tripGetById, tripEdit } from '../../../lib/api'
 import { useParams } from 'react-router-dom'
 
 import RenderMap from '../maps/RenderMap'
@@ -20,6 +20,21 @@ function TripEdit () {
   const notesRemainingChars = maxLengthNotes - formData.notes.length
   const [formErrors, setFormErrors] = React.useState(initialState)
   const { tripId } = useParams()
+  const [isError, setIsError] = React.useState(false)
+
+  // populate initial data
+
+  React.useEffect(()=>{
+    (async ()=>{
+      try {
+        setFormData(
+          await tripGetById(tripId)
+        )
+      } catch (err){
+        setIsError(true)
+      }
+    })()
+  }, [tripId])
   
   const handleChange = e =>{
     const value = e.target.value
