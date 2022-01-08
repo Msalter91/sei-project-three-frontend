@@ -17,12 +17,14 @@ const initialState = {
 
 function TripEdit () {
   const [formData, setFormData] = React.useState(initialState)
+  const notesRemainingChars = maxLengthNotes - formData.notes.length
   const [formErrors, setFormErrors] = React.useState(initialState)
   const { tripId } = useParams()
   
   const handleChange = e =>{
     const value = e.target.value
     // if user is editing title field and exceeds length, do not accept new characters.
+    // allow 
     if (
       e.target.name === 'title' &&
       e.target.value.length > maxLengthTitle
@@ -42,7 +44,6 @@ function TripEdit () {
       setFormErrors(err.response.data.errors)
     }
   }
-  
   return (
     <section className="section">
       <form
@@ -84,12 +85,16 @@ function TripEdit () {
               id="notes"
               className={
                 `form-control 
-                ${(maxLengthNotes - formData.notes.length < 0 ||
+                ${(notesRemainingChars < 0 ||
                   formErrors.notes ) ? 'border-danger' : ''}`}
               value={formData.notes}
               onChange={handleChange} />
             <div className='row'>
-              <small className="form-text text-muted ml-auto text-end">{maxLengthNotes - formData.notes.length} characters remaining</small>
+              <small 
+                className={`form-text ml-auto text-end ${
+                  (notesRemainingChars < 0) ? 'text-danger' : 'text-muted'
+                }`}
+              >{notesRemainingChars} characters remaining</small>
             </div>
             {formErrors.notes && <p className="text-danger">{formErrors.notes}</p>  }
           </div>
