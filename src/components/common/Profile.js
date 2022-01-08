@@ -15,11 +15,6 @@ function Profile() {
               <div className="profile mr-3"><img src="https://i.imgur.com/4zrA1gBb.jpg" alt="..." width="150" className="rounded mb-2 img-thumbnail"/>              
               </div>
 
-<<<<<<< HEAD
-              {/* {isOwner(wine.user._id) &&  */}
-=======
-
->>>>>>> ed86998 (staged minor changes)
 
               <div className="d-flex-body mb-5 text-white">
                 <h4 className="mt-0 mb-0 ms-3">Alex</h4>
