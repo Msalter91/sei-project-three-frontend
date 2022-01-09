@@ -1,89 +1,166 @@
-// import React from 'react'
-// import { editWine, getSingleWine } from '../../lib/api'
-// import { useHistory, useParams } from 'react-router'
-// import Error from '../common/Error'
+import axios from 'axios'
+import React from 'react'
 
-
-// const initialState = {
-//   displayName: '',
-//   email: '',
-//   password: '',
-//   forename: '',
-//   surname: '',
-//   about: '',
-//   image: '',
-// }
-
-//*note: memories "edit & delete " ideally should have these functions on "show memories page"?)
+console.log(process.env.REACT_APP_CLOUDINARY_URL)
+console.log(process.env.REACT_APP_CLOUDINARY_UPLOAD_PRESET)
 
 function ProfileEdit() {
+  // const initialState = {
+  const [formData, setFormData] = React.useState({
+    displayName: '',
+    email: '',
+    firstName: '',
+    lastName: '',
+    About: '',
+    profileImage: '',
+  })
+  
+  // const [formData, setFormData] = React.useState(initialState)
+  // const [formErrors, setFormErrors] = React.useState(initialState)
+
+  const [isUploadingImage, setIsUploadingImage] = React.useState(false)
+  
+  const handleChange = e => {
+    const value = e.target.type === 'checkbox' ? e.target.checked : e.target.value
+    setFormData({ ...formData, [e.target.name]: value })
+  }
+
+  const handleSubmit = event => {
+    event.preventDefault()
+    window.alert(`Submitting ${JSON.stringify(formData, null, 2)}`)
+  }
+
+  const handleImageUpload = async (e) => {
+    const data = new FormData()
+    data.append('file', e.target.files[0])
+    data.append('upload_preset', process.env.REACT_APP_CLOUDINARY_UPLOAD_PRESET)
+    setIsUploadingImage(true)
+    const res = await axios.post(process.env.REACT_APP_CLOUDINARY_URL, data)
+    setFormData({ ...formData, profileImage: res.data.url })
+    setIsUploadingImage(false)
+  }
 
   return (
-    <section className="section profileEdit">
-      <div className="card mx-auto mb-5 shadow-sm mb-2 bg-body rounded col">
+    <main className="section profileEdit">
+      <div className="col">
+        <div className="card mx-auto mb-5 shadow-sm mb-2 bg-body rounded col">
+          
+          <form onSubmit={handleSubmit}>
 
-        <form className="col-3 mx-auto" 
-          // onSubmit={handleSubmit}
-        >
-          <div className="field-floating mb-3">
-            <label className="label"
-              htmlFor="displayName">Display name</label>
-            <div className="control">
-              <input
+            <div className="field">
+              <label className="label">Display Name</label>
+              <div className="control">
+                <input
                 // className={`input ${formErrors.displayName ? 'is-danger' : '' }`}
-                placeholder="***should be current userID displayName?"
-                name="displayName"
-                id="displayName"
-                // onChange={handleChange}
-              />
+                  className="input"
+                  placeholder="***should be current userID displayName?"
+                  name="displayName"
+                  id="displayName"
+                  value={formData.displayName}
+                  // onChange={handleChange}
+                />
+              </div>
             </div>
-          </div>
 
-          <div className="field-floating mb-2">
-            <label className="label"
-              htmlFor="email">email</label>
-            <div className="control">
-              <input
+            <div className="field">
+              <label className="label">Email</label>
+              <div className="control">
+                <input
                 // className={`input ${formErrors.email ? 'is-danger' : '' }`}
-                placeholder="email***current userID email address?"
-                name="email"
-                id="email"
-                // onChange={handleChange}
-              />
+                  className="input"
+                  placeholder="***should be current userID email?"
+                  name="email"
+                  id="email"
+                  value={formData.email}
+                  // onChange={handleChange}
+                />
+              </div>
             </div>
-          </div>
 
-          <div className="field-floating mb-2">
-            <label className="label"
-              htmlFor="firstName">First Name</label>
-            <div className="control">
-              <input
-                // className={`input ${formErrors.firstName ? 'is-danger' : '' }`}
-                placeholder="Enter First Name"
-                //*placeholder should be current userID email address?
-                name="email"
-                id="email"
-                // onChange={handleChange}
-              />
+            <div className="field">
+              <label className="label">First Name</label>
+              <div className="control">
+                <input
+                  // className={`input ${formErrors.firstName ? 'is-danger' : '' }`}
+                  className="input"
+                  placeholder="Enter First Name"
+                  name="firstName"
+                  value={formData.firstName}
+                  onChange={handleChange}
+                />
+              </div>
+
             </div>
-          </div>
+            <div className="field">
+              <label className="label">Last Name</label>
+              <div className="control">
+                <input
+                // className={`input ${formErrors.lastName ? 'is-danger' : '' }`}
+                  className="input"
+                  placeholder="Enter Last Name"
+                  name="lastName"
+                  value={formData.lastName}
+                  onChange={handleChange}
+                />
+              </div>
+            </div>
 
-    
+            <div className="field">
+              <label className="label">Country</label>
+              <div className="control">
+                <input
+                // className={`input ${formErrors.country ? 'is-danger' : '' }`}
+                  className="input"
+                  placeholder="Enter your country"
+                  name="country"
+                  value={formData.country}
+                  onChange={handleChange}
+                />
+              </div>
+            </div>
 
-          {/* <div className="input-group">
-        <input type="file" className="form-control" id="inputAvatar" aria-describedby="inputAvatarFile" aria-label="Upload"/>
-        <button className="btn btn-outline-secondary" type="button" id="inputAvatarFile">Upload</button>
-      </div> */}
+            <div className="field">
+              <label className="label">About</label>
+              <div className="control">
+                <textarea
+                  className="textarea"
+                  rows="4"
+                  placeholder="A little something about you..."
+                  name="about"
+                  value={formData.about}
+                  onChange={handleChange}
+                />
+              </div>
+            </div>
+            
+            {isUploadingImage && <p>Image uploading</p>}
+            {formData.profileImage ?
+              <div>
+                <img src={formData.profileImage} alt="uploaded image"/>
+              </div>
+              :
+              <div className="field">
+                <label className="label" htmlFor="image">Profile Image</label>
+                <br></br>
 
+                <input type="file" id="image" accept="image/png, image/jpeg"
+                  onChange={handleImageUpload} />
 
-        </form>
+              </div>
+            }
+            <br></br>
+            <div className="field col d-flex flex-column">
+              <button className="btn btn-outline-info btn-sm" type="submit">
+                Submit
+              </button>
+            </div>
 
+          </form>
 
-
+        </div>
       </div>
-    </section>
-
-
+    </main>
   )
 }
+
 export default ProfileEdit
