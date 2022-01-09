@@ -12,6 +12,7 @@ function MemorySmall ({ memory }){
   const handleSwitchToShow = () =>{
     setIsShowMode(true)
   }
+  //todo update memory on submit of changes
   return (
     <>
       { isShowMode ?
