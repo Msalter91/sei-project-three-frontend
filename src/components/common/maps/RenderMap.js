@@ -1,5 +1,6 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useRef, useCallback } from 'react'
 import ReactMapGL, { Marker, WebMercatorViewport } from 'react-map-gl'
+import Geocoder from 'react-map-gl-geocoder'
 
 function getLocationArrayStats (array){
   const locationAggregates = array.reduce((acc, cur)=>{
@@ -21,6 +22,10 @@ function getLocationArrayStats (array){
   }
 }
 
+function getCoordinates (e) {
+  console.log(e.lngLat)
+}
+
 function RenderMap ({ 
   data, 
   center = { lat: 0, long: 0 },
@@ -36,6 +41,24 @@ function RenderMap ({
     }
   } 
 
+  const mapRef = useRef()
+  const handleViewportChange = useCallback(
+    (newViewport) => setViewport(newViewport),
+    []
+  )
+
+  const handleGeocoderViewportChange = useCallback(
+    (newViewport) => {
+      const geocoderDefaultOverrides = { transitionDuration: 1000 }
+
+      return handleViewportChange({
+        ...newViewport,
+        ...geocoderDefaultOverrides,
+      })
+    },
+    [handleViewportChange]
+  )
+  
   const [viewport, setViewport] = useState({
     latitude: center.lat,
     longitude: center.long,
@@ -76,12 +99,20 @@ function RenderMap ({
     <div className="map-container" style={{ height: '100%', width: '100%' }}>
       <ReactMapGL
         mapboxApiAccessToken={process.env.REACT_APP_MAPS_API_KEY}
+        ref={mapRef}
         // height="100%"
         // width="100%"
         mapStyle='mapbox://styles/mapbox/outdoors-v11'
         {...viewport}
         onViewportChange={newViewport => setViewport(newViewport)}
+        onClick={getCoordinates}
       >
+        <Geocoder 
+          mapRef={mapRef}
+          onViewportChange={handleGeocoderViewportChange}
+          mapboxApiAccessToken={process.env.REACT_APP_MAPS_API_KEY}
+          position='top-left'
+        />
         {data && data.memories.map(location => (
           <Marker
             key={location.id}
@@ -92,6 +123,7 @@ function RenderMap ({
           </Marker>
         ))}
         {/* <MapController onClick={handleNewLocation}/> */}
+        
       </ReactMapGL>
     </div>
   )
