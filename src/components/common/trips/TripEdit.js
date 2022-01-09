@@ -4,8 +4,8 @@ import { useParams } from 'react-router-dom'
 
 import RenderMap from '../maps/RenderMap'
 import Error from '../Error'
-import MemoryEdit from '../memories/MemoryEdit'
 import MemoryCreate from '../memories/MemoryCreate'
+import MemorySmall from '../memories/MemorySmall'
 
 const maxLengthTitle = 50
 const maxLengthNotes = 300
@@ -162,7 +162,7 @@ function TripEdit () {
             </div>
             <div className='custom-memories-container row'>
               {Boolean(formData.memories.length) && formData.memories.map(
-                memory => <MemoryEdit key={memory._id} memory={memory} />
+                memory => <MemorySmall key={memory._id} memory={memory} />
               )}
             </div>
             <div className='create-memory-container row' >
