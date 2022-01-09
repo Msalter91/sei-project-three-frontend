@@ -91,10 +91,11 @@ function RenderMap ({
       zoom: fittedZoom })
   }
   useEffect(()=>{
+    console.log('zooming')
     if (hasMemories){
       fitViewPort()
     }
-  }, [])
+  }, [data.memories])
 
   return (
     <div className="map-container" style={{ height: '100%', width: '100%' }}>
