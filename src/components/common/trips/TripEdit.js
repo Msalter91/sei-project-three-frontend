@@ -86,6 +86,7 @@ function TripEdit () {
   // const newMemoryEditor = async ()=>{
   //   console.log('new mem button')
   // }
+
   return (
     <section className="section">
       {isError ? (
@@ -144,7 +145,7 @@ function TripEdit () {
               {formErrors.notes && <p className="text-danger">{formErrors.notes}</p>  }
             </div>
             <div>
-              <RenderMap />
+              <RenderMap data={formData}/>
             </div>
             <div className='row'>
               <button 

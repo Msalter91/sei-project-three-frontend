@@ -34,7 +34,8 @@ function RenderMap ({
   mapw = 500,
 }) {
   let locationStats = {}
-  if (data){
+  const hasMemories = Boolean(data.memories.length)
+  if (hasMemories){
     locationStats = getLocationArrayStats(data.memories)
     if (!center){
       center = { lat: locationStats.lat, long: locationStats.long }
@@ -90,7 +91,7 @@ function RenderMap ({
       zoom: fittedZoom })
   }
   useEffect(()=>{
-    if (data){
+    if (hasMemories){
       fitViewPort()
     }
   }, [])
@@ -113,9 +114,9 @@ function RenderMap ({
           mapboxApiAccessToken={process.env.REACT_APP_MAPS_API_KEY}
           position='top-left'
         />
-        {data && data.memories.map(location => (
+        {hasMemories && data.memories.map(location => (
           <Marker
-            key={location.id}
+            key={location._id}
             latitude={location.lat}
             longitude={location.long}
           >
