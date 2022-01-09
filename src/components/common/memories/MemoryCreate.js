@@ -14,7 +14,7 @@ const initialState = {
 const maxLengthNotes = 200
 
 
-function MemoryCreate () {
+function MemoryCreate ({ tripId }) {
   const [formData, setFormData] = useState(initialState)
   const notesRemainingChars = maxLengthNotes - formData.notes.length
   const [formErrors, setFormErrors] = useState({ initialState, name: '', location: '' , visitDate: 0, image: '' })
@@ -24,10 +24,11 @@ function MemoryCreate () {
   }
   const handleSubmit = async e =>{
     e.preventDefault()
-    console.log('submitting:', formData)
+    console.log('submitting:', { ...formData, pairedTrip: tripId })
     try {
-      const res = await memoryCreate(formData)
+      const res = await memoryCreate({ ...formData, pairedTrip: tripId })
       const newMemoryId = res.data._id
+      console.log('new memory :', newMemoryId)
     } catch (err) {
       console.log('error response:', err.res)
       setFormErrors(err.response.data.errors)
@@ -149,6 +150,12 @@ function MemoryCreate () {
           </div>
           {formErrors.notes && <p className="text-danger">{formErrors.notes}</p>  }
         </div>
+      </div>
+      <div className='row'>
+        <button 
+          type="submit"
+          className="btn btn-success ml-auto"
+        >Save this memory!</button>
       </div>
     </form>
   )

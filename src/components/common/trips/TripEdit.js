@@ -148,7 +148,7 @@ function TripEdit () {
               )}
             </div>
             <div className='create-memory-container row' >
-              <MemoryCreate />
+              <MemoryCreate tripId={tripId}/>
             </div>
             {/* <div className='row'>
               <button type="button" 
