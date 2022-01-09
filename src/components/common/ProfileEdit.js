@@ -56,7 +56,7 @@ function ProfileEdit() {
                   placeholder="***should be current userID displayName?"
                   name="displayName"
                   id="displayName"
-                  value={formData.displayName}
+                  // value={formData.displayName}
                   // onChange={handleChange}
                 />
               </div>
@@ -71,7 +71,7 @@ function ProfileEdit() {
                   placeholder="***should be current userID email?"
                   name="email"
                   id="email"
-                  value={formData.email}
+                  // value={formData.email}
                   // onChange={handleChange}
                 />
               </div>
@@ -85,7 +85,7 @@ function ProfileEdit() {
                   className="input"
                   placeholder="Enter First Name"
                   name="firstName"
-                  value={formData.firstName}
+                  // value={formData.firstName}
                   onChange={handleChange}
                 />
               </div>
@@ -99,7 +99,7 @@ function ProfileEdit() {
                   className="input"
                   placeholder="Enter Last Name"
                   name="lastName"
-                  value={formData.lastName}
+                  // value={formData.lastName}
                   onChange={handleChange}
                 />
               </div>
@@ -113,7 +113,7 @@ function ProfileEdit() {
                   className="input"
                   placeholder="Enter your country"
                   name="country"
-                  value={formData.country}
+                  // value={formData.country}
                   onChange={handleChange}
                 />
               </div>
@@ -127,7 +127,7 @@ function ProfileEdit() {
                   rows="4"
                   placeholder="A little something about you..."
                   name="about"
-                  value={formData.about}
+                  // value={formData.about}
                   onChange={handleChange}
                 />
               </div>
