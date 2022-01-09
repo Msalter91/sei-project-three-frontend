@@ -48,3 +48,7 @@ export function memoryGetById(memoryId){
 export function memoryEdit(memoryId, formData){
   return axios.put(`${baseUrl}/memories/${memoryId}`, formData, authHeader())
 }
+
+export function memoryCreate(formData){
+  return axios.post(`${baseUrl}/memories/`, formData, authHeader())
+}
