@@ -5,6 +5,7 @@ import { useParams } from 'react-router-dom'
 import RenderMap from '../maps/RenderMap'
 import Error from '../Error'
 import MemoryEdit from '../memories/MemoryEdit'
+import MemoryCreate from '../memories/MemoryCreate'
 
 const maxLengthTitle = 50
 const maxLengthNotes = 300
@@ -61,9 +62,9 @@ function TripEdit () {
       setFormErrors(err.response.data.errors)
     }
   }
-  const newMemoryEditor = async ()=>{
-    console.log('new mem button')
-  }
+  // const newMemoryEditor = async ()=>{
+  //   console.log('new mem button')
+  // }
   return (
     <section className="section">
       {isError ? (
@@ -142,14 +143,15 @@ function TripEdit () {
                 memory => <MemoryEdit key={memory._id} memory={memory}/>
               )}
             </div>
-            {/* TODO: create memory component */}
-            <div className='row'>
+            <div className='create-memory-container row' >
+              <MemoryCreate />
+            </div>
+            {/* <div className='row'>
               <button type="button" 
                 className="btn btn-primary"
                 onClick={newMemoryEditor}
               >Add a Memory</button>
-            </div>
-            {/* TODO: add new create memory component */}
+            </div> */}
           </div>
         </div>
       )}
