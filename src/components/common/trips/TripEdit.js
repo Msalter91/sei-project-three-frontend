@@ -61,6 +61,9 @@ function TripEdit () {
       setFormErrors(err.response.data.errors)
     }
   }
+  const newMemoryEditor = async ()=>{
+    console.log('new mem button')
+  }
   return (
     <section className="section">
       {isError ? (
@@ -128,13 +131,17 @@ function TripEdit () {
             <div 
               className='d-flex flex-column'>
             </div>
-
-            {formData.memories.length && formData.memories.map(
-              memoryId => <MemoryEdit key={memoryId} memoryId={memoryId}/>
-            )}
+            <div className='custom-memories-container row'>
+              {Boolean(formData.memories.length) && formData.memories.map(
+                memory => <MemoryEdit key={memory._id} memory={memory}/>
+              )}
+            </div>
             {/* TODO: create memory component */}
             <div className='row'>
-              <button type="button" className="btn btn-primary">Add a Memory</button>
+              <button type="button" 
+                className="btn btn-primary"
+                onClick={newMemoryEditor}
+              >Add a Memory</button>
             </div>
             {/* TODO: add new create memory component */}
           </div>
