@@ -14,7 +14,7 @@ const initialState = {
 const maxLengthNotes = 200
 
 
-function MemoryCreate ({ tripId }) {
+function MemoryCreate ({ tripId, addNewMemoryToTrip }) {
   const [formData, setFormData] = useState(initialState)
   const notesRemainingChars = maxLengthNotes - formData.notes.length
   const [formErrors, setFormErrors] = useState({ initialState, name: '', location: '' , visitDate: 0, image: '' })
@@ -29,8 +29,9 @@ function MemoryCreate ({ tripId }) {
       const res = await memoryCreate({ ...formData, pairedTrip: tripId })
       const newMemoryId = res.data._id
       console.log('new memory :', newMemoryId)
+      await addNewMemoryToTrip(newMemoryId)
     } catch (err) {
-      console.log('error response:', err.res)
+      console.log('error response:', err)
       setFormErrors(err.response.data.errors)
     }
   }

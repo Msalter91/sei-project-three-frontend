@@ -26,15 +26,19 @@ function TripEdit () {
   const [isError, setIsError] = useState(false)
   // populate initial data
 
+  const refreshFormDataFromApi = async ()=>{
+    try {
+      const getTripRes = await tripGetById(tripId)
+      const newFormData = { ...formData,...getTripRes.data }
+      setFormData(newFormData)
+    } catch (err){
+      setIsError(true)
+    }
+  }
+
   useEffect(()=>{
     (async ()=>{
-      try {
-        const getTripRes = await tripGetById(tripId)
-        const newFormData = { ...formData,...getTripRes.data }
-        setFormData(newFormData)
-      } catch (err){
-        setIsError(true)
-      }
+      await refreshFormDataFromApi()
     })()
     // Do NOT want this hook to re-render on formData change, therefore accept non-exhaustive dependency
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -64,6 +68,19 @@ function TripEdit () {
       console.log('Editing return:',res)
     } catch (err) {
       setFormErrors(err.response.data.errors)
+    }
+  }
+
+  const addNewMemoryToTrip = async (newMemoryId) =>{
+    try {
+      const newFormData = { 
+        ...formData, 
+        memories: [...formData.memories, newMemoryId], 
+      }
+      await tripEdit(tripId, newFormData)
+      refreshFormDataFromApi()
+    } catch (err){
+      setIsError(true)
     }
   }
   // const newMemoryEditor = async ()=>{
@@ -144,11 +161,11 @@ function TripEdit () {
             </div>
             <div className='custom-memories-container row'>
               {Boolean(formData.memories.length) && formData.memories.map(
-                memory => <MemoryEdit key={memory._id} memory={memory}/>
+                memory => <MemoryEdit key={memory._id} memory={memory} />
               )}
             </div>
             <div className='create-memory-container row' >
-              <MemoryCreate tripId={tripId}/>
+              <MemoryCreate tripId={tripId} addNewMemoryToTrip={addNewMemoryToTrip}/>
             </div>
             {/* <div className='row'>
               <button type="button" 
