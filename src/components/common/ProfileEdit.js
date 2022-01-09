@@ -25,18 +25,14 @@ function ProfileEdit() {
 
 
   const [countryValue, setCountryValue] = useState('')
-  const options = useMemo(() => countryList().getData(), [])
-
-  
-
-  const changeHandler = value => {
-    setCountryValue(value.label)
+  const countrySelectOptions = useMemo(() => countryList().getData(), [])
+  const countryPickerChangeHandler = value => {
+    console.log(value)
+    setCountryValue(value)
     setFormData({ ...formData, location: value.label })
   }
+
   const [formData, setFormData] = React.useState({})
-
-  console.log(formData)
-
   const [user, setUser] = React.useState(null)
 
   React.useEffect( ()=>{
@@ -52,7 +48,6 @@ function ProfileEdit() {
     getUser()
   }, [])
   
-  console.log(formData)
   const [formErrors, setFormErrors] = React.useState(initialState)
 
   const [isUploadingImage, setIsUploadingImage] = React.useState(false)
@@ -87,7 +82,7 @@ function ProfileEdit() {
     setFormData({ ...formData, profileImage: res.data.url })
     setIsUploadingImage(false)
   }
-
+  console.log(formData.location)
   return (
     <main className="section profileEdit">
       <div className="col">
@@ -150,7 +145,7 @@ function ProfileEdit() {
             <div className="field">
               <label className="label">Country</label>
               <div className="control">
-                { user && (<Select options={options} value={countryValue} onChange={changeHandler} /> ) }
+                { user && (<Select options={countrySelectOptions} defaultValue={countryValue} onChange={countryPickerChangeHandler} /> ) }
               </div>
             </div>
 
