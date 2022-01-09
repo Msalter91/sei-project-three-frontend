@@ -1,15 +1,11 @@
 import { useState } from 'react'
+
 import { memoryCreate } from '../../../lib/api.js'
-
-// //*NEW AC * * * * * * * cloudinary setup
-import axios from 'axios'
-import React from 'react'
-
 
 const initialState = {
   name: 'A beautiful day',
   location: '<location picker here>',
-  image: '',
+  image: 'https://i.imgur.com/ElzRumx.png',
   notes: '',
   lat: 0,
   long: 0,
@@ -18,14 +14,11 @@ const initialState = {
 const maxLengthNotes = 200
 
 
-function MemoryCreate ({ tripId, addNewMemoryToTrip }) {
+function MemoryCreateBACKUP ({ tripId, addNewMemoryToTrip }) {
   const [formData, setFormData] = useState(initialState)
   const notesRemainingChars = maxLengthNotes - formData.notes.length
   const [formErrors, setFormErrors] = useState({ initialState, name: '', location: '' , visitDate: 0, image: '' })
   
-  // //*NEW AC * * * * * * * cloudinary setup
-  const [isUploadingImage, setIsUploadingImage] = React.useState(false)
-
   const handleChange = e =>{
     setFormData({ ...formData, [e.target.name]: e.target.value })
   }
@@ -43,18 +36,6 @@ function MemoryCreate ({ tripId, addNewMemoryToTrip }) {
     }
   }
 
-  // //*NEW AC * * * * * * * cloudinary setup
-  const handleImageUpload = async (e) => {
-    const data = new FormData()
-    data.append('file', e.target.files[0])
-    data.append('upload_preset', process.env.REACT_APP_CLOUDINARY_UPLOAD_PRESET_MEMORY)
-    setIsUploadingImage(true)
-    const res = await axios.post(process.env.REACT_APP_CLOUDINARY_URL, data)
-    setFormData({ ...formData, image: res.data.url })
-    setIsUploadingImage(false)
-  }
-
-
   return (
 
     <form 
@@ -63,25 +44,6 @@ function MemoryCreate ({ tripId, addNewMemoryToTrip }) {
 
       {/* <div className='col'> */}
       <div className="form-group">
-
-        {isUploadingImage && <p>Image uploading</p>}
-        {formData.image ?
-          <div>
-            <img src={formData.image} alt="uploaded image" />
-          </div>
-          :
-          <div className="field">
-            <label className="label" htmlFor="image">Share a photo?</label>
-            <br></br>
-
-            <input type="file" id="image" accept="image/png, image/jpeg"
-              onChange={handleImageUpload} />
-
-          </div>}
-      </div>
-
-
-      {/* 
         <label htmlFor="image">Share a photo?</label>
         <input
           type='text' 
@@ -97,8 +59,7 @@ function MemoryCreate ({ tripId, addNewMemoryToTrip }) {
       </div>
       <figure className="image">
         <img src={formData.image} alt={formData.name} className='memory-edit-image' />
-      </figure> */}
-
+      </figure>
       {/* </div> */}
 
       {/* <div className='col'> */}
@@ -203,4 +164,4 @@ function MemoryCreate ({ tripId, addNewMemoryToTrip }) {
   )
 }
 
-export default MemoryCreate
+export default MemoryCreateBACKUP
