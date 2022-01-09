@@ -69,12 +69,12 @@ function TripEdit () {
       {isError ? (
         <Error />
       ) : (
-        <form
-          className="container-fluid row"
-          onSubmit={handleSubmit}
-        >
-          <div className="col-7" 
-            style={{ background: 'antiquewhite' }}>
+        <div className='container-fluid row'>
+          <form
+            onSubmit={handleSubmit}
+            className="col-7" 
+            style={{ background: 'antiquewhite' }}
+          >
             <div className="form-group">
               <label htmlFor="title"></label>
               <input 
@@ -124,7 +124,13 @@ function TripEdit () {
             <div>
               <RenderMap />
             </div>
-          </div>
+            <div className='row'>
+              <button 
+                type="submit"
+                className="btn btn-success ml-auto"
+              >Save your trip</button>
+            </div>
+          </form>
           <div 
             className="col"
             style={{ background: 'khaki' }}>
@@ -145,13 +151,7 @@ function TripEdit () {
             </div>
             {/* TODO: add new create memory component */}
           </div>
-          <div className='row'>
-            <button 
-              type="submit"
-              className="btn btn-success ml-auto"
-            >Save your trip</button>
-          </div>
-        </form>
+        </div>
       )}
     </section>
   )

@@ -19,7 +19,7 @@ function MemoryEdit (memory) {
   console.log('edit: ',memory)
   const [formData, setFormData] = useState(initialState)
   const notesRemainingChars = maxLengthNotes - formData.notes.length
-  const [formErrors, setFormErrors] = useState(initialState)
+  const [formErrors, setFormErrors] = useState(memory ? memory : initialState)
   
   const handleChange = e =>{
     setFormData({ ...formData, [e.target.name]: e.target.value })
