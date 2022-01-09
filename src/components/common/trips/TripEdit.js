@@ -42,10 +42,14 @@ function TripEdit () {
   
   const handleChange = e =>{
     const value = e.target.value
-    // if user is editing title field and exceeds length, do not accept new characters.
+    // if user is editing limited field and exceeds length, do not accept new characters.
+    // improves UX and ensures form can always be submitted so that updating memories does not get blocked by over-length text fields
+    // TODO: release lock on notes length to make writing easier, but cut off over-length writing on submit?
     if (
-      e.target.name === 'title' &&
-      e.target.value.length > maxLengthTitle
+      (e.target.name === 'title' &&
+      e.target.value.length > maxLengthTitle) ||
+      (e.target.name === 'notes' &&
+      e.target.value.length > maxLengthNotes)
     ) {
       return
     }
