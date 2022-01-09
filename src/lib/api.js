@@ -41,6 +41,10 @@ export function tripGetById(tripId){
 }
 
 // Memories
+export function memoryGetById(memoryId){
+  return axios.get(`${baseUrl}/memories/${memoryId}`)
+}
+
 export function memoryEdit(memoryId, formData){
   return axios.put(`${baseUrl}/memories/${memoryId}`, formData, authHeader())
 }

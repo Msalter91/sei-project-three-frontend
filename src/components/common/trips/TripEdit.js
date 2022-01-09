@@ -23,7 +23,6 @@ function TripEdit () {
   const [formErrors, setFormErrors] = useState(initialState)
   const { tripId } = useParams()
   const [isError, setIsError] = useState(false)
-
   // populate initial data
 
   useEffect(()=>{
@@ -124,10 +123,19 @@ function TripEdit () {
             </div>
           </div>
           <div 
-            className="col d-flex flex-column"
+            className="col"
             style={{ background: 'khaki' }}>
-            <MemoryEdit />
+            <div 
+              className='d-flex flex-column'>
+            </div>
+
+            {formData.memories.length && formData.memories.map(
+              memoryId => <MemoryEdit key={memoryId} memoryId={memoryId}/>
+            )}
             {/* TODO: create memory component */}
+            <div className='row'>
+              <button type="button" className="btn btn-primary">Add a Memory</button>
+            </div>
             {/* TODO: add new create memory component */}
           </div>
           <div className='row'>
