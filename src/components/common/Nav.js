@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import { isAuthenticated, removeToken } from '../../lib/auth'
+import { getUserId, isAuthenticated, removeToken } from '../../lib/auth'
 import { Navbar } from 'react-bootstrap'
 
 function Nav() {
@@ -32,7 +32,7 @@ function Nav() {
         <ul className="navbar-nav ms-auto">   
           {isAuth ? (
             <>
-              <Link to="/profile" className="nav-link active">
+              <Link to={`/profile/${getUserId()}`} className="nav-link active">
                 Profile
               </Link>
               <Link to="/" className="navbar-item nav-link active" onClick={handleLogout}>
