@@ -5,7 +5,7 @@ function Profile() {
 
   return (
     <div className="row py-5 px-4">
-      <div className="col-md-7 mx-auto">
+      <div className="col-md-10 mx-auto">
     
         {/* <!-- Profile widget --> */}
     

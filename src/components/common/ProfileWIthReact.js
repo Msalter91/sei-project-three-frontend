@@ -26,7 +26,7 @@ function Profile() {
 
   return (
     <div className="row py-5 px-4">
-      <div className="col-md-5 mx-auto">
+      <div className="col-md-9 mx-auto">
     
         {/* <!-- Profile widget --> */}
     
@@ -36,16 +36,15 @@ function Profile() {
               <div className="profile mr-3"><img src="https://i.imgur.com/4zrA1gBb.jpg" alt="..." width="150" className="rounded mb-2 img-thumbnail"/>              
               </div>
 
-              {/* {isOwner(wine.user._id) &&  */}
 
               <div className="d-flex-body mb-5 text-white">
-                <h4 className="mt-0 mb-0">{user && user.displayName}</h4>
+                <h4 className="mt-0 mb-0 ms-3">{user && user.displayName}</h4>
                 <p className="small mb-4">
-                  <i className="fas fa-map-marker-alt mr-2"></i>{user && user.location}</p>
+                  <i className="fas fa-map-marker-alt mr-2 ms-3"></i>{user && user.location}</p>
               </div>
             </div>
           </div>
-          <div className="bg-light p-4 d-flex justify-content-end text-center">
+          <div className="bg-light p-3 d-flex justify-content-end text-center">
             <ul className="list-inline mb-0">
               <li className="list-inline-item">
                 <h5 className="font-weight-bold mb-0 d-block">5</h5><small className="text-muted"> <i className="fas fa-image mr-1"></i>Memories</small>
