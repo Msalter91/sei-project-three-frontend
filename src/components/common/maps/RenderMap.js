@@ -30,8 +30,6 @@ function RenderMap ({
   data, 
   center = { lat: 0, long: 0 },
   initZoom = 1,
-  maph = 500,
-  mapw = 500,
 }) {
 
   let locationStats = {}
@@ -44,6 +42,8 @@ function RenderMap ({
   } 
   const mapContainer = useRef()
   const mapRef = useRef()
+
+  // calculating viewport to fit multiple markers requires a viewport with known pixel size in order to prevent errors within WebMercatorViewport
   useEffect(() => {
     function handleResize() {      
       if (mapContainer.current){
@@ -84,8 +84,6 @@ function RenderMap ({
     zoom: initZoom,
     bearing: 0,
     pitch: 50,
-    height: maph,
-    width: mapw,
   })
 
   function fitViewPort () {
@@ -99,7 +97,7 @@ function RenderMap ({
         [locationStats.longMax, locationStats.latMax]
       ],
       {
-        padding: mapw * 0.15,
+        padding: mapContainer.current.offsetWidth * 0.15,
       }
     )
     setViewport({ 
@@ -109,7 +107,6 @@ function RenderMap ({
       zoom: fittedZoom })
   }
   useEffect(()=>{
-    console.log('zooming')
     if (hasMemories){
       fitViewPort()
     }
