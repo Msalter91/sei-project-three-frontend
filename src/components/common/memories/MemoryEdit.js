@@ -62,6 +62,76 @@ function MemoryEdit (memory) {
       </div>
       <div className='col'>
         <div className="form-group">
+          <label htmlFor="name">What happened?</label>
+          <input
+            type='text' 
+            name="name"
+            id="name"
+            className={
+              `form-control 
+                ${(formErrors.name ) ? 'border-danger' : ''}
+                `}
+            value={formData.name}
+            onChange={handleChange} />
+          {formErrors.name && <p className="text-danger">{formErrors.name}</p>  }
+        </div>
+        <div className="form-group">
+          <label htmlFor="location">Where were you?</label>
+          <input
+            type='text' 
+            name="location"
+            id="location"
+            className={
+              `form-control 
+                ${(formErrors.name ) ? 'border-danger' : ''}
+                `}
+            value={formData.location}
+            onChange={handleChange} />
+          {formErrors.location && <p className="text-danger">{formErrors.location}</p>  }
+        </div>
+        <div className="form-group">
+          <label htmlFor="lat">LATITUDE</label>
+          <input
+            type='number' 
+            name="lat"
+            id="lat"
+            className={
+              `form-control 
+                ${(formErrors.lat ) ? 'border-danger' : ''}
+                `}
+            value={formData.lat}
+            onChange={handleChange} />
+          {formErrors.lat && <p className="text-danger">{formErrors.lat}</p>  }
+        </div>
+        <div className="form-group">
+          <label htmlFor="long">LONGITUDE</label>
+          <input
+            type='number' 
+            name="long"
+            id="long"
+            className={
+              `form-control 
+                ${(formErrors.long ) ? 'border-danger' : ''}
+                `}
+            value={formData.long}
+            onChange={handleChange} />
+          {formErrors.long && <p className="text-danger">{formErrors.long}</p>  }
+        </div>
+        <div className="form-group">
+          <label htmlFor="visitDate">When were you there?</label>
+          <input
+            type='date' 
+            name="visitDate"
+            id="visitDate"
+            className={
+              `form-control 
+                ${(formErrors.visitDate ) ? 'border-danger' : ''}
+                `}
+            value={formData.visitDate}
+            onChange={handleChange} />
+          {Boolean(formErrors.visitDate) && <p className="text-danger">{formErrors.visitDate}</p>  }
+        </div>
+        <div className="form-group">
           <label htmlFor="notes">What did you love?</label>
           <textarea 
             name="notes"
@@ -81,6 +151,12 @@ function MemoryEdit (memory) {
           </div>
           {formErrors.notes && <p className="text-danger">{formErrors.notes}</p>  }
         </div>
+      </div>
+      <div className='row'>
+        <button 
+          type="submit"
+          className="btn btn-success ml-auto"
+        >Save this memory!</button>
       </div>
     </form>
   )

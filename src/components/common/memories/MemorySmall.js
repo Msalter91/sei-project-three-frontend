@@ -3,7 +3,7 @@ import MemoryEdit from './MemoryEdit'
 import MemoryShowSmall from './MemorySmallShow'
 
 
-function MemorySmall (memory){
+function MemorySmall ({ memory }){
   const [isShowMode, setIsShowMode] = useState(true)
   return (
     <>
