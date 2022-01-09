@@ -144,7 +144,7 @@ function TripEdit () {
               </div>
               {formErrors.notes && <p className="text-danger">{formErrors.notes}</p>  }
             </div>
-            <div>
+            <div className='edit-trip-map-container'>
               <RenderMap data={formData}/>
             </div>
             <div className='row'>
