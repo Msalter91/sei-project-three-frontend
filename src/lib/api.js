@@ -27,6 +27,10 @@ export function getUser(userId) {
 //   return axios.get(`${baseUrl}/profile/${userId}`)
 // }
 
+export function editUser(formData, userId) {
+  return axios.put(`${baseUrl}/profile/${userId}`, formData)
+}
+
 // Trips
 export function tripCreate(formData){
   return axios.post(`${baseUrl}/trips/`, formData, authHeader())

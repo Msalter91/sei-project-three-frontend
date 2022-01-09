@@ -8,7 +8,6 @@ import { getUserId } from '../../lib/auth'
 function Profile() {
 
   const userId = useParams()
-  console.log(getUserId())
 
   const [user, setUser] = React.useState(null)
 
@@ -59,8 +58,7 @@ function Profile() {
             <div className="p-4 rounded shadow-sm bg-light">
               <p className="font-italic mb-0"> {user && user.about}</p>
               <button>
-                <Link to="/profileEdit" className="btn btn-outline-info btn-sm">Edit Profile</Link>
-                {/* {`/profile/${user_Id}/edit`} */}
+                <Link to={`/profile/${getUserId()}/edit`} className="btn btn-outline-info btn-sm">Edit Profile</Link>
               </button>
             </div>
           </div>

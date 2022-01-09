@@ -1,22 +1,59 @@
 import axios from 'axios'
-import React from 'react'
+import React, { useMemo, useState } from 'react'
+import Select from 'react-select'
+import { getUserId } from '../../lib/auth'
+
+import countryList from 'react-select-country-list'
+import { editUser } from '../../lib/api'
+
+
 
 console.log(process.env.REACT_APP_CLOUDINARY_URL)
 console.log(process.env.REACT_APP_CLOUDINARY_UPLOAD_PRESET)
 
+const initialState = {
+  displayName: '',
+  email: '',
+  firstName: '',
+  surname: '',
+  about: '',
+  location: '',
+  image: '',
+}
+
 function ProfileEdit() {
-  // const initialState = {
-  const [formData, setFormData] = React.useState({
-    displayName: '',
-    email: '',
-    firstName: '',
-    lastName: '',
-    About: '',
-    profileImage: '',
-  })
+
+
+  const [countryValue, setCountryValue] = useState('')
+  const options = useMemo(() => countryList().getData(), [])
+
   
-  // const [formData, setFormData] = React.useState(initialState)
-  // const [formErrors, setFormErrors] = React.useState(initialState)
+
+  const changeHandler = value => {
+    setCountryValue(value.label)
+    setFormData({ ...formData, location: value.label })
+  }
+  const [formData, setFormData] = React.useState({})
+
+  console.log(formData)
+
+  const [user, setUser] = React.useState(null)
+
+  React.useEffect( ()=>{
+    const getUser = async () => {
+      try {
+        const userData = await axios.get(`/api/profile/${getUserId()}`)
+        setUser(userData.data)
+        setFormData(userData.data)
+      } catch (err) {
+        console.log(err)
+      }
+    }
+    getUser()
+  }, [])
+  
+  console.log(formData)
+  const [formErrors, setFormErrors] = React.useState(initialState)
 
   const [isUploadingImage, setIsUploadingImage] = React.useState(false)
   
@@ -25,9 +62,20 @@ function ProfileEdit() {
     setFormData({ ...formData, [e.target.name]: value })
   }
 
-  const handleSubmit = event => {
-    event.preventDefault()
+
+  const handleSubmit = async e => {
+    e.preventDefault()
+    formData.displayName = user.displayName
+    formData.email = user.email
     window.alert(`Submitting ${JSON.stringify(formData, null, 2)}`)
+    try {
+      const res = await editUser(formData, getUserId())
+      console.log(res)
+      // history.push(`/cheeses/${res.data._id}`)
+    } catch (err) {
+      setFormErrors(err.response.data.errors)
+      console.log(err)
+    }
   }
 
   const handleImageUpload = async (e) => {
@@ -51,13 +99,11 @@ function ProfileEdit() {
               <label className="label">Display Name</label>
               <div className="control">
                 <input
-                // className={`input ${formErrors.displayName ? 'is-danger' : '' }`}
                   className="input"
-                  placeholder="***should be current userID displayName?"
+                  placeholder={user && user.displayName}
                   name="displayName"
                   id="displayName"
-                  // value={formData.displayName}
-                  // onChange={handleChange}
+                  disabled= {true}
                 />
               </div>
             </div>
@@ -66,13 +112,11 @@ function ProfileEdit() {
               <label className="label">Email</label>
               <div className="control">
                 <input
-                // className={`input ${formErrors.email ? 'is-danger' : '' }`}
                   className="input"
-                  placeholder="***should be current userID email?"
+                  placeholder={user && user.email}
                   name="email"
                   id="email"
-                  // value={formData.email}
-                  // onChange={handleChange}
+                  disabled={true}
                 />
               </div>
             </div>
@@ -81,11 +125,10 @@ function ProfileEdit() {
               <label className="label">First Name</label>
               <div className="control">
                 <input
-                  // className={`input ${formErrors.firstName ? 'is-danger' : '' }`}
-                  className="input"
+                  className={`input ${formErrors.firstName && 'is-danger'}`}
                   placeholder="Enter First Name"
                   name="firstName"
-                  // value={formData.firstName}
+                  value={formData && formData.firstName}
                   onChange={handleChange}
                 />
               </div>
@@ -95,11 +138,10 @@ function ProfileEdit() {
               <label className="label">Last Name</label>
               <div className="control">
                 <input
-                // className={`input ${formErrors.lastName ? 'is-danger' : '' }`}
-                  className="input"
+                  className={`input ${formErrors.lastName && 'is-danger'}`}
                   placeholder="Enter Last Name"
-                  name="lastName"
-                  // value={formData.lastName}
+                  name="surname"
+                  value={formData && formData.surname}
                   onChange={handleChange}
                 />
               </div>
@@ -108,14 +150,7 @@ function ProfileEdit() {
             <div className="field">
               <label className="label">Country</label>
               <div className="control">
-                <input
-                // className={`input ${formErrors.country ? 'is-danger' : '' }`}
-                  className="input"
-                  placeholder="Enter your country"
-                  name="country"
-                  // value={formData.country}
-                  onChange={handleChange}
-                />
+                { user && (<Select options={options} value={countryValue} onChange={changeHandler} /> ) }
               </div>
             </div>
 
@@ -127,8 +162,8 @@ function ProfileEdit() {
                   rows="4"
                   placeholder="A little something about you..."
                   name="about"
-                  // value={formData.about}
                   onChange={handleChange}
+                  value={formData && formData.about}
                 />
               </div>
             </div>

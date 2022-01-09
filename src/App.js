@@ -29,8 +29,8 @@ function App() {
         <Route path="/aboutus"><AboutUs/></Route>
 
         <Route exact path="/profile"><Profile/></Route>
-        <Route path ="/profile/:usedId"><ProfileWithReact /></Route>
-        <Route path="/profileEdit"><ProfileEdit/></Route>
+        <Route exact path ="/profile/:usedId"><ProfileWithReact /></Route>
+        <Route path="/profile/:userId/edit"><ProfileEdit/></Route>
 
         <Route exact path="/countries"><Countries/></Route>
         <Route path="/countries/:countryId"><CountryShow/></Route>
