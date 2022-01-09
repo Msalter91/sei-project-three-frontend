@@ -5,11 +5,18 @@ import MemoryShowSmall from './MemorySmallShow'
 
 function MemorySmall ({ memory }){
   const [isShowMode, setIsShowMode] = useState(true)
+
+  const handleSwitchToEdit = () =>{
+    setIsShowMode(false)
+  }
+  const handleSwitchToShow = () =>{
+    setIsShowMode(true)
+  }
   return (
     <>
       { isShowMode ?
-        <MemoryShowSmall memory={memory}/> :
-        <MemoryEdit memory={memory} />
+        <MemoryShowSmall memory={memory} handleSwitchToEdit={handleSwitchToEdit}/> :
+        <MemoryEdit memory={memory} handleSwitchToShow={handleSwitchToShow}/>
       }
     </>
   )

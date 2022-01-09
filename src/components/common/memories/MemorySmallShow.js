@@ -1,4 +1,4 @@
-function MemoryShowSmall ({ memory }) {
+function MemoryShowSmall ({ memory, handleSwitchToEdit }) {
   return (
     <div 
       className="container-fluid"
@@ -24,6 +24,9 @@ function MemoryShowSmall ({ memory }) {
             <p >{memory.notes}</p>
           </div>
         </div>
+      </div>
+      <div className="memory-show-small-buttons row">
+        <button className="btn btn-warning" onClick={handleSwitchToEdit}>Edit</button>
       </div>
     </div>
   )
