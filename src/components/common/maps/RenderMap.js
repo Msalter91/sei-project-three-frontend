@@ -33,6 +33,7 @@ function RenderMap ({
   maph = 500,
   mapw = 500,
 }) {
+
   let locationStats = {}
   const hasMemories = Boolean(data.memories.length)
   if (hasMemories){
@@ -41,8 +42,25 @@ function RenderMap ({
       center = { lat: locationStats.lat, long: locationStats.long }
     }
   } 
-
+  const mapContainer = useRef()
   const mapRef = useRef()
+  useEffect(() => {
+    function handleResize() {      
+      if (mapContainer.current){
+        setViewport({ ...viewport, 
+          height: mapContainer.current.offsetHeight, 
+          width: mapContainer.current.offsetWidth })
+      }
+    }
+    
+    handleResize()
+    window.addEventListener('resize', handleResize)
+
+    return () => window.removeEventListener('resize', handleResize)
+    // want this hook to ONLY cause a re-render when the html element resizes, therefore accept non-exhaustive dependency
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  },[mapContainer])
+
   const handleViewportChange = useCallback(
     (newViewport) => setViewport(newViewport),
     []
@@ -95,15 +113,15 @@ function RenderMap ({
     if (hasMemories){
       fitViewPort()
     }
+  // Want this hook to ONLY re-render on formData change, therefore accept non-exhaustive dependency
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data.memories])
 
   return (
-    <div className="map-container" style={{ height: '100%', width: '100%' }}>
+    <div ref={mapContainer} className="map-container" style={{ height: '100%', width: '100%' }}>
       <ReactMapGL
         mapboxApiAccessToken={process.env.REACT_APP_MAPS_API_KEY}
         ref={mapRef}
-        // height="100%"
-        // width="100%"
         mapStyle='mapbox://styles/mapbox/outdoors-v11'
         {...viewport}
         onViewportChange={newViewport => setViewport(newViewport)}
