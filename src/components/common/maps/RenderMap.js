@@ -33,7 +33,6 @@ function RenderMap ({
   initZoom = 1,
 }) {
   const aggregatedMemoriesForViewport = flattenArrayByPropertyOfMember(arrayOfTrips, 'memories')
-  console.log(aggregatedMemoriesForViewport)
   let locationStats = {}
   const hasMemories = Boolean(aggregatedMemoriesForViewport.length)
   if (hasMemories){
