@@ -25,9 +25,21 @@ function TripsIndexAsMap () {
       {isError ? (
         <Error />
       ) : (
-        <div className='index-map-container col' style={{ height: 500 }}>
-          <RenderMap arrayOfTrips={tripList}/>
-        </div>
+        <>
+          <div className='index-map-container row' style={{ height: 500 }}>
+            <RenderMap arrayOfTrips={tripList}/>
+          </div>
+          <div className='row'>
+            {Boolean(tripList.length) && tripList.map(trip =>(
+              <div className="col" key={trip._id}>
+                <h4>{trip.title}</h4>
+                <p>{trip.addedBy.displayName}</p>
+              </div>
+            ))
+
+            }
+          </div>
+        </>
       )}
     </section>
   )
