@@ -10,6 +10,7 @@ function Profile() {
   const userId = useParams()
 
   const [user, setUser] = React.useState(null)
+  const [memories, setMemories] = React.useState(null)
 
   React.useEffect( ()=>{
     const getUser = async () => {
@@ -22,6 +23,21 @@ function Profile() {
     }
     getUser()
   }, [userId] )
+
+  React.useEffect( ()=>{
+    const getMemories = async () => {
+      try {
+        const memoryData = await axios.get('/api/memories')
+        const memoryArray = memoryData.data.filter(memory => memory.addedBy === getUserId())
+        setMemories(memoryArray)
+      } catch (err) {
+        console.log(err)
+      }
+    }
+    getMemories()
+  }, [userId] )
+
+  console.log(memories)
 
   return (
     <div className="row py-5 px-4">
@@ -46,7 +62,7 @@ function Profile() {
           <div className="bg-light p-3 d-flex justify-content-end text-center">
             <ul className="list-inline mb-0">
               <li className="list-inline-item">
-                <h5 className="font-weight-bold mb-0 d-block">5</h5><small className="text-muted"> <i className="fas fa-image mr-1"></i>Memories</small>
+                <h5 className="font-weight-bold mb-0 d-block">{user && user.memories.length}</h5><small className="text-muted"> <i className="fas fa-image mr-1"></i>Memories</small>
               </li>
               
             </ul>
@@ -65,16 +81,15 @@ function Profile() {
               <h5 className="mb-0">Recent Memories</h5><a href="#" className="btn btn-link text-muted">Show all</a>
             </div>
             <div className="row">
-              <div className="col-lg-6 mb-2 pr-lg-1">
-                <img src="https://i.imgur.com/LW9SNEh.jpg" alt="" className="img-fluid rounded shadow-sm"/></div>
-              <div className="col-lg-6 mb-2 pl-lg-1">
-                <img src="https://i.imgur.com/CPMvfQh.jpg" alt="" className="img-fluid rounded shadow-sm"/></div>
-              <div className="col-lg-6 mb-2 pl-lg-1">
-                <img src="https://i.imgur.com/S1z7d1G.jpg" alt="" className="img-fluid rounded shadow-sm"/></div>
-              <div className="col-lg-6 mb-2 pl-lg-1">
-                <img src="https://i.imgur.com/hiOMkOG.jpg" alt="" className="img-fluid rounded shadow-sm"/></div>
-              <div className="col-lg-6 pl-lg-1">
-                <img src="https://i.imgur.com/hO01J15.jpg" alt="" className="img-fluid rounded shadow-sm"/></div> 
+              {memories && memories.map((memory => {
+                return (
+                  <Link key={memory._id} to={`/memories/${memory._id}`} >
+                    <div className="col-lg-6 mb-2 pr-lg-1">
+                      <img src={memory.image} alt="" className="img-fluid rounded shadow-sm"/>
+                    </div> 
+                  </Link>
+                )
+              }))}
             </div>
           </div>
 
