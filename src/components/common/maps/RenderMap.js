@@ -27,7 +27,6 @@ function getLocationArrayStats (array){
 }
 
 
-
 function RenderMap ({ 
   arrayOfTrips = [], 
   center = { lat: 0, long: 0 },
@@ -144,7 +143,7 @@ function RenderMap ({
         <Marker
           latitude={viewport.latitude}
           longitude={viewport.longitude}
-        ></Marker>
+        ><span role="img" aria-label="map-marker" className="marker">{'📸'}</span></Marker>
         {hasMemories && arrayOfTrips.map(trip =>{
           //if no memories, don't attempt to draw anything memory related
           if (!trip.memories.length) return

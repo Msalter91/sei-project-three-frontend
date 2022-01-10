@@ -170,7 +170,6 @@ function MemoryCreate ({ tripId, addNewMemoryToTrip, toggleCreateMemoryForm }) {
         </div>
         {formErrors.notes && <p className="text-danger">{formErrors.notes}</p>  }
       </div>
-      {/* </div> */}
       <div className='row'>
         {isUploadingImage && <p>Image uploading...</p>}
         <button 
