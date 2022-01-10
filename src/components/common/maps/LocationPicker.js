@@ -1,5 +1,5 @@
 import { useState, useRef, useCallback } from 'react'
-import ReactMapGL, { Marker } from 'react-map-gl'
+import ReactMapGL, { Marker, WebMercatorViewport } from 'react-map-gl'
 import Geocoder from 'react-map-gl-geocoder'
 
 const mapboxApiAccessToken = process.env.REACT_APP_MAPS_API_KEY
@@ -39,6 +39,24 @@ function LocationPicker ({
     },
     [handleViewportChange]
   )
+  const fitBounds = (
+    bounds, viewport
+  ) => new WebMercatorViewport(viewport).fitBounds(bounds)
+  const handleGeocoderResult = ({ result })=>{
+    console.log(result)
+    const { bbox } = result
+    const bounds = [[bbox[0], bbox[1]], [bbox[2], bbox[3]]]
+    const fittedBounds = fitBounds(bounds, viewport)
+    console.log(viewport)
+    console.log(fittedBounds)
+    // handleGeocoderViewportChange
+    setViewport({
+      ...viewport, 
+      latitude: fittedBounds.latitude,
+      longitude: fittedBounds.longitude,
+      zoom: fittedBounds.zoom,
+    })
+  }
 
   return (
     <div className="map-container" style={{ height: '100%', width: '100%' }}>
@@ -56,6 +74,7 @@ function LocationPicker ({
           onViewportChange={handleGeocoderViewportChange}
           mapboxApiAccessToken={mapboxApiAccessToken}
           position='top-left'
+          onResult={handleGeocoderResult}
         />
         <Marker
           latitude={viewport.latitude}
