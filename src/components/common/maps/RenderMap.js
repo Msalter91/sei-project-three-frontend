@@ -97,7 +97,7 @@ function RenderMap ({
         [locationStats.longMax, locationStats.latMax]
       ],
       {
-        padding: mapContainer.current.offsetWidth * 0.15,
+        padding: mapContainer.current.offsetWidth * 0.05,
       }
     )
     setViewport({ 
