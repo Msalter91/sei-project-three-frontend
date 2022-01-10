@@ -83,9 +83,12 @@ function TripEdit () {
       setIsError(true)
     }
   }
-  // const newMemoryEditor = async ()=>{
-  //   console.log('new mem button')
-  // }
+  const updateClientsideMemory = (index) => {
+    return function (newMemoryData) {
+      formData.memories[index] = newMemoryData
+      setFormData({ ...formData })
+    }
+  }
 
   return (
     <section className="section">
@@ -161,8 +164,15 @@ function TripEdit () {
               className='d-flex flex-column'>
             </div>
             <div className='custom-memories-container row'>
-              {Boolean(formData.memories.length) && formData.memories.map(
-                memory => <MemorySmall key={memory._id} memory={memory} />
+              {Boolean(formData.memories.length) && 
+              formData.memories.map(
+                (memory, index) => (
+                  <MemorySmall 
+                    key={memory._id} 
+                    memory={memory} 
+                    updateClientsideMemory = {updateClientsideMemory(index)}
+                  />
+                )
               )}
             </div>
             <div className='create-memory-container row' >

@@ -15,7 +15,7 @@ const initialState = {
 const maxLengthNotes = 200
 
 
-function MemoryEdit ({ memory, handleSwitchToShow }) {
+function MemoryEdit ({ memory, handleSwitchToShow, updateClientsideMemory }) {
   const [formData, setFormData] = useState(memory ? memory : initialState)
   const notesRemainingChars = maxLengthNotes - formData.notes.length
   const [formErrors, setFormErrors] = useState({ ...initialState, visitDate: 0 })
@@ -27,15 +27,11 @@ function MemoryEdit ({ memory, handleSwitchToShow }) {
     e.preventDefault()
     console.log('submitting:', formData)
     try {
-      const res = await memoryEdit(memory._id, formData)
-      console.log('Editing return:',res)
-      console.log('pre',memory)
-      memory = formData
-      console.log('post',memory)
-
+      await memoryEdit(memory._id, formData)
+      updateClientsideMemory(formData)
       handleSwitchToShow()
     } catch (err) {
-      console.log('error response:', err.res)
+      console.log('error response:', err)
       setFormErrors(err.response.data.errors)
     }
   }
