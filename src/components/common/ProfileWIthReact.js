@@ -48,7 +48,7 @@ function Profile() {
         <div className="bg-white shadow rounded overflow-hidden">
           <div className="px-4 pt-0 pb-4 cover">
             <div className="d-flex align-items-end profile-head">
-              <div className="profile mr-3"><img src="https://i.imgur.com/4zrA1gBb.jpg" alt="..." width="150" className="rounded mb-2 img-thumbnail"/>              
+              <div className="profile mr-3"><img src={user && user.image} alt="..." width="150" className="rounded mb-2 img-thumbnail"/>              
               </div>
 
 
@@ -62,7 +62,7 @@ function Profile() {
           <div className="bg-light p-3 d-flex justify-content-end text-center">
             <ul className="list-inline mb-0">
               <li className="list-inline-item">
-                <h5 className="font-weight-bold mb-0 d-block">{user && user.memories.length}</h5><small className="text-muted"> <i className="fas fa-image mr-1"></i>Memories</small>
+                <h5 className="font-weight-bold mb-0 d-block">{memories && memories.length}</h5><small className="text-muted"> <i className="fas fa-image mr-1"></i>Memories</small>
               </li>
               
             </ul>
