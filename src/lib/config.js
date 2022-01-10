@@ -1,0 +1,1 @@
+export const logoImageLink = 'https://i.imgur.com/ElzRumx.png'
