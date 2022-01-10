@@ -24,11 +24,11 @@ const initialState = {
 function ProfileEdit() {
 
 
-  const [countryValue, setCountryValue] = useState('')
+  const [countryPickerValue, setCountryPickerValue] = useState('')
   const countrySelectOptions = useMemo(() => countryList().getData(), [])
   const countryPickerChangeHandler = value => {
     console.log(value)
-    setCountryValue(value)
+    setCountryPickerValue(value)
     setFormData({ ...formData, location: value.label })
   }
 
@@ -64,8 +64,7 @@ function ProfileEdit() {
     formData.email = user.email
     window.alert(`Submitting ${JSON.stringify(formData, null, 2)}`)
     try {
-      const res = await editUser(formData, getUserId())
-      console.log(res)
+      await editUser(formData, getUserId())
       // history.push(`/cheeses/${res.data._id}`)
     } catch (err) {
       setFormErrors(err.response.data.errors)
@@ -82,7 +81,7 @@ function ProfileEdit() {
     setFormData({ ...formData, profileImage: res.data.url })
     setIsUploadingImage(false)
   }
-  console.log(formData.location)
+
   return (
     <main className="section profileEdit">
       <div className="col">
@@ -145,7 +144,7 @@ function ProfileEdit() {
             <div className="field">
               <label className="label">Country</label>
               <div className="control">
-                { user && (<Select options={countrySelectOptions} defaultValue={countryValue} onChange={countryPickerChangeHandler} /> ) }
+                { user && (<Select options={countrySelectOptions} defaultValue={countryPickerValue} onChange={countryPickerChangeHandler} /> ) }
               </div>
             </div>
 
