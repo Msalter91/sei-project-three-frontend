@@ -17,8 +17,6 @@ function Login() {
     setFormData({ ...formData, [e.target.name]: e.target.value })
   }
 
-  console.log('formdata', formData)
-
   const handleSubmit = async (e) => {
     e.preventDefault()
 
