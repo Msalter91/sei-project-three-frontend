@@ -1,9 +1,9 @@
 import { useState } from 'react'
-import axios from 'axios'
 
 import { memoryCreate } from '../../../lib/api.js'
 import { logoImageLink } from '../../../lib/config.js'
 import RenderMap from '../maps/RenderMap.js'
+import { uploadImageMemory } from '../../../lib/imageHosting.js'
 
 
 const initialState = {
@@ -40,15 +40,15 @@ function MemoryCreate ({ tripId, addNewMemoryToTrip, toggleCreateMemoryForm }) {
     }
   }
 
-  // Cloudinary
   const handleImageUpload = async (e) => {
-    const data = new FormData()
-    data.append('file', e.target.files[0])
-    data.append('upload_preset', process.env.REACT_APP_CLOUDINARY_UPLOAD_PRESET_MEMORY)
-    setIsUploadingImage(true)
-    const res = await axios.post(process.env.REACT_APP_CLOUDINARY_URL, data)
-    setFormData({ ...formData, image: res.data.url })
-    setIsUploadingImage(false)
+    try {
+      setIsUploadingImage(true)
+      const newImageUrl = await uploadImageMemory(e.target.files[0])
+      setFormData({ ...formData, image: newImageUrl })
+      setIsUploadingImage(false)
+    } catch (err) {
+      setIsUploadingImage(false)
+    }
   }
 
   // Map information 

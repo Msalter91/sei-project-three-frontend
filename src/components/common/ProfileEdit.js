@@ -6,6 +6,7 @@ import { getUserId } from '../../lib/auth'
 import countryList from 'react-select-country-list'
 import { editUser } from '../../lib/api'
 import { useHistory } from 'react-router-dom'
+import { uploadImageProfile } from '../../lib/imageHosting'
 
 const initialState = {
   displayName: '',
@@ -68,13 +69,14 @@ function ProfileEdit() {
   }
 
   const handleImageUpload = async (e) => {
-    const data = new FormData()
-    data.append('file', e.target.files[0])
-    data.append('upload_preset', process.env.REACT_APP_CLOUDINARY_UPLOAD_PRESET_PROFILE)
-    setIsUploadingImage(true)
-    const res = await axios.post(process.env.REACT_APP_CLOUDINARY_URL, data)
-    setFormData({ ...formData, profileImage: res.data.url })
-    setIsUploadingImage(false)
+    try {
+      setIsUploadingImage(true)
+      const newImageUrl = await uploadImageProfile(e.target.files[0])
+      setFormData({ ...formData, image: newImageUrl })
+      setIsUploadingImage(false)
+    } catch (err) {
+      setIsUploadingImage(false)
+    }
   }
 
   return (
