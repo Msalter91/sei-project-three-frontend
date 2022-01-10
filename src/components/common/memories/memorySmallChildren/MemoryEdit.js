@@ -25,9 +25,9 @@ function MemoryEdit ({ memory, handleSwitchToShow, updateClientsideMemory }) {
   }
   const handleSubmit = async e =>{
     e.preventDefault()
-    console.log('submitting:', formData)
     try {
       await memoryEdit(memory._id, formData)
+      // update client without re-fetching
       updateClientsideMemory(formData)
       handleSwitchToShow()
     } catch (err) {
