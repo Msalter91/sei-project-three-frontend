@@ -4,6 +4,7 @@ import { memoryCreate } from '../../../lib/api.js'
 // //*NEW AC * * * * * * * cloudinary setup
 import axios from 'axios'
 import React from 'react'
+import RenderMap from '../maps/RenderMap.js'
 
 
 const initialState = {
@@ -55,6 +56,10 @@ function MemoryCreate ({ tripId, addNewMemoryToTrip, toggleCreateMemoryForm }) {
     setIsUploadingImage(false)
   }
 
+  // Map information 
+  const captureLocation = (location) => {
+    setFormData({ ...formData, long: location[0], lat: location[1] })
+  }
 
   return (
 
@@ -94,6 +99,7 @@ function MemoryCreate ({ tripId, addNewMemoryToTrip, toggleCreateMemoryForm }) {
       </div>
       <div className="form-group">
         <label htmlFor="location">Where were you?</label>
+        <RenderMap getLocationFromMap={captureLocation} />
         <input
           type='text' 
           name="location"

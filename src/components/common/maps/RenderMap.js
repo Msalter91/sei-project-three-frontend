@@ -23,14 +23,13 @@ function getLocationArrayStats (array){
   }
 }
 
-function getCoordinates (e) {
-  console.log(e.lngLat)
-}
+
 
 function RenderMap ({ 
   arrayOfTrips = [], 
   center = { lat: 0, long: 0 },
   initZoom = 1,
+  getLocationFromMap,
 }) {
   const aggregatedMemoriesForViewport = flattenArrayByPropertyOfMember(arrayOfTrips, 'memories')
   let locationStats = {}
@@ -41,6 +40,11 @@ function RenderMap ({
       center = { lat: locationStats.lat, long: locationStats.long }
     }
   } 
+
+  function getCoordinates (e) {
+    getLocationFromMap(e.lngLat)
+  }
+
   const mapContainer = useRef()
   const mapRef = useRef()
 
