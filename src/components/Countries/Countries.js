@@ -34,15 +34,15 @@ function Countries() {
   }
 
   return (
-    <div className='container-fluid h-100' style={{ border: '1px solid red' }}>
-      <div className='row header-wrapper'style={{ border: '1px solid green' }}>
+    <div className='container-fluid h-100'>
+      <div className='row header-wrapper'>
         <div className='col'>
           <div className='header-splash'>
             <h2>Inspiration for your next memory</h2>
           </div>
         </div>
       </div>
-      <div className='row' style={{ border: '1px solid blue' }}>
+      <div className='row'>
         <div className='col'>
           <div className='country-search'>
             <input
@@ -53,7 +53,7 @@ function Countries() {
           </div>
         </div>
       </div>
-      <div className=' row card-container' style={{ border: '1px solid black' }}>
+      <div className=' row card-container'>
         {
           countries && (
             filteredCountries(countries).map(country=> {
@@ -63,7 +63,7 @@ function Countries() {
                     <img className='' src={country.image} alt="Card image cap"></ img>
                     <div className="card-body">
                       <h6 className="card-title">{country.name}</h6>
-                      <a href="#" className="btn btn-primary">Go somewhere</a>
+                      <a href="#" className="btn btn-primary">Trips in {country.name}</a>
                     </div>
                   </div>
                 </Link>
