@@ -1,5 +1,5 @@
 import { useHistory } from 'react-router-dom'
-import { tripCreate } from '../../../lib/api'
+import { tripPostNewTrip } from '../../../lib/api'
 import { isAuthenticated } from '../../../lib/auth'
 
 function TripCreate(){
@@ -9,7 +9,7 @@ function TripCreate(){
   if (!isAuthenticated()) history.push('/login')
 
   const getNewTripId = async () => {
-    const res = await tripCreate()
+    const res = await tripPostNewTrip()
     history.push(`/trips/${res.data._id}/edit`)
   }
   getNewTripId()
