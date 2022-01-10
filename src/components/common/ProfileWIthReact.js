@@ -81,7 +81,7 @@ function Profile() {
               <h5 className="mb-0 ms-4">Recent Memories</h5>
               {/* <a href="#" className="btn btn-link text-muted">Show all</a> */}
               <button>
-                <Link to={`/trips/${getUserId()}/edit`} className="btn btn-outline-info btn-sm me-3">Create New Memory</Link>
+                <Link to={'/trips/new'} className="btn btn-outline-info btn-sm me-3">Create New Memory</Link>
               </button>
 
             </div>
