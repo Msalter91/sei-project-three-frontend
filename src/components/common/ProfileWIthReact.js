@@ -41,7 +41,7 @@ function Profile() {
 
   return (
     <div className="row py-5 px-4">
-      <div className="col-md-9 mx-auto">
+      <div className="col-md-7 mx-auto">
     
         {/* <!-- Profile widget --> */}
     
@@ -67,7 +67,7 @@ function Profile() {
               
             </ul>
           </div>
-          <div className="px-4 py-3">
+          <div className="px-5 py-1">
             <h5 className="mb-0">About</h5>
             <div className="p-4 rounded shadow-sm bg-light">
               <p className="font-italic mb-0"> {user && user.about}</p>
@@ -76,21 +76,28 @@ function Profile() {
               </button>
             </div>
           </div>
-          <div className="py-4 px-4">
+          <div className="py-1 px-4">
             <div className="d-flex align-items-center justify-content-between mb-3">
-              <h5 className="mb-0">Recent Memories</h5><a href="#" className="btn btn-link text-muted">Show all</a>
+              <h5 className="mb-0 ms-4">Recent Memories</h5>
+              {/* <a href="#" className="btn btn-link text-muted">Show all</a> */}
+              <button>
+                <Link to={`/trips/${getUserId()}/edit`} className="btn btn-outline-info btn-sm me-3">Create New Memory</Link>
+              </button>
+
             </div>
-            <div className="row">
-              {memories && memories.map((memory => {
-                return (
-                  <Link key={memory._id} to={`/memories/${memory._id}`} >
-                    <div className="col-lg-6 mb-2 pr-lg-1">
-                      <img src={memory.image} alt="" className="img-fluid rounded shadow-sm"/>
-                    </div> 
-                  </Link>
-                )
-              }))}
-            </div>
+            <div className="container pg-index">
+              <div className="gy-2 row row-cols-3">
+                {memories && memories.map((memory => {
+                  return (
+                    <Link key={memory._id} to={`/memories/${memory._id}`} >
+                      <div className="profileImgGal col-lg-12 mb-2 pr-lg-1">
+                        <img src={memory.image} alt="" className="img-fluid rounded shadow-sm"/>
+                      </div> 
+                    </Link>
+                  )
+                }))}
+              </div>
+            </div> 
           </div>
 
         </div>

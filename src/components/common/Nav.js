@@ -57,11 +57,11 @@ function Nav() {
           }
           {isLoggedIn && (
             <>
-              <Link to={`/profile/${getUserId()}`} className="nav-link active">
-                Profile
-              </Link>
               <Link to="/" className="navbar-item nav-link active" onClick={handleLogout}>
                 LOG OUT
+              </Link>
+              <Link to={`/profile/${getUserId()}`} className="nav-link active">
+                Profile
               </Link>
             </>
           ) 
