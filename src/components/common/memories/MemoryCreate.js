@@ -61,24 +61,31 @@ function MemoryCreate ({ tripId, addNewMemoryToTrip, toggleCreateMemoryForm }) {
     <form 
       className="container-fluid row"
       onSubmit={handleSubmit}>
-      <div className="form-group">
-        <label className="label" htmlFor="image" role="button">
-          <p>Share a photo?</p>
-          <img 
-            src={formData.image ? formData.image : logoImageLink} 
-            alt={formData.name} 
-            className='memory-edit-image' 
+      <div className='row'>
+        <div className="form-group col">
+          <label className="label" htmlFor="image" role="button">
+            <p>Share a photo?</p>
+            <img 
+              src={formData.image ? formData.image : logoImageLink} 
+              alt={formData.name} 
+              className='memory-edit-image' 
+            />
+          </label>
+          <input 
+            type="file" 
+            className='d-none'
+            id="image" 
+            accept="image/png, image/jpeg"
+            onChange={handleImageUpload} 
           />
-        </label>
-        <input 
-          type="file" 
-          className='d-none'
-          id="image" 
-          accept="image/png, image/jpeg"
-          onChange={handleImageUpload} 
-        />
-        {isUploadingImage && <p>Image uploading</p>}
+          {isUploadingImage && <p>Image uploading</p>}
+        </div>
+        <div className="form-group col">
+          <label htmlFor="location">Where were you?</label>
+          <LocationPicker getLocationFromMap={captureLocation} />
+        </div>
       </div>
+
       <div className="form-group">
         <label htmlFor="name">What happened?</label>
         <input
@@ -92,51 +99,6 @@ function MemoryCreate ({ tripId, addNewMemoryToTrip, toggleCreateMemoryForm }) {
           value={formData.name}
           onChange={handleChange} />
         {formErrors.name && <p className="text-danger">{formErrors.name}</p>  }
-      </div>
-      <div className="form-group">
-        <label htmlFor="location">Where were you?</label>
-        <div className='map-container' style={{ height: 300 }}>
-          <LocationPicker getLocationFromMap={captureLocation} />
-        </div>
-        <input
-          type='text' 
-          name="location"
-          id="location"
-          className={
-            `form-control 
-                ${(formErrors.name ) ? 'border-danger' : ''}
-                `}
-          value={formData.location}
-          onChange={handleChange} />
-        {formErrors.location && <p className="text-danger">{formErrors.location}</p>  }
-      </div>
-      <div className="form-group">
-        <label htmlFor="lat">LATITUDE</label>
-        <input
-          type='number' 
-          name="lat"
-          id="lat"
-          className={
-            `form-control 
-                ${(formErrors.lat ) ? 'border-danger' : ''}
-                `}
-          value={formData.lat}
-          onChange={handleChange} />
-        {formErrors.lat && <p className="text-danger">{formErrors.lat}</p>  }
-      </div>
-      <div className="form-group">
-        <label htmlFor="long">LONGITUDE</label>
-        <input
-          type='number' 
-          name="long"
-          id="long"
-          className={
-            `form-control 
-                ${(formErrors.long ) ? 'border-danger' : ''}
-                `}
-          value={formData.long}
-          onChange={handleChange} />
-        {formErrors.long && <p className="text-danger">{formErrors.long}</p>  }
       </div>
       <div className="form-group">
         <label htmlFor="visitDate">When were you there?</label>
