@@ -223,8 +223,14 @@ text-shadow: 0px 1px 1px rgba(0, 0, 0, 0.4);
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  padding-bottom: 20px;
 }
 
+.row-location-notes{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 //* * * * * L O G  I N  * * * * * 
 
 
