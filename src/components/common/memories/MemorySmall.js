@@ -1,9 +1,9 @@
 import { useState } from 'react'
-import MemoryEdit from './MemoryEdit'
-import MemoryShowSmall from './MemorySmallShow'
+import MemoryEdit from './memorySmallChildren/MemoryEdit.js'
+import MemoryShowSmall from './memorySmallChildren/MemorySmallShow.js'
 
 
-function MemorySmall ({ memory }){
+function MemorySmall ({ memory, updateClientsideMemory }){
   const [isShowMode, setIsShowMode] = useState(true)
 
   const handleSwitchToEdit = () =>{
@@ -12,12 +12,19 @@ function MemorySmall ({ memory }){
   const handleSwitchToShow = () =>{
     setIsShowMode(true)
   }
-  //todo update memory on submit of changes
+  //todo use a context instead of passing functions for updating client trip.memories
   return (
     <>
       { isShowMode ?
-        <MemoryShowSmall memory={memory} handleSwitchToEdit={handleSwitchToEdit}/> :
-        <MemoryEdit memory={memory} handleSwitchToShow={handleSwitchToShow}/>
+        <MemoryShowSmall 
+          memory={memory} 
+          handleSwitchToEdit={handleSwitchToEdit}
+        /> :
+        <MemoryEdit 
+          memory={memory} 
+          handleSwitchToShow={handleSwitchToShow}  
+          updateClientsideMemory={updateClientsideMemory}
+        />
       }
     </>
   )

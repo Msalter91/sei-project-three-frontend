@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-import { memoryEdit } from '../../../lib/api.js'
+import { memoryEdit } from '../../../../lib/api.js'
 
 
 const initialState = {
@@ -15,8 +15,7 @@ const initialState = {
 const maxLengthNotes = 200
 
 
-function MemoryEdit ({ memory, handleSwitchToShow }) {
-  console.log('edit: ',memory)
+function MemoryEdit ({ memory, handleSwitchToShow, updateClientsideMemory }) {
   const [formData, setFormData] = useState(memory ? memory : initialState)
   const notesRemainingChars = maxLengthNotes - formData.notes.length
   const [formErrors, setFormErrors] = useState({ ...initialState, visitDate: 0 })
@@ -26,13 +25,13 @@ function MemoryEdit ({ memory, handleSwitchToShow }) {
   }
   const handleSubmit = async e =>{
     e.preventDefault()
-    console.log('submitting:', formData)
     try {
-      const res = await memoryEdit(memory._id, formData)
-      console.log('Editing return:',res)
+      await memoryEdit(memory._id, formData)
+      // update client without re-fetching
+      updateClientsideMemory(formData)
       handleSwitchToShow()
     } catch (err) {
-      console.log('error response:', err.res)
+      console.log('error response:', err)
       setFormErrors(err.response.data.errors)
     }
   }

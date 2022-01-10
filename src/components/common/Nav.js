@@ -27,6 +27,9 @@ function Nav() {
           <li className="nav-item active">
             <Link to="/countries" className="nav-link active">
             Inspire Me</Link></li> 
+          <li className="nav-item active">
+            <Link to= "/trips/new" className="nav-link active">
+            Create a Trip</Link></li> 
         </ul>
             
         <ul className="navbar-nav ms-auto">   
