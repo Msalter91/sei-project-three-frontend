@@ -4,6 +4,8 @@ import Geocoder from 'react-map-gl-geocoder'
 import { flattenArrayByPropertyOfMember } from '../../../lib/helpers.js'
 import TripPolyLine from './helpers/TripPolyLine.js'
 
+const mapboxApiAccessToken = process.env.REACT_APP_MAPS_API_KEY
+
 function getLocationArrayStats (array){
   const locationAggregates = array.reduce((acc, cur)=>{
     acc.lat += cur.lat
@@ -30,7 +32,7 @@ function RenderMap ({
   arrayOfTrips = [], 
   center = { lat: 0, long: 0 },
   initZoom = 1,
-  getLocationFromMap,
+  getLocationFromMap = ()=>{},
 }) {
   const aggregatedMemoriesForViewport = flattenArrayByPropertyOfMember(arrayOfTrips, 'memories')
   let locationStats = {}
@@ -46,6 +48,9 @@ function RenderMap ({
   } 
 
   function getCoordinates (e) {
+    console.log(e)
+    console.log('center:', mapRef.getCenter())
+    console.log('click:', e.lngLat)
     getLocationFromMap(e.lngLat)
   }
 
@@ -123,7 +128,7 @@ function RenderMap ({
   return (
     <div ref={mapContainer} className="map-container" style={{ height: '100%', width: '100%' }}>
       <ReactMapGL
-        mapboxApiAccessToken={process.env.REACT_APP_MAPS_API_KEY}
+        mapboxApiAccessToken={mapboxApiAccessToken}
         ref={mapRef}
         mapStyle='mapbox://styles/mapbox/outdoors-v11'
         {...viewport}
@@ -133,9 +138,13 @@ function RenderMap ({
         <Geocoder 
           mapRef={mapRef}
           onViewportChange={handleGeocoderViewportChange}
-          mapboxApiAccessToken={process.env.REACT_APP_MAPS_API_KEY}
+          mapboxApiAccessToken={mapboxApiAccessToken}
           position='top-left'
         />
+        <Marker
+          latitude={viewport.latitude}
+          longitude={viewport.longitude}
+        ></Marker>
         {hasMemories && arrayOfTrips.map(trip =>{
           //if no memories, don't attempt to draw anything memory related
           if (!trip.memories.length) return
