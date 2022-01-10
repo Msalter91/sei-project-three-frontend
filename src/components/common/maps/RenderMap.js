@@ -27,15 +27,20 @@ function getCoordinates (e) {
 }
 
 function RenderMap ({ 
-  data, 
+  arrayOfTrips, 
   center = { lat: 0, long: 0 },
   initZoom = 1,
 }) {
-
+  const aggregatedMemoriesForViewport = []
+  if (arrayOfTrips.length) arrayOfTrips.forEach(trip => {
+    trip.memories.forEach(memory => {
+      aggregatedMemoriesForViewport.push(memory)
+    })
+  })
   let locationStats = {}
-  const hasMemories = Boolean(data.memories.length)
+  const hasMemories = Boolean(aggregatedMemoriesForViewport.length)
   if (hasMemories){
-    locationStats = getLocationArrayStats(data.memories)
+    locationStats = getLocationArrayStats(aggregatedMemoriesForViewport)
     if (!center){
       center = { lat: locationStats.lat, long: locationStats.long }
     }
@@ -112,7 +117,7 @@ function RenderMap ({
     }
   // Want this hook to ONLY re-render on formData change, therefore accept non-exhaustive dependency
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [data.memories])
+  }, [arrayOfTrips.memories])
 
   return (
     <div ref={mapContainer} className="map-container" style={{ height: '100%', width: '100%' }}>
@@ -130,14 +135,16 @@ function RenderMap ({
           mapboxApiAccessToken={process.env.REACT_APP_MAPS_API_KEY}
           position='top-left'
         />
-        {hasMemories && data.memories.map(location => (
-          <Marker
-            key={location._id}
-            latitude={location.lat}
-            longitude={location.long}
-          >
-            <span role="img" aria-label="map-marker" className="marker">{'📸'}</span>
-          </Marker>
+        {hasMemories && arrayOfTrips.map(trip =>(
+          trip.memories.map(location => (
+            <Marker
+              key={location._id}
+              latitude={location.lat}
+              longitude={location.long}
+            >
+              <span role="img" aria-label="map-marker" className="marker">{'📸'}</span>
+            </Marker>
+          ))
         ))}
         {/* <MapController onClick={handleNewLocation}/> */}
         
