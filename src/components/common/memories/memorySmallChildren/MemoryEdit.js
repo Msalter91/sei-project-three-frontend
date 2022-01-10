@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-import { memoryEdit } from '../../../lib/api.js'
+import { memoryEdit } from '../../../../lib/api.js'
 
 
 const initialState = {
@@ -16,7 +16,6 @@ const maxLengthNotes = 200
 
 
 function MemoryEdit ({ memory, handleSwitchToShow }) {
-  console.log('edit: ',memory)
   const [formData, setFormData] = useState(memory ? memory : initialState)
   const notesRemainingChars = maxLengthNotes - formData.notes.length
   const [formErrors, setFormErrors] = useState({ ...initialState, visitDate: 0 })
@@ -30,6 +29,10 @@ function MemoryEdit ({ memory, handleSwitchToShow }) {
     try {
       const res = await memoryEdit(memory._id, formData)
       console.log('Editing return:',res)
+      console.log('pre',memory)
+      memory = formData
+      console.log('post',memory)
+
       handleSwitchToShow()
     } catch (err) {
       console.log('error response:', err.res)

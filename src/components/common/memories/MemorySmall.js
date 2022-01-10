@@ -1,6 +1,6 @@
 import { useState } from 'react'
-import MemoryEdit from './MemoryEdit'
-import MemoryShowSmall from './MemorySmallShow'
+import MemoryEdit from './memorySmallChildren/MemoryEdit.js'
+import MemoryShowSmall from './memorySmallChildren/MemorySmallShow.js'
 
 
 function MemorySmall ({ memory }){
