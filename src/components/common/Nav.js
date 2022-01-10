@@ -1,14 +1,24 @@
-import { Link } from 'react-router-dom'
+import { Link, useHistory, useLocation } from 'react-router-dom'
 import { getUserId, isAuthenticated, removeToken } from '../../lib/auth'
 import { Navbar } from 'react-bootstrap'
+import React from 'react'
+
 
 function Nav() {
-  const isAuth = isAuthenticated()
+
+  const history = useHistory()
+  const location = useLocation()
+
   const handleLogout = () => {
     removeToken()
-    location.reload()
+    history.push('/')
   }
 
+  const [isLoggedIn, setIsLoggedIn] = React.useState(null)
+
+  React.useEffect( ()=>{
+    setIsLoggedIn(isAuthenticated())
+  }, [location])
 
   return (
     <Navbar bg="" variant="light" expand="md">
@@ -33,7 +43,19 @@ function Nav() {
         </ul>
             
         <ul className="navbar-nav ms-auto">   
-          {isAuth ? (
+          {!isLoggedIn && 
+                      (
+                        <div className="nav-item auth">
+                          <li className="nav-item">
+                            <Link to="/register" className="nav-link active">REGISTER</Link>
+                          </li>
+                          <li className="nav-item">
+                            <Link to="/login" className="nav-link active">LOGIN</Link>
+                          </li>
+                        </div>
+                      )
+          }
+          {isLoggedIn && (
             <>
               <Link to={`/profile/${getUserId()}`} className="nav-link active">
                 Profile
@@ -42,16 +64,8 @@ function Nav() {
                 LOG OUT
               </Link>
             </>
-          ) : (
-            <div className="nav-item auth">
-              <li className="nav-item">
-                <Link to="/register" className="nav-link active">REGISTER</Link>
-              </li>
-              <li className="nav-item">
-                <Link to="/login" className="nav-link active">LOGIN</Link>
-              </li>
-            </div>
-          )}      
+          ) 
+          }
         </ul>
       </Navbar.Collapse>
     </Navbar>   
