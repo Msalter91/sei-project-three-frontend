@@ -1,6 +1,8 @@
 import { useState } from 'react'
 
 import { memoryEdit } from '../../../../lib/api.js'
+import { logoImageLink } from '../../../../lib/config.js'
+import { uploadImageMemory } from '../../../../lib/imageHosting.js'
 
 
 const initialState = {
@@ -19,6 +21,7 @@ function MemoryEdit ({ memory, handleSwitchToShow, updateClientsideMemory }) {
   const [formData, setFormData] = useState(memory ? memory : initialState)
   const notesRemainingChars = maxLengthNotes - formData.notes.length
   const [formErrors, setFormErrors] = useState({ ...initialState, visitDate: 0 })
+  const [isUploadingImage, setIsUploadingImage] = useState(false)
   
   const handleChange = e =>{
     setFormData({ ...formData, [e.target.name]: e.target.value })
@@ -36,6 +39,17 @@ function MemoryEdit ({ memory, handleSwitchToShow, updateClientsideMemory }) {
     }
   }
 
+  const handleImageUpload = async (e) => {
+    try {
+      setIsUploadingImage(true)
+      const newImageUrl = await uploadImageMemory(e.target.files[0])
+      setFormData({ ...formData, image: newImageUrl })
+      setIsUploadingImage(false)
+    } catch (err) {
+      setIsUploadingImage(false)
+    }
+  }
+
   return (
     <form 
       className="container-fluid row"
@@ -43,22 +57,23 @@ function MemoryEdit ({ memory, handleSwitchToShow, updateClientsideMemory }) {
     >
       <div className='col'>
         <div className="form-group">
-          <label htmlFor="image">Share a photo?</label>
-          <input
-            type='text' 
-            name="image"
-            id="image"
-            className={
-              `form-control 
-                ${(formErrors.image ) ? 'border-danger' : ''}
-                `}
-            value={formData.image}
-            onChange={handleChange} />
-          {formErrors.image && <p className="text-danger">{formErrors.image}</p>  }
+          <label className="label" htmlFor="image" role='button'>
+            <p>Share a photo?</p>
+            <img 
+              src={formData.image ? formData.image : logoImageLink } 
+              alt={formData.name} 
+              className='memory-edit-image' 
+            />
+          </label>
+          <input 
+            type="file" 
+            className='d-none'
+            id="image" 
+            accept="image/png, image/jpeg"
+            onChange={handleImageUpload} 
+          />
+          {isUploadingImage && <p>Image uploading...</p>}
         </div>
-        <figure className="image">
-          <img src={formData.image} alt={formData.name} className='memory-edit-image' />
-        </figure>
       </div>
       <div className='col'>
         <div className="form-group">
@@ -153,9 +168,11 @@ function MemoryEdit ({ memory, handleSwitchToShow, updateClientsideMemory }) {
         </div>
       </div>
       <div className='row'>
+        {isUploadingImage && <p>Image uploading...</p>}
         <button 
           type="submit"
-          className="btn btn-success ml-auto"
+          className={`btn btn-success ml-auto ${isUploadingImage && 'disabled'}`}
+          aria-disabled={isUploadingImage}
         >Save this memory!</button>
       </div>
     </form>

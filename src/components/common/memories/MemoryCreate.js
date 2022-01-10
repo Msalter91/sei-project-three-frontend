@@ -1,9 +1,9 @@
 import { useState } from 'react'
-import { memoryCreate } from '../../../lib/api.js'
 
-// //*NEW AC * * * * * * * cloudinary setup
-import axios from 'axios'
-import React from 'react'
+import { memoryCreate } from '../../../lib/api.js'
+import { logoImageLink } from '../../../lib/config.js'
+import RenderMap from '../maps/RenderMap.js'
+import { uploadImageMemory } from '../../../lib/imageHosting.js'
 
 
 const initialState = {
@@ -22,9 +22,7 @@ function MemoryCreate ({ tripId, addNewMemoryToTrip, toggleCreateMemoryForm }) {
   const [formData, setFormData] = useState(initialState)
   const notesRemainingChars = maxLengthNotes - formData.notes.length
   const [formErrors, setFormErrors] = useState({ initialState, name: '', location: '' , visitDate: 0, image: '' })
-  
-  // //*NEW AC * * * * * * * cloudinary setup
-  const [isUploadingImage, setIsUploadingImage] = React.useState(false)
+  const [isUploadingImage, setIsUploadingImage] = useState(false)
 
   const handleChange = e =>{
     setFormData({ ...formData, [e.target.name]: e.target.value })
@@ -35,26 +33,28 @@ function MemoryCreate ({ tripId, addNewMemoryToTrip, toggleCreateMemoryForm }) {
     try {
       const res = await memoryCreate({ ...formData, pairedTrip: tripId })
       const newMemoryId = res.data._id
-      console.log('new memory :', newMemoryId)
       await addNewMemoryToTrip(newMemoryId)
       toggleCreateMemoryForm()
     } catch (err) {
-      console.log('error response:', err)
       setFormErrors(err.response.data.errors)
     }
   }
 
-  // Cloudinary
   const handleImageUpload = async (e) => {
-    const data = new FormData()
-    data.append('file', e.target.files[0])
-    data.append('upload_preset', process.env.REACT_APP_CLOUDINARY_UPLOAD_PRESET_MEMORY)
-    setIsUploadingImage(true)
-    const res = await axios.post(process.env.REACT_APP_CLOUDINARY_URL, data)
-    setFormData({ ...formData, image: res.data.url })
-    setIsUploadingImage(false)
+    try {
+      setIsUploadingImage(true)
+      const newImageUrl = await uploadImageMemory(e.target.files[0])
+      setFormData({ ...formData, image: newImageUrl })
+      setIsUploadingImage(false)
+    } catch (err) {
+      setIsUploadingImage(false)
+    }
   }
 
+  // Map information 
+  const captureLocation = (location) => {
+    setFormData({ ...formData, long: location[0], lat: location[1] })
+  }
 
   return (
 
@@ -62,21 +62,22 @@ function MemoryCreate ({ tripId, addNewMemoryToTrip, toggleCreateMemoryForm }) {
       className="container-fluid row"
       onSubmit={handleSubmit}>
       <div className="form-group">
-
+        <label className="label" htmlFor="image" role="button">
+          <p>Share a photo?</p>
+          <img 
+            src={formData.image ? formData.image : logoImageLink} 
+            alt={formData.name} 
+            className='memory-edit-image' 
+          />
+        </label>
+        <input 
+          type="file" 
+          className='d-none'
+          id="image" 
+          accept="image/png, image/jpeg"
+          onChange={handleImageUpload} 
+        />
         {isUploadingImage && <p>Image uploading</p>}
-        {formData.image ?
-          <div>
-            <img src={formData.image} alt="uploaded image" />
-          </div>
-          :
-          <div className="field">
-            <label className="label" htmlFor="image">Share a photo?</label>
-            <br></br>
-
-            <input type="file" id="image" accept="image/png, image/jpeg"
-              onChange={handleImageUpload} />
-
-          </div>}
       </div>
       <div className="form-group">
         <label htmlFor="name">What happened?</label>
@@ -94,6 +95,7 @@ function MemoryCreate ({ tripId, addNewMemoryToTrip, toggleCreateMemoryForm }) {
       </div>
       <div className="form-group">
         <label htmlFor="location">Where were you?</label>
+        <RenderMap getLocationFromMap={captureLocation} />
         <input
           type='text' 
           name="location"
@@ -170,6 +172,7 @@ function MemoryCreate ({ tripId, addNewMemoryToTrip, toggleCreateMemoryForm }) {
       </div>
       {/* </div> */}
       <div className='row'>
+        {isUploadingImage && <p>Image uploading...</p>}
         <button 
           type="submit"
           className={`btn btn-success ml-auto ${isUploadingImage && 'disabled'}`}

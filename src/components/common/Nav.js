@@ -1,7 +1,9 @@
 import { Link, useHistory, useLocation } from 'react-router-dom'
-import { getUserId, isAuthenticated, removeToken } from '../../lib/auth'
 import { Navbar } from 'react-bootstrap'
 import React from 'react'
+
+import { logoImageLink } from '../../lib/config'
+import { getUserId, isAuthenticated, removeToken } from '../../lib/auth'
 
 
 function Nav() {
@@ -25,7 +27,7 @@ function Nav() {
     
       <Link to="/" className="homeIcon navbar-nav">
         <img alt="logo" className="logo-home nav-link me-auto"
-          src ="https://i.imgur.com/ElzRumx.png"/></Link>
+          src ={logoImageLink}/></Link>
       
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
       <Navbar.Collapse id="basic-navbar-nav">
