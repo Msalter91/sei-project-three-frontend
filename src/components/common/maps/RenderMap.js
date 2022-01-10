@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useRef, useCallback } from 'react'
 import ReactMapGL, { Marker, WebMercatorViewport } from 'react-map-gl'
 import Geocoder from 'react-map-gl-geocoder'
+import { flattenArrayByPropertyOfMember } from '../../../lib/helpers.js'
 
 function getLocationArrayStats (array){
   const locationAggregates = array.reduce((acc, cur)=>{
@@ -27,16 +28,12 @@ function getCoordinates (e) {
 }
 
 function RenderMap ({ 
-  arrayOfTrips, 
+  arrayOfTrips = [], 
   center = { lat: 0, long: 0 },
   initZoom = 1,
 }) {
-  const aggregatedMemoriesForViewport = []
-  if (arrayOfTrips.length) arrayOfTrips.forEach(trip => {
-    trip.memories.forEach(memory => {
-      aggregatedMemoriesForViewport.push(memory)
-    })
-  })
+  const aggregatedMemoriesForViewport = flattenArrayByPropertyOfMember(arrayOfTrips, 'memories')
+  console.log(aggregatedMemoriesForViewport)
   let locationStats = {}
   const hasMemories = Boolean(aggregatedMemoriesForViewport.length)
   if (hasMemories){
