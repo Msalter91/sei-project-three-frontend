@@ -5,11 +5,7 @@ import { getUserId } from '../../lib/auth'
 
 import countryList from 'react-select-country-list'
 import { editUser } from '../../lib/api'
-
-
-
-console.log(process.env.REACT_APP_CLOUDINARY_URL)
-console.log(process.env.REACT_APP_CLOUDINARY_UPLOAD_PRESET)
+import { useHistory } from 'react-router-dom'
 
 const initialState = {
   displayName: '',
@@ -23,21 +19,20 @@ const initialState = {
 
 function ProfileEdit() {
 
+  const history = useHistory()
 
   const [countryValue, setCountryValue] = useState('')
-  const options = useMemo(() => countryList().getData(), [])
+  const [formData, setFormData] = React.useState({})
+  const [user, setUser] = React.useState(null)
+  const [formErrors, setFormErrors] = React.useState(initialState)
+  const [isUploadingImage, setIsUploadingImage] = React.useState(false)
 
-  
+  const countryOptions = useMemo(() => countryList().getData(), [])
 
-  const changeHandler = value => {
-    setCountryValue(value.label)
+  const changeCountryHandler = value => {
+    setCountryValue(value)
     setFormData({ ...formData, location: value.label })
   }
-  const [formData, setFormData] = React.useState({})
-
-  console.log(formData)
-
-  const [user, setUser] = React.useState(null)
 
   React.useEffect( ()=>{
     const getUser = async () => {
@@ -52,10 +47,6 @@ function ProfileEdit() {
     getUser()
   }, [])
   
-  console.log(formData)
-  const [formErrors, setFormErrors] = React.useState(initialState)
-
-  const [isUploadingImage, setIsUploadingImage] = React.useState(false)
   
   const handleChange = e => {
     const value = e.target.type === 'checkbox' ? e.target.checked : e.target.value
@@ -67,14 +58,12 @@ function ProfileEdit() {
     e.preventDefault()
     formData.displayName = user.displayName
     formData.email = user.email
-    window.alert(`Submitting ${JSON.stringify(formData, null, 2)}`)
     try {
       const res = await editUser(formData, getUserId())
       console.log(res)
-      // history.push(`/cheeses/${res.data._id}`)
+      history.push(`/profile/${getUserId()}`)
     } catch (err) {
       setFormErrors(err.response.data.errors)
-      console.log(err)
     }
   }
 
@@ -148,9 +137,9 @@ function ProfileEdit() {
             </div>
 
             <div className="field">
-              <label className="label">Country</label>
+              <label className="label">Country <p className='country-name'>Current Country: {user && user.location}</p></label>
               <div className="control">
-                { user && (<Select options={options} value={countryValue} onChange={changeHandler} /> ) }
+                { user && (<Select options={countryOptions} value={countryValue} onChange={changeCountryHandler} /> ) }
               </div>
             </div>
 
@@ -187,6 +176,9 @@ function ProfileEdit() {
             <div className="field col d-flex flex-column">
               <button className="btn btn-outline-info btn-sm" type="submit">
                 Submit
+              </button>
+              <button className="btn btn-outline-danger btn-sm">
+                Cancel
               </button>
             </div>
 

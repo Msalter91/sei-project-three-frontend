@@ -22,7 +22,6 @@ function Profile() {
     }
     getUser()
   }, [userId] )
-  console.log(user)
 
   return (
     <div className="row py-5 px-4">
