@@ -2,8 +2,8 @@ import { useState } from 'react'
 
 import { memoryCreate } from '../../../lib/api.js'
 import { logoImageLink } from '../../../lib/config.js'
-import RenderMap from '../maps/RenderMap.js'
 import { uploadImageMemory } from '../../../lib/imageHosting.js'
+import LocationPicker from '../maps/LocationPicker.js'
 
 
 const initialState = {
@@ -95,7 +95,9 @@ function MemoryCreate ({ tripId, addNewMemoryToTrip, toggleCreateMemoryForm }) {
       </div>
       <div className="form-group">
         <label htmlFor="location">Where were you?</label>
-        <RenderMap getLocationFromMap={captureLocation} />
+        <div className='map-container' style={{ height: 300 }}>
+          <LocationPicker getLocationFromMap={captureLocation} />
+        </div>
         <input
           type='text' 
           name="location"

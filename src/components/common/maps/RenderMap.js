@@ -140,10 +140,6 @@ function RenderMap ({
           mapboxApiAccessToken={mapboxApiAccessToken}
           position='top-left'
         />
-        <Marker
-          latitude={viewport.latitude}
-          longitude={viewport.longitude}
-        ><span role="img" aria-label="map-marker" className="marker">{'📸'}</span></Marker>
         {hasMemories && arrayOfTrips.map(trip =>{
           //if no memories, don't attempt to draw anything memory related
           if (!trip.memories.length) return
