@@ -45,7 +45,7 @@ function TripShow () {
             <h3>{tripData.countryVisited}</h3>
             <p>{tripData.notes}</p>
             <div className='edit-trip-map-container'>
-              <RenderMap data={tripData}/>
+              <RenderMap arrayOfTrips={[tripData]}/>
             </div>
           </div>
           <div 

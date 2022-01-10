@@ -14,7 +14,7 @@ function MapTest ({ tripData = trip }){
   return (
     <div >
       <RenderMap 
-        data={tripData}
+        arrayOfTrips={[tripData]}
         maph={800} 
         mapw={800}
       />

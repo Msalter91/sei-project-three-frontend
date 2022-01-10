@@ -145,7 +145,7 @@ function TripEdit () {
               {formErrors.notes && <p className="text-danger">{formErrors.notes}</p>  }
             </div>
             <div className='edit-trip-map-container'>
-              <RenderMap data={formData}/>
+              <RenderMap arrayOfTrips={[formData]}/>
             </div>
             <div className='row'>
               <button 
