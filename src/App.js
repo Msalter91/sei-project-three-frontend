@@ -18,6 +18,7 @@ import Login from './components/auth/Login'
 import MapTest from './components/common/maps/MapTest'
 import TripEdit from './components/common/trips/TripEdit'
 import TripCreate from './components/common/trips/TripCreate'
+import TripShow from './components/common/trips/TripShow'
 
 function App() {
   return (
@@ -38,8 +39,9 @@ function App() {
         <Route path="/register"><Register/></Route>
         <Route path="/login"><Login/></Route>
 
-        <Route path="/trips/:tripId/edit"><TripEdit /></Route>
         <Route path="/trips/new"><TripCreate /></Route>
+        <Route path="/trips/:tripId/edit"><TripEdit /></Route>
+        <Route path="/trips/:tripId/"><TripShow /></Route>
         
         <Route path="/maptest"><MapTest /></Route>
 

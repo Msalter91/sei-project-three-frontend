@@ -32,7 +32,7 @@ export function editUser(formData, userId) {
 }
 
 // Trips
-export function tripCreate(formData){
+export function tripPostNewTrip(formData){
   return axios.post(`${baseUrl}/trips/`, formData, authHeader())
 }
 
