@@ -60,7 +60,7 @@ function Countries() {
               return <div className='col-3' key={country.name}>
                 <Link to={`/countries/${country._id}`}>
                   <div className="card">
-                    <img className='' src='https://images.unsplash.com/photo-1500382017468-9049fed747ef?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1332&q=80' alt="Card image cap"></ img>
+                    <img className='' src={country.image} alt="Card image cap"></ img>
                     <div className="card-body">
                       <h6 className="card-title">{country.name}</h6>
                       <a href="#" className="btn btn-primary">Go somewhere</a>
