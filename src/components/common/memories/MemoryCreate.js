@@ -18,7 +18,7 @@ const initialState = {
 const maxLengthNotes = 200
 
 
-function MemoryCreate ({ tripId, addNewMemoryToTrip }) {
+function MemoryCreate ({ tripId, addNewMemoryToTrip, toggleCreateMemoryForm }) {
   const [formData, setFormData] = useState(initialState)
   const notesRemainingChars = maxLengthNotes - formData.notes.length
   const [formErrors, setFormErrors] = useState({ initialState, name: '', location: '' , visitDate: 0, image: '' })
@@ -37,13 +37,14 @@ function MemoryCreate ({ tripId, addNewMemoryToTrip }) {
       const newMemoryId = res.data._id
       console.log('new memory :', newMemoryId)
       await addNewMemoryToTrip(newMemoryId)
+      toggleCreateMemoryForm()
     } catch (err) {
       console.log('error response:', err)
       setFormErrors(err.response.data.errors)
     }
   }
 
-  // //*NEW AC * * * * * * * cloudinary setup
+  // Cloudinary
   const handleImageUpload = async (e) => {
     const data = new FormData()
     data.append('file', e.target.files[0])
@@ -60,8 +61,6 @@ function MemoryCreate ({ tripId, addNewMemoryToTrip }) {
     <form 
       className="container-fluid row"
       onSubmit={handleSubmit}>
-
-      {/* <div className='col'> */}
       <div className="form-group">
 
         {isUploadingImage && <p>Image uploading</p>}
@@ -79,29 +78,6 @@ function MemoryCreate ({ tripId, addNewMemoryToTrip }) {
 
           </div>}
       </div>
-
-
-      {/* 
-        <label htmlFor="image">Share a photo?</label>
-        <input
-          type='text' 
-          name="image"
-          id="image"
-          className={
-            `form-control 
-                ${(formErrors.image ) ? 'border-danger' : ''}
-                `}
-          value={formData.image}
-          onChange={handleChange} />
-        {formErrors.image && <p className="text-danger">{formErrors.image}</p>  }
-      </div>
-      <figure className="image">
-        <img src={formData.image} alt={formData.name} className='memory-edit-image' />
-      </figure> */}
-
-      {/* </div> */}
-
-      {/* <div className='col'> */}
       <div className="form-group">
         <label htmlFor="name">What happened?</label>
         <input
@@ -196,7 +172,8 @@ function MemoryCreate ({ tripId, addNewMemoryToTrip }) {
       <div className='row'>
         <button 
           type="submit"
-          className="btn btn-success ml-auto"
+          className={`btn btn-success ml-auto ${isUploadingImage && 'disabled'}`}
+          aria-disabled={isUploadingImage}
         >Save this memory!</button>
       </div>
     </form>
