@@ -136,8 +136,9 @@ function RenderMap ({
         {hasMemories && arrayOfTrips.map(trip =>{
           //if no memories, don't attempt to draw anything memory related
           if (!trip.memories.length) return
+          const randomColourValue = () => Math.floor(Math.random() * 255)
           const polylineOptions = {
-            lineColour: 'rgba(213, 184, 255, 0.8)',
+            lineColour: `rgba(${randomColourValue()}, ${randomColourValue()}, ${randomColourValue()}, 0.8)`,
           }
           return (
             <ul key={trip._id}>
