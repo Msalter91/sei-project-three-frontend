@@ -2,6 +2,7 @@ import React, { useEffect, useState, useRef, useCallback } from 'react'
 import ReactMapGL, { Marker, WebMercatorViewport } from 'react-map-gl'
 import Geocoder from 'react-map-gl-geocoder'
 import { flattenArrayByPropertyOfMember } from '../../../lib/helpers.js'
+import TripPolyLine from './helpers/TripPolyLine.js'
 
 function getLocationArrayStats (array){
   const locationAggregates = array.reduce((acc, cur)=>{
@@ -33,6 +34,9 @@ function RenderMap ({
 }) {
   const aggregatedMemoriesForViewport = flattenArrayByPropertyOfMember(arrayOfTrips, 'memories')
   let locationStats = {}
+  const mapContainer = useRef()
+  const mapRef = useRef()
+
   const hasMemories = Boolean(aggregatedMemoriesForViewport.length)
   if (hasMemories){
     locationStats = getLocationArrayStats(aggregatedMemoriesForViewport)
@@ -44,9 +48,6 @@ function RenderMap ({
   function getCoordinates (e) {
     getLocationFromMap(e.lngLat)
   }
-
-  const mapContainer = useRef()
-  const mapRef = useRef()
 
   // calculating viewport to fit multiple markers requires a viewport with known pixel size in order to prevent errors within WebMercatorViewport
   useEffect(() => {
@@ -135,17 +136,33 @@ function RenderMap ({
           mapboxApiAccessToken={process.env.REACT_APP_MAPS_API_KEY}
           position='top-left'
         />
-        {hasMemories && arrayOfTrips.map(trip =>(
-          trip.memories.map(location => (
-            <Marker
-              key={location._id}
-              latitude={location.lat}
-              longitude={location.long}
-            >
-              <span role="img" aria-label="map-marker" className="marker">{'📸'}</span>
-            </Marker>
-          ))
-        ))}
+        {hasMemories && arrayOfTrips.map(trip =>{
+          //if no memories, don't attempt to draw anything memory related
+          if (!trip.memories.length) return
+
+          const polylineOptions = {
+            lineColour: 'rgba(213, 184, 255, 0.8)',
+          }
+          return (
+            <ul key={trip._id}>
+              {
+                trip.memories.map(location => (
+                  <Marker
+                    key={location._id}
+                    latitude={location.lat}
+                    longitude={location.long}
+                  >
+                    <span role="img" aria-label="map-marker" className="marker">{'📸'}</span>
+                  </Marker>
+                ))
+              }
+              {
+                Boolean(trip.memories.length > 1) && 
+              <TripPolyLine key={trip._id} trip={trip} options = {polylineOptions}/>
+              }
+            </ul>
+          )
+        })}
         {/* <MapController onClick={handleNewLocation}/> */}
         
       </ReactMapGL>
