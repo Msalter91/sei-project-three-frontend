@@ -104,7 +104,7 @@ function TripEdit () {
         <div className='container-fluid row'>
           <form
             onSubmit={handleSubmit}
-            className="col-4" 
+            className="col-4 placebook-form" 
             style={{ background: 'antiquewhite' }}
           >
             <div className="form-group">

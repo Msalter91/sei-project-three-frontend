@@ -1,9 +1,11 @@
 function MemoryShowSmall ({ memory, handleSwitchToEdit }) {
   return (
     <div 
-      className="container-fluid"
+      className="container-fluid placebook-form"
     >
-      <h3 className="row">{memory.name}</h3>
+      <div className="row">
+        <h3 className="mx-auto text-center">{memory.name}</h3>
+      </div>
       <div className="row">
         <div className='col'>
           <figure className="image">
@@ -11,16 +13,17 @@ function MemoryShowSmall ({ memory, handleSwitchToEdit }) {
           </figure>
         </div>
         <div className='col'>
+          {[
+            ['location', 'At:'], 
+            ['dateVisited', 'On:']
+          ].map(field=>(
+            <div key={field[0]} className="row">
+              <h6 className="col-1 pr-0 mr-0">{field[1]}</h6>
+              <p className="col pl-0 ml-0">{memory[field[0]]}</p>
+            </div>  
+          ))}
           <div className="row">
-            <p className="col-2">At:</p>
-            <p className="col">{memory.location}</p>
-          </div>
-          <div className="row">
-            <p className="col-2">On:</p>
-            <p className="col">{memory.date}</p>
-          </div>
-          <div className="row">
-            <p >I remember:</p>
+            <h6 >I remember:</h6>
             <p >{memory.notes}</p>
           </div>
         </div>

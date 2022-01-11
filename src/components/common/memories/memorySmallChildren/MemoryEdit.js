@@ -57,7 +57,7 @@ function MemoryEdit ({ memory, handleSwitchToShow, updateClientsideMemory }) {
 
   return (
     <form 
-      className="container-fluid row"
+      className="container-fluid row placebook-form"
       onSubmit={handleSubmit}>
       <div className='row'>
         <div className="form-group col">

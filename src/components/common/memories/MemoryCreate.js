@@ -58,7 +58,7 @@ function MemoryCreate ({ tripId, addNewMemoryToTrip, toggleCreateMemoryForm }) {
   return (
 
     <form 
-      className="container-fluid row"
+      className="container-fluid row placebook-form"
       onSubmit={handleSubmit}>
       <div className='row'>
         <div className="form-group col">
