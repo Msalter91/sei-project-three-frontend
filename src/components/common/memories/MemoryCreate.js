@@ -149,7 +149,7 @@ function MemoryCreate ({ tripId, addNewMemoryToTrip, toggleCreateMemoryForm }) {
         {isUploadingImage && <p>Image uploading...</p>}
         <button 
           type="submit"
-          className={`btn btn-success ml-auto ${isUploadingImage && 'disabled'}`}
+          className={`btn btn-outline-info btn-sm ${isUploadingImage && 'disabled'}`}
           aria-disabled={isUploadingImage}
         >Save this memory!</button>
       </div>

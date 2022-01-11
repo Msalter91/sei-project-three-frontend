@@ -101,101 +101,127 @@ function TripEdit () {
       {isError ? (
         <Error />
       ) : (
-        <div className='container-fluid row'>
-          <form
-            onSubmit={handleSubmit}
-            className="col-4 placebook-form" 
-            style={{ background: 'antiquewhite' }}
-          >
-            <div className="form-group">
-              <label htmlFor="title"></label>
-              <input 
-                type="text"
-                name="title"
-                id="title"
-                className={
-                  `form-control ${formErrors.countryVisited ? 'border-danger' : ''}`}
-                value={formData.title}
-                onChange={handleChange}
-              />
-              {formErrors.title && <p className="text-danger">{formErrors.title}</p>  }
-            </div>
-            <div className="form-group">
-              <label htmlFor="countryVisited">Where did you start?</label>
-              <input 
-                type="text" 
-                name="countryVisited"
-                id="countryVisited"
-                className={
-                  `form-control ${formErrors.countryVisited ? 'border-danger' : ''}`}
-                value={formData.countryVisited}
-                onChange={handleChange} 
-              />
-              {formErrors.countryVisited && <p className="text-danger">{formErrors.countryVisited}</p>  }
-            </div>
-            <div className="form-group">
-              <label htmlFor="notes">Tell the world about your trip!</label>
-              <textarea 
-                name="notes"
-                id="notes"
-                className={
-                  `form-control 
-                ${(notesRemainingChars < 0 ||
-                  formErrors.notes ) ? 'border-danger' : ''}`}
-                value={formData.notes}
-                onChange={handleChange} />
-              <div className='row'>
-                <small 
-                  className={`form-text ml-auto text-end ${
-                    (notesRemainingChars < 0) ? 'text-danger' : 'text-muted'
-                  }`}
-                >{notesRemainingChars} characters remaining</small>
+
+        <>
+          <div className="container fluid">
+            <div className="bg-white shadow rounded overflow-hidden">
+              <div className="px-4 pt-1 pb-4 cover">
+                <div className="d-flex-body mb-0 text-white">
+                  <h3 className="title-trip-create text-uppercase text-center pb-0 pt-4">create a trip with memories!</h3>
+                </div>
               </div>
-              {formErrors.notes && <p className="text-danger">{formErrors.notes}</p>  }
             </div>
-            <div className='edit-trip-map-container'>
-              <RenderMap arrayOfTrips={[formData]}/>
+
+            <div className="d-flex fluid row w-auto">
+              <div className="col fluid">
+                <form
+                  onSubmit={handleSubmit}
+                  className="col placebook-form fluid"
+                  // style={{ background: 'antiquewhite' }}
+                >
+                  <div className="form-group">
+                    <label htmlFor="title"></label>
+                    <input
+                      type="text"
+                      name="title"
+                      id="title"
+                      className={`form-control ${formErrors.countryVisited ? 'border-danger' : ''}`}
+                      value={formData.title}
+                      onChange={handleChange} />
+                    {formErrors.title && <p className="text-danger">{formErrors.title}</p>}
+                  </div>
+                  <div className="form-group">
+                    <label htmlFor="countryVisited">Where did you start?</label>
+                    <input
+                      type="text"
+                      name="countryVisited"
+                      id="countryVisited"
+                      className={`form-control ${formErrors.countryVisited ? 'border-danger' : ''}`}
+                      value={formData.countryVisited}
+                      onChange={handleChange} />
+                    {formErrors.countryVisited && <p className="text-danger">{formErrors.countryVisited}</p>}
+                  </div>
+                  <div className="form-group">
+                    <label htmlFor="notes">Tell the world about your trip!</label>
+                    <textarea
+                      name="notes"
+                      id="notes"
+                      className={`form-control 
+                ${(notesRemainingChars < 0 ||
+                          formErrors.notes) ? 'border-danger' : ''}`}
+                      value={formData.notes}
+                      onChange={handleChange} />
+                    <div className='row'>
+                      <small
+                        className={`form-text ml-auto text-end ${(notesRemainingChars < 0) ? 'text-danger' : 'text-muted'}`}
+                      >{notesRemainingChars} characters remaining</small>
+                    </div>
+                    {formErrors.notes && <p className="text-danger">{formErrors.notes}</p>}
+                  </div>
+                  <div className='edit-trip-map-container'>
+                    <RenderMap arrayOfTrips={[formData]} />
+                  </div>
+                  <div className='row mt-1'>
+          
+                    <button
+                      type="submit"
+                      className="btn btn-outline-info btn-sm"
+                    >Save your trip</button>
+                  </div>
+
+
+
+
+                </form>
+              </div>
+
+
+              <div className="col-md">
+                <div className="col-12 fluid"
+                  // style={{ background: 'khaki' }}
+                >
+                  <div
+                    className='d-flex flex-column'>
+                  </div>
+                  <div className='custom-memories-container row'>
+                    {Boolean(formData.memories.length) &&
+                      formData.memories.map(
+                        (memory, index) => (
+                          <MemorySmall
+                            key={memory._id}
+                            memory={memory}
+                            updateClientsideMemory={updateClientsideMemory(index)} />
+                        )
+                      )}
+                  </div>
+
+                  <div className='create-memory-container row'>
+                    {isDisplayingCreateMemory ?
+                      <MemoryCreate
+                        tripId={tripId}
+                        addNewMemoryToTrip={addNewMemoryToTrip}
+                        toggleCreateMemoryForm={toggleCreateMemoryForm} /> :
+                      <button type="button"
+                        className="btn btn-outline-info btn-sm"
+                        onClick={toggleCreateMemoryForm}
+                      >Add a Memory</button>}
+                  </div>
+                </div>
+
+              </div>
             </div>
-            <div className='row'>
-              <button 
-                type="submit"
-                className="btn btn-success ml-auto"
-              >Save your trip</button>
-            </div>
-          </form>
-          <div 
-            className="col"
-            style={{ background: 'khaki' }}>
-            <div 
-              className='d-flex flex-column'>
-            </div>
-            <div className='custom-memories-container row'>
-              {Boolean(formData.memories.length) && 
-              formData.memories.map(
-                (memory, index) => (
-                  <MemorySmall 
-                    key={memory._id} 
-                    memory={memory} 
-                    updateClientsideMemory = {updateClientsideMemory(index)}
-                  />
-                )
-              )}
-            </div>
-            <div className='create-memory-container row' >
-              {isDisplayingCreateMemory ?
-                <MemoryCreate 
-                  tripId={tripId} 
-                  addNewMemoryToTrip={addNewMemoryToTrip} 
-                  toggleCreateMemoryForm={toggleCreateMemoryForm}
-                /> :
-                <button type="button" 
-                  className="btn btn-primary"
-                  onClick={toggleCreateMemoryForm}
-                >Add a Memory</button>
-              }
+          </div><div className="row py-4 px-4">
+            <div className="col-md-11 mx-auto row">
+
+              {/* <div className='container-fluid row'> */}
+            
+
+            
+              {/* </div> */}
             </div>
           </div>
-        </div>
+
+        </>
       )}
     </section>
   )
