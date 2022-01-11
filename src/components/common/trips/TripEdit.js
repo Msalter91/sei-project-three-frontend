@@ -163,13 +163,10 @@ function TripEdit () {
               >Save your trip</button>
             </div>
           </form>
+          {/* * * MEMORIES SECTION * * */}
           <div 
-            className="col"
-            style={{ background: 'khaki' }}>
-            <div 
-              className='d-flex flex-column'>
-            </div>
-            <div className='custom-memories-container row'>
+            className="col">
+            <div className='trip-memories-container row mx-auto'>
               {Boolean(formData.memories.length) && 
               formData.memories.map(
                 (memory, index) => (
