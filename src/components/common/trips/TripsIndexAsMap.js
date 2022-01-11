@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { getAllTrips } from '../../../lib/api'
 import Error from '../Error'
 import RenderMap from '../maps/RenderMap'
+import TripCardSmall from './TripCardSmall'
 
 function TripsIndexAsMap () {
   const [tripList, setTripList] = useState([])
@@ -31,10 +32,11 @@ function TripsIndexAsMap () {
           <div className='row'>
             {
               Boolean(tripList.length) && tripList.map(trip =>(
-                <div className="col" key={trip._id}>
-                  <h4>{trip.title}</h4>
-                  <p>{trip.addedBy.displayName}</p>
-                </div>
+                <TripCardSmall key={trip._id} trip={trip}/>
+                // <div className="col" key={trip._id}>
+                //   <h4>{trip.title}</h4>
+                //   <p>{trip.addedBy.displayName}</p>
+                // </div>
               ))
             }
           </div>

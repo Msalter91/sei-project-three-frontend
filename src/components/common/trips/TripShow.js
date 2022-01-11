@@ -48,9 +48,7 @@ function TripShow () {
               <RenderMap arrayOfTrips={[tripData]}/>
             </div>
           </div>
-          <div 
-            className="col"
-            style={{ background: 'khaki' }}>
+          <div className="col">
             <div 
               className='d-flex flex-column'>
             </div>
