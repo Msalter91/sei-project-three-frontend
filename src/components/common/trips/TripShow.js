@@ -56,7 +56,6 @@ function TripShow () {
                   <RenderMap arrayOfTrips={[tripData]}/>
                 </div>
               </div>
-              {/* <div className="col"> */}
               <div 
                 className='d-flex flex-column'>
               </div>
@@ -66,7 +65,6 @@ function TripShow () {
                 )}
               </div>
             </div>
-            {/* </div> */}
           </div>
         </>
       )}
