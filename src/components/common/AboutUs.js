@@ -1,11 +1,17 @@
 function AboutUs() {
   return (
-    <div className="aboutus-bg clearfix">
+    <div className="aboutus-bg clearfix container">
       <img src="https://i.imgur.com/tNUbHb2.png" 
-        className="img-fluid history-img col-md-4 float-md-end mb-5 ms-md-1 " alt="aboutus-img" />
+        className="img-fluid history-img col-md-5 float-md-end mb-4 ms-md-4 " alt="aboutus-img" />
 
+
+      <div className="px-4 pt-0 pb-4 cover">
+        <div className="reg-head">  
+          <div className="aboutus-title text-white">Placebook</div>
+        </div>
+      </div>
       <div className="aboutus-text">
-        <h2>Placebook</h2>
+        <br></br>
         <p>A place to share travel memories</p>
         <p>All photography is important - it freezes memories.  It captures a moment in time to remember and cherish years from now.</p>
         <p>Tell your story by sharing your images with other like-minded placebookers to find and visit those magical destinations.</p>
@@ -20,8 +26,8 @@ function AboutUs() {
               data-bs-toggle="modal" 
               data-bs-target="#exampleModal1">
               <img src="https://i.imgur.com/zEhltnDb.jpg" className="card-img-top" alt="rainbowsky"/>
-              <div className="card-body">
-                <p className="card-text"></p>
+              <div className="card-bodypb-0">
+                <p className="md-card-text">Travel</p>
               </div>
             </button>
           </div>
@@ -46,8 +52,8 @@ function AboutUs() {
               data-bs-toggle="modal" 
               data-bs-target="#exampleModal2">
               <img src="https://i.imgur.com/bYxhlZ0b.png" className="card-img-top" alt="girl" />
-              <div className="card-body">
-                <p className="card-text"></p>
+              <div className="card-bodypb-0">
+                <p className="md-card-text">Capture</p>
               </div>
             </button>
           </div>
@@ -72,8 +78,8 @@ function AboutUs() {
               data-bs-toggle="modal" 
               data-bs-target="#exampleModal3">
               <img src="https://i.imgur.com/PrLhxXeb.jpg" className="card-img-top" alt="noseehearspeak" />
-              <div className="card-body">
-                <p className="card-text"></p>
+              <div className="card-bodypb-0">
+                <p className="md-card-text">Share</p>
               </div>
             </button>
           </div>

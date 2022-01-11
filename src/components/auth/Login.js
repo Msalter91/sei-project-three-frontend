@@ -41,7 +41,7 @@ function Login() {
             
               <div className="d-flex-body mb-1 text-white align-object-center">
                 <div className="group-heading">
-                  <h4 className="reg-tit text-center text-uppercase lign-items-center ms-3">
+                  <h4 className="reg-tit text-center text-uppercase align-items-center ms-3">
                   Login<img src="https://i.imgur.com/uBKiZQY.png" 
                       className="mini-logo-wht align-object-center ps-2" alt="placebook-logo"/>
                   </h4>
