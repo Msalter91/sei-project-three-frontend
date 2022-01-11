@@ -33,10 +33,6 @@ function TripsIndexAsMap () {
             {
               Boolean(tripList.length) && tripList.map(trip =>(
                 <TripCardSmall key={trip._id} trip={trip}/>
-                // <div className="col" key={trip._id}>
-                //   <h4>{trip.title}</h4>
-                //   <p>{trip.addedBy.displayName}</p>
-                // </div>
               ))
             }
           </div>

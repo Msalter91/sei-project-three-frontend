@@ -35,30 +35,40 @@ function TripShow () {
   }, [tripId])
 
   return (
-    <section className='section'>
+    <section className='section trip-show'>
       {isError ? (
         <Error />
       ) : (
-        <div className='container-fluid row'>
-          <div className='col-4'>
-            <h2>{tripData.title}</h2>
-            <h3>{tripData.countryVisited}</h3>
-            <p>{tripData.notes}</p>
-            <div className='edit-trip-map-container'>
-              <RenderMap arrayOfTrips={[tripData]}/>
+        <>
+          <div className="container fluid">
+            <div className="bg-white shadow rounded overflow-hidden">
+              <div className="px-4 pt-1 pb-4 cover">
+                <div className="d-flex-body mb-0 text-white">
+                  <h3 className="title-trip-create text-uppercase text-center pb-0 pt-4">{tripData.title}</h3>
+                </div>
+              </div>
             </div>
+            <div className="d-flex fluid row w-auto">
+              <div className="col fluid">
+                <h3>{tripData.countryVisited}</h3>
+                <p>{tripData.notes}</p>
+                <div className='edit-trip-map-container'>
+                  <RenderMap arrayOfTrips={[tripData]}/>
+                </div>
+              </div>
+              {/* <div className="col"> */}
+              <div 
+                className='d-flex flex-column'>
+              </div>
+              <div className='custom-memories-container row'>
+                {Boolean(tripData.memories.length) && tripData.memories.map(
+                  memory => <MemorySmall key={memory._id} memory={memory} />
+                )}
+              </div>
+            </div>
+            {/* </div> */}
           </div>
-          <div className="col">
-            <div 
-              className='d-flex flex-column'>
-            </div>
-            <div className='custom-memories-container row'>
-              {Boolean(tripData.memories.length) && tripData.memories.map(
-                memory => <MemorySmall key={memory._id} memory={memory} />
-              )}
-            </div>
-          </div>
-        </div>
+        </>
       )}
     </section>
   )

@@ -101,7 +101,6 @@ function TripEdit () {
       {isError ? (
         <Error />
       ) : (
-
         <>
           <div className="container fluid">
             <div className="bg-white shadow rounded overflow-hidden">
@@ -117,7 +116,6 @@ function TripEdit () {
                 <form
                   onSubmit={handleSubmit}
                   className="col placebook-form fluid"
-                  // style={{ background: 'antiquewhite' }}
                 >
                   <div className="form-group">
                     <label htmlFor="title"></label>
@@ -162,19 +160,13 @@ function TripEdit () {
                     <RenderMap arrayOfTrips={[formData]} />
                   </div>
                   <div className='row mt-1'>
-          
                     <button
                       type="submit"
                       className="btn btn-outline-info btn-sm"
                     >Save your trip</button>
                   </div>
-
-
-
-
                 </form>
               </div>
-
               {/* * * MEMORIES SECTION * * */}
               <div className="col-md">
                 <div className="col-12 fluid"
@@ -212,15 +204,8 @@ function TripEdit () {
             </div>
           </div><div className="row py-4 px-4">
             <div className="col-md-11 mx-auto row">
-
-              {/* <div className='container-fluid row'> */}
-            
-
-            
-              {/* </div> */}
             </div>
           </div>
-
         </>
       )}
     </section>

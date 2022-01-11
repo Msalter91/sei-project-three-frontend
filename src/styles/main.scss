@@ -11,6 +11,11 @@ $grid-breakpoints: (
 $placebook-title-font: 'Gochi Hand', cursive;
 $placebook-font-spacing: 0.2em;
 
+h1, h2, h3, h4, h5, h6{
+  font-family: $placebook-title-font;
+  letter-spacing: $placebook-font-spacing;
+}
+
 img { text-align: center;}
 
 //* * * * * N A V    B A R  * * * * * 
@@ -429,6 +434,10 @@ label img {
   }
 }
 
+//**** TRIP SHOW ****
+.trip-show{
+  h3{}
+}
 
 @include media-breakpoint-down(md) {
   .header-splash {
