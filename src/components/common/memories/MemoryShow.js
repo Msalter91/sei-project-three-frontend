@@ -22,8 +22,8 @@ function MemoryShow () {
 
   return (
 
-    <div className="row py-5 px-4">
-      <div className="col-md-6 mx-auto">
+    <div className="row py-4 px-4">
+      <div className="col-md-5 mx-auto">
 
         {/* <!-- Profile widget --> */}
 
@@ -34,9 +34,9 @@ function MemoryShow () {
               </div>
 
               <div className="d-flex-body mb-5 text-white">
-                <h4 className="mt-0 mb-0 ms-3">NAME</h4>
-                <p className="small mb-4">
-                  <i className="fas fa-map-marker-alt mr-2 ms-3"></i>LOCATION</p>
+                <h4 className="memsname text-uppercase mt-0 mb-0 ms-3">name</h4>
+                <p className="memslocation text-capitalize small mb-4">
+                  <i className="fas fa-map-marker-alt mr-2 ms-3"></i>location</p>
               </div>
             </div>
           </div>
@@ -44,36 +44,36 @@ function MemoryShow () {
             <br></br><br></br>
 
           </ul>
-          <div className="px-5 py-1">
-          </div>
-          <div className="py-1 px-4">
+
+          <div className="py-4 px-4">
             <div className="d-flex align-items-center justify-content-between mb-3">
 
               
-              <div className='container-fluid h-100'>
+              <div className="fluid h-100">
                 {memory &&
-          <div className='container-fluid memory-wrapper'>
-            {/* <div className='row'> */}
-            <div className='col memory-image-holder'>
+          <div className="fluid">
+            {/* <div className="row"> */}
+            <div className="memstitle gy-1 row row-col text-wrap text-center text-capitalize">
               <h2>{memory.name}</h2>
-              <img src={memory.image} />
+              <img src={memory.image}/>
             </div>
+
             {/* </div> */}
           
             <div className="p-3 rounded shadow-sm bg-light">
-              <div className='row memory-info-holder'>
-                <div className='col-sm-4'>
+              <div className="row memory-info-holder">
+                <div className="col-sm-4">
                   <p>part of Trip</p>
                 </div>
-                <div className='col-sm-8'>
+                <div className="col-sm-8">
                   <p>Added on {memory.created_at}</p>
                 </div>
               </div>
             </div>
             <br></br>
             <div className="p-3 rounded shadow-sm bg-light">
-              <div className='row text-center'>
-                <div className='col-sm-12'>
+              <div className="row text-wrap text-center">
+                <div className="col-sm-12">
                   <p>{memory.location}</p>
                   <p>{memory.notes}</p>
                 </div>

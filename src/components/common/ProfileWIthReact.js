@@ -53,8 +53,8 @@ function Profile() {
 
 
               <div className="d-flex-body mb-5 text-white">
-                <h4 className="mt-0 mb-0 ms-3">{user && user.displayName}</h4>
-                <p className="small mb-4">
+                <h4 className="profile-tit text-uppercase mt-0 mb-0 ms-3">{user && user.displayName}</h4>
+                <p className="profile-location text-capitalize small mb-4">
                   <i className="fas fa-map-marker-alt mr-2 ms-3"></i>{user && user.location}</p>
               </div>
             </div>
@@ -68,22 +68,26 @@ function Profile() {
             </ul>
           </div>
           <div className="px-5 py-1">
-            <h5 className="mb-0">About</h5>
-            <div className="p-4 rounded shadow-sm bg-light">
+            <h5 className="pro-title text-capitalizemb-0">About</h5>
+            <div className="p-3 rounded shadow-sm bg-light">
               <p className="font-italic mb-0"> {user && user.about}</p>
-              <button>
-                <Link to={`/profile/${getUserId()}/edit`} className="btn btn-outline-info btn-sm">Edit Profile</Link>
-              </button>
+              <br></br>
+           
             </div>
           </div>
           <div className="py-1 px-4">
             <div className="d-flex align-items-center justify-content-between mb-3">
-              <h5 className="mb-0 ms-4">Recent Memories</h5>
-              {/* <a href="#" className="btn btn-link text-muted">Show all</a> */}
-              <button>
-                <Link to={'/trips/new'} className="btn btn-outline-info btn-sm me-3">Create New Memory</Link>
-              </button>
-
+              <h5 className="pro-title text-capitalize mb-0 ms-4">Recent Memories</h5>
+              
+              <div className="group-buttons">
+                <button>
+                  <Link to={`/profile/${getUserId()}/edit`} className="btn btn-outline-info btn-sm justify-content-end">Edit Profile</Link>
+                </button>
+              
+                <button>
+                  <Link to={'/trips/new'} className="btn btn-outline-info btn-sm me-3">Create New Memory</Link>
+                </button>
+              </div>
             </div>
             <div className="container pg-index">
               <div className="gy-2 row row-cols-3">
