@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom'
+
 function randomDate(start, end) {
   return new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime()))
 }
@@ -6,9 +8,11 @@ function randomDate(start, end) {
 function TripCardSmall ({ trip }) {
   console.log(trip)
   return (
-    <div 
+    <Link 
+      to={`/trips/${trip._id}`}
       className="show-small-container d-flex flex-column placebook-form shadow rounded m-3 bg-light"
     >
+      {/* //todo : replace with trip summary image*/}
       {/* <div className='row'>
         <img src={memory.image} alt={memory.name} className='memory-edit-image image mx-auto' />
       </div> */}
@@ -34,7 +38,7 @@ function TripCardSmall ({ trip }) {
           </div>
         </div>
       </div>
-    </div>
+    </Link>
   )
 }
 
