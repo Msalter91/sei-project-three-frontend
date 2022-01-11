@@ -8,6 +8,9 @@ $grid-breakpoints: (
   md: 1000px,
   lg: 1024px
 );
+$placebook-title-font: 'Gochi Hand', cursive;
+$placebook-font-spacing: 0.2em;
+
 //* * * * * N A V    B A R  * * * * * 
 
 button {
@@ -16,9 +19,9 @@ button {
 }
 
 .navbar {
-  font-family: 'Gochi Hand', cursive;
+  font-family: $placebook-title-font;
+  letter-spacing: $placebook-font-spacing;
   font-size: 15px;
-  letter-spacing: 3px;
   text-transform: uppercase;
   align-content: center;
   }
@@ -54,17 +57,17 @@ button {
 }
 
 .home-subtitle {
-  font-family: 'Gochi Hand', cursive;
+  font-family: $placebook-title-font;
+  letter-spacing: $placebook-font-spacing;
   font-size: 20px;
-  letter-spacing: 4px;
   text-transform: uppercase;
   padding-bottom: 150px;
 }
 
 .project-text {
-  font-family: 'Gochi Hand', cursive;
+  font-family: $placebook-title-font;
+  letter-spacing: $placebook-font-spacing;
   font-size: 12px;
-  letter-spacing: 3px;
   text-transform: uppercase;
   }
 
@@ -73,9 +76,9 @@ button {
 //* * * * * A B O U T   U S * * * * * 
 
 .aboutus-title {
-  font-family: 'Gochi Hand', cursive;
+  font-family: $placebook-title-font;
+  letter-spacing: $placebook-font-spacing;
   font-size: 30px;
-  letter-spacing: 6px;
 }
 
 .aboutus-bg { 
@@ -91,9 +94,9 @@ button {
   }
   
 .md-card-text {
-  font-family: 'Gochi Hand', cursive;
+  font-family: $placebook-title-font;
+  letter-spacing: $placebook-font-spacing;
   font-size: 15px;
-  letter-spacing: 3px;
 }
 
   .aboutus-img { 
@@ -118,9 +121,9 @@ button {
 }
 
 .reg-tit {
-  font-family: 'Gochi Hand', cursive;
+  font-family: $placebook-title-font;
+  letter-spacing: $placebook-font-spacing;
   font-size: 18px;
-  letter-spacing: 4px;
   }
 
   .mini-logo-wht {
@@ -129,25 +132,25 @@ button {
   }
 
 .alt-login {
-  font-family: 'Gochi Hand', cursive;
+  font-family: $placebook-title-font;
+  letter-spacing: $placebook-font-spacing;
   font-size: 12px;
-  letter-spacing: 3px;
   text-transform: uppercase;
   text-align: center;
   font-size: smaller;
   }
 
   .label {
-  font-family: 'Gochi Hand', cursive;
+  font-family: $placebook-title-font;
+  letter-spacing: $placebook-font-spacing;
   font-size: 14px;
-  letter-spacing: 3px;
   text-transform: uppercase;
   align-items: center;
 
   .country-name {
-    font-family: 'Gochi Hand', cursive;
+    font-family: $placebook-title-font;
+    letter-spacing: $placebook-font-spacing;
     font-size: 14px;
-    letter-spacing: 3px;
     text-transform: uppercase;
     align-items: center; 
   }
@@ -262,11 +265,18 @@ form {
 
 //* * * * * SINGLE COUNTRY  * * * * * 
 .header-splash-single {
-  height: 20vh;
+  // height: 35vh;
   overflow: hidden;
   img{
     width: 100%;
   }
+}
+
+.country-card-title {
+  text-align: center;
+  font-family: 'Gochi Hand', cursive;
+  font-size: 15px;
+  letter-spacing: 3px;
 }
 
 .info-container {
@@ -274,7 +284,7 @@ form {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  border: 1px solid black;
+  // border: 1px solid black;
   
 }
 
@@ -352,19 +362,36 @@ letter-spacing: 8px;
 .section.profileEdit {
   align-self: center;
   margin: 20px;
-  }
 
-.input {
+  form {
   width: 300px;
-  }
 
-.textarea {
-  width: 300px;
+  .input, .textarea {
+    width:100%
   }
-    .input {
-      width: 300px;
-      }
+  }
+}
 
+//* * * * * PLACEBOOK DATA FORMS * * * * * 
+
+.placebook-form {
+  h3, h6, label {
+    font-family: $placebook-title-font;
+    letter-spacing: $placebook-font-spacing;
+  }
+  .pr-0 {
+    padding-right: 0;
+  }
+  .mr-0 {
+    margin-right: 0;
+  }
+  .pl-0 {
+    padding-left: 0;
+  }
+  .ml-0 {
+    margin-left: 0;
+  }
+}
 //* * * * * T R I P  E D I T * * * * * 
 .edit-trip-map-container{
   height:500px
