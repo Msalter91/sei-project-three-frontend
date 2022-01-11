@@ -34,18 +34,127 @@ function Register() {
 
   console.log('form data', formData)
 
-  
   return (
-    <section className="section registration">
-      <div className="card mx-auto mb-5 shadow-sm mb-2 bg-body rounded col">
 
-        <form className="col-3 mx-auto" onSubmit={handleSubmit}>
-          <div className="field-floating mb-3">
-            <label className="label" htmlFor="displayName">
-                  Display name
-            </label>
-            <div className="control">
-              <input
+    
+    <div className="row py-5 px-4">
+      <div className="col-md-5 mx-auto">
+        <div className="bg-white shadow rounded overflow-hidden">
+          <div className="px-4 pt-0 pb-4 cover">
+            <div className="reg-head">  
+
+              <div className="d-flex-body mb-1 text-white align-object-center">
+                <div className="group-heading">
+                  <h4 className="reg-tit text-center text-uppercase lign-items-center ms-3">
+                  Register Account<img src="https://i.imgur.com/uBKiZQY.png" 
+                      className="mini-logo-wht align-object-center ps-2" alt="placebook-logo"/>
+                  </h4>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="d-flex flex-column bd-highlight mb-3">
+            <form className="p-2 bd-highlight text-center" onSubmit={handleSubmit}>
+              <label className="label" htmlFor="displayName">
+              Display name</label>
+              <div className="control mb-3">
+                <input 
+                  className={`input ${formErrors.displayName ? 'is-danger' : '' }`}
+                  placeholder="Display Name"
+                  name="displayName"
+                  id="displayName"
+                  onChange={handleChange}
+                />
+              </div>
+              {formErrors.displayName && (
+                <p className="text-danger">{formErrors.displayName}</p>
+              )}
+
+              <label className="label" htmlFor="email">
+                Email</label>
+              <div className="control mb-3">
+                <input
+                  className={`input ${formErrors.email ? 'is-danger' : ''}`}
+                  placeholder="Email Address here"
+                  name="email"
+                  id="email"
+                  onChange={handleChange}
+                />
+              </div>
+              {formErrors.email && (
+                <p className="help text-danger">{formErrors.email}</p>
+              )}
+
+              <label className="label" htmlFor="password">
+              Password</label>
+              <div className="control mb-3">
+                <input
+                  type="password"
+                  className={`input ${formErrors.password ? 'is-danger' : ''}`}
+                  placeholder="Password"
+                  name="password"
+                  id="password"
+                  onChange={handleChange}
+                />
+              </div>
+              {formErrors.password && (
+                <p className="help text-danger">{formErrors.password}</p>
+              )}
+
+              <label className="label" htmlFor="passwordConfirmation">
+              Password Confirmation</label>
+              <div className="control mb-3">
+                <input
+                  type="password"
+                  className={`input ${
+                    formErrors.passwordConfirmation ? 'is-danger' : ''
+                  }`}
+                  placeholder="Password Confirmation"
+                  name="passwordConfirmation"
+                  id="passwordConfirmation"
+                  onChange={handleChange}
+                />
+              </div>
+              {formErrors.passwordConfirmation && (
+                <p className="help text-danger">{formErrors.passwordConfirmation}</p>
+              )}
+              <div className="mb-4">
+                <button type="submit" className="btn btn-outline-info btn-sm">
+              Register Me!</button>
+              </div>
+            </form>
+
+            <p className="alt-login text-muted">
+                Already have an account? <Link to="/login">
+                <br></br>Log In Here</Link>
+            </p>
+          </div>
+
+        </div>
+      </div>
+    </div>
+ 
+  )
+}
+export default Register
+
+
+
+
+
+//* BACK UP REG FORM before AC restyle //
+
+/* <section className="section registration">
+       <div className="card mx-auto mb-5 shadow-sm mb-2 bg-body rounded col">
+
+         <form className="col-3 mx-auto" onSubmit={handleSubmit}>
+           <div className="field-floating mb-3">
+             <label className="label" htmlFor="displayName">
+                   Display name
+             </label>
+             <div className="control">
+                   <input
                 className={`input ${formErrors.displayName ? 'is-danger' : '' }`}
                 placeholder="Display Name"
                 name="displayName"
@@ -131,4 +240,4 @@ function Register() {
     </section>
   )
 }
-export default Register
+export default Register */

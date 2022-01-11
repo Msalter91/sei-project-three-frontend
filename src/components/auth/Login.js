@@ -32,59 +32,76 @@ function Login() {
   }
 
   return (
-    <section className="section login">
-      <div className="card mb-5 shadow-sm mb-2 bg-body rounded">
-        <div className="row">
-          <div className="col">
-            <form className="col" onSubmit={handleSubmit}>
 
-              <div className="field-floating mb-3">
-                <label className="label" htmlFor="email">Email</label>
-                <div className="control">
-                  <input
-                    className={`input ${isError.email ? 'is-danger' : ''}`}
-                    placeholder="Email Address"
-                    name="email"
-                    id="email"
-                    onChange={handleChange}
-                  />
+    <div className="row py-5 px-4">
+      <div className="col-md-5 mx-auto">
+        <div className="bg-white shadow rounded overflow-hidden">
+          <div className="px-4 pt-0 pb-4 cover">
+            <div className="reg-head">  
+            
+              <div className="d-flex-body mb-1 text-white align-object-center">
+                <div className="group-heading">
+                  <h4 className="reg-tit text-center text-uppercase lign-items-center ms-3">
+                  Login<img src="https://i.imgur.com/uBKiZQY.png" 
+                      className="mini-logo-wht align-object-center ps-2" alt="placebook-logo"/>
+                  </h4>
                 </div>
               </div>
+            </div>
+          </div>
 
-              <div className="field-floating mb-3">
-                <label className="label" htmlFor="password">Password</label>
-                <div className="control">
-                  <input
-                    type="password"
-                    className={`input ${isError.password ? 'is-danger' : ''}`}
-                    placeholder="Password"
-                    name="password"
-                    id="password"
-                    onChange={handleChange}
-                  />
-                </div>
+          <div className="d-flex flex-column bd-highlight mb-3">
+            <form className="p-2 bd-highlight text-center" onSubmit={handleSubmit}>
+              
+              <label className="label" htmlFor="email">
+                Email</label>
+              <div className="control mb-3">
+                <input
+                  className={`input ${isError.email ? 'is-danger' : ''}`}
+                  placeholder="Email Address here"
+                  name="email"
+                  id="email"
+                  onChange={handleChange}
+                />
               </div>
-
-              {isError && (
-                <p className="help is-danger field">
-              Password or Email were incorrect
-                </p>
+              {isError.email && (
+                <p className="help text-danger">{isError.email}</p>
               )}
 
-              <div className="mb-5">
-                <button type="submit" className="btn btn-dark btn-outline-warning btn-lg">
-                Log Me In!
-                </button>
+              <label className="label" htmlFor="password">
+              Password</label>
+              <div className="control mb-3">
+                <input
+                  type="password"
+                  className={`input ${isError.password ? 'is-danger' : ''}`}
+                  placeholder="Password"
+                  name="password"
+                  id="password"
+                  onChange={handleChange}
+                />
+              </div>
+              {isError.password && (
+                <p className="help text-danger">{isError.password}</p>
+              )}
+
+              <div className="mb-4">
+                <button type="submit" className="btn btn-outline-info btn-sm">
+              Log me In!</button>
               </div>
             </form>
+
+            <p className="alt-login text-muted">
+                Don&apos;t have an account? <Link to="/register">
+                <br></br>Sign up Here!</Link>
+            </p>
           </div>
-          <p className="alt-login">
-        Don&apos;t have an account? 
-            {' '}<Link to="/register">Register</Link>
-          </p>
+
         </div>
       </div>
-    </section>
+    </div>
+ 
   )
 }
 export default Login
+
+
