@@ -411,6 +411,14 @@ label img {
   min-width: 200px;
 }
 
+//* * * * * SMALL MEMORY CARD * * * * * 
+.show-small-container {
+  width:300px;
+
+  .w-4em{
+    width: 3em;
+  }
+}
 
 
 @include media-breakpoint-down(md) {
