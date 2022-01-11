@@ -7,7 +7,7 @@ const mapboxApiAccessToken = process.env.REACT_APP_MAPS_API_KEY
 function LocationPicker ({ 
   center = { lat: 0, long: 0 },
   initZoom = 1,
-  getLocationFromMap = ()=>{},
+  captureLocation = ()=>{},
 }) {
   const [viewport, setViewport] = useState({
     latitude: center.lat,
@@ -20,13 +20,13 @@ function LocationPicker ({
 
   const handleViewportChange = useCallback(
     (newViewport) => {
-      getLocationFromMap([
-        newViewport.latitude,
-        newViewport.longitude
-      ])
+      captureLocation({
+        lat: newViewport.latitude,
+        long: newViewport.longitude, 
+      })
       setViewport(newViewport)
     },
-    [getLocationFromMap]
+    [captureLocation]
   )
 
   const handleGeocoderViewportChange = useCallback(
@@ -39,23 +39,29 @@ function LocationPicker ({
     },
     [handleViewportChange]
   )
+
   const fitBounds = (
     bounds, viewport
   ) => new WebMercatorViewport(viewport).fitBounds(bounds)
   const handleGeocoderResult = ({ result })=>{
     console.log(result)
-    const { bbox } = result
-    const bounds = [[bbox[0], bbox[1]], [bbox[2], bbox[3]]]
-    const fittedBounds = fitBounds(bounds, viewport)
-    console.log(viewport)
-    console.log(fittedBounds)
-    // handleGeocoderViewportChange
+    let newLocation = {}
+    if (result.bbox){
+      const { bbox } = result
+      const bounds = [[bbox[0], bbox[1]], [bbox[2], bbox[3]]]
+      newLocation = fitBounds(bounds, viewport)
+    } else {
+      newLocation.longitude = result.center[0]
+      newLocation.latitude = result.center[1]
+      newLocation.zoom = 14
+    }
     setViewport({
       ...viewport, 
-      latitude: fittedBounds.latitude,
-      longitude: fittedBounds.longitude,
-      zoom: fittedBounds.zoom,
+      latitude: newLocation.latitude,
+      longitude: newLocation.longitude,
+      zoom: newLocation.zoom,
     })
+    captureLocation({ location: result.text })
   }
 
   return (

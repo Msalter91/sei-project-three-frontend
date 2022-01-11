@@ -52,7 +52,7 @@ function MemoryEdit ({ memory, handleSwitchToShow, updateClientsideMemory }) {
   }
 
   const captureLocation = (location) => {
-    setFormData({ ...formData, long: location[0], lat: location[1] })
+    setFormData({ ...formData, ...location })
   }
 
   return (
@@ -80,7 +80,18 @@ function MemoryEdit ({ memory, handleSwitchToShow, updateClientsideMemory }) {
         </div>
         <div className="form-group col">
           <label htmlFor="location">Where were you?</label>
-          <LocationPicker getLocationFromMap={captureLocation} />
+          <input
+            type='text' 
+            name="location"
+            id="location"
+            className={
+              `form-control 
+                ${(formErrors.location ) ? 'border-danger' : ''}
+                `}
+            value={formData.location}
+            onChange={handleChange} />
+          {formErrors.location && <p className="text-danger">{formErrors.location}</p>  }
+          <LocationPicker captureLocation={captureLocation} />
         </div>
       </div>
 

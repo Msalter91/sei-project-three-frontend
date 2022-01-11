@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef, useCallback } from 'react'
+import { useEffect, useState, useRef, useCallback } from 'react'
 import ReactMapGL, { Marker, WebMercatorViewport } from 'react-map-gl'
 import Geocoder from 'react-map-gl-geocoder'
 import { flattenArrayByPropertyOfMember } from '../../../lib/helpers.js'
@@ -96,6 +96,7 @@ function RenderMap ({
     pitch: 50,
   })
 
+  // todo: use fitbounds pattern from locationPicker to clean up
   function fitViewPort () {
     const fittedVp = new WebMercatorViewport(viewport)
     const { 
