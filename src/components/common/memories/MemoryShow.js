@@ -1,6 +1,6 @@
 import axios from 'axios'
 import React from 'react'
-import { useParams } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 
 function MemoryShow () {
   const { memoryId } = useParams()
@@ -83,7 +83,13 @@ function MemoryShow () {
           </div>}
               </div>
             </div>
+            <button>
+              <Link to="/trips/edit"
+                className="btn btn-outline-info btn-sm d-flex justify-content-center">
+                  Edit / Delete Memory</Link>
+            </button>
           </div>
+
         </div>
       </div>
     </div>
