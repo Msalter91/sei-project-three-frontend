@@ -76,7 +76,7 @@ function CountryShow () {
 
               <div className="px-4 py-1">
                 <div className="p-5 rounded shadow-sm bg-light mt-2 mb-2">
-                  <p className="font-italic mb-0"> LINK COUNTRY SUMMARY HERE</p>
+                  <p className="font-italic mb-0">{country && country.summary}</p>
                 </div>
 
                 <div className="single-country-text-group row">
