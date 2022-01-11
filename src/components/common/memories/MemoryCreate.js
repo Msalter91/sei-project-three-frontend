@@ -8,7 +8,7 @@ import LocationPicker from '../maps/LocationPicker.js'
 
 const initialState = {
   name: 'A beautiful day',
-  location: '<location picker here>',
+  location: '',
   image: '',
   notes: '',
   lat: 0,
@@ -85,6 +85,7 @@ function MemoryCreate ({ tripId, addNewMemoryToTrip, toggleCreateMemoryForm }) {
             type='text' 
             name="location"
             id="location"
+            placeholder='Search below or name your location!'
             className={
               `form-control 
                 ${(formErrors.location ) ? 'border-danger' : ''}
