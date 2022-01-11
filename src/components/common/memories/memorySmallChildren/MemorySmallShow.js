@@ -15,7 +15,7 @@ function MemoryShowSmall ({ memory, handleSwitchToEdit }) {
         <div className='col'>
           {[
             ['location', 'At:'], 
-            ['dateVisited', 'On:']
+            ['visitDate', 'On:']
           ].map(field=>(
             <div key={field[0]} className="row">
               <h6 className="col-1 pr-0 mr-0">{field[1]}</h6>
