@@ -19,7 +19,6 @@ function TripsIndexAsMap () {
     getTripList()
   }, [])
 
-  console.log(tripList)
   return (
     <section className="section row">
       {isError ? (
@@ -30,13 +29,13 @@ function TripsIndexAsMap () {
             <RenderMap arrayOfTrips={tripList}/>
           </div>
           <div className='row'>
-            {Boolean(tripList.length) && tripList.map(trip =>(
-              <div className="col" key={trip._id}>
-                <h4>{trip.title}</h4>
-                <p>{trip.addedBy.displayName}</p>
-              </div>
-            ))
-
+            {
+              Boolean(tripList.length) && tripList.map(trip =>(
+                <div className="col" key={trip._id}>
+                  <h4>{trip.title}</h4>
+                  <p>{trip.addedBy.displayName}</p>
+                </div>
+              ))
             }
           </div>
         </>

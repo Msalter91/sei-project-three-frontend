@@ -1,7 +1,10 @@
-import React, { useEffect, useState, useRef, useCallback } from 'react'
+import { useEffect, useState, useRef, useCallback } from 'react'
 import ReactMapGL, { Marker, WebMercatorViewport } from 'react-map-gl'
 import Geocoder from 'react-map-gl-geocoder'
+
+import { mapboxApiAccessToken } from '../../../lib/config.js'
 import { flattenArrayByPropertyOfMember } from '../../../lib/helpers.js'
+import TripPolyLine from './helpers/TripPolyLine.js'
 
 function getLocationArrayStats (array){
   const locationAggregates = array.reduce((acc, cur)=>{
@@ -24,15 +27,16 @@ function getLocationArrayStats (array){
 }
 
 
-
 function RenderMap ({ 
   arrayOfTrips = [], 
   center = { lat: 0, long: 0 },
   initZoom = 1,
-  getLocationFromMap,
 }) {
   const aggregatedMemoriesForViewport = flattenArrayByPropertyOfMember(arrayOfTrips, 'memories')
   let locationStats = {}
+  const mapContainer = useRef()
+  const mapRef = useRef()
+
   const hasMemories = Boolean(aggregatedMemoriesForViewport.length)
   if (hasMemories){
     locationStats = getLocationArrayStats(aggregatedMemoriesForViewport)
@@ -41,13 +45,7 @@ function RenderMap ({
     }
   } 
 
-  function getCoordinates (e) {
-    getLocationFromMap(e.lngLat)
-  }
-
-  const mapContainer = useRef()
-  const mapRef = useRef()
-
+  // todo: use fitbounds pattern from locationPicker to clean up
   // calculating viewport to fit multiple markers requires a viewport with known pixel size in order to prevent errors within WebMercatorViewport
   useEffect(() => {
     function handleResize() {      
@@ -91,6 +89,7 @@ function RenderMap ({
     pitch: 50,
   })
 
+  // todo: use fitbounds pattern from locationPicker to clean up
   function fitViewPort () {
     const fittedVp = new WebMercatorViewport(viewport)
     const { 
@@ -122,30 +121,45 @@ function RenderMap ({
   return (
     <div ref={mapContainer} className="map-container" style={{ height: '100%', width: '100%' }}>
       <ReactMapGL
-        mapboxApiAccessToken={process.env.REACT_APP_MAPS_API_KEY}
+        mapboxApiAccessToken={mapboxApiAccessToken}
         ref={mapRef}
         mapStyle='mapbox://styles/mapbox/outdoors-v11'
         {...viewport}
         onViewportChange={newViewport => setViewport(newViewport)}
-        onClick={getCoordinates}
       >
         <Geocoder 
           mapRef={mapRef}
           onViewportChange={handleGeocoderViewportChange}
-          mapboxApiAccessToken={process.env.REACT_APP_MAPS_API_KEY}
+          mapboxApiAccessToken={mapboxApiAccessToken}
           position='top-left'
         />
-        {hasMemories && arrayOfTrips.map(trip =>(
-          trip.memories.map(location => (
-            <Marker
-              key={location._id}
-              latitude={location.lat}
-              longitude={location.long}
-            >
-              <span role="img" aria-label="map-marker" className="marker">{'📸'}</span>
-            </Marker>
-          ))
-        ))}
+        {hasMemories && arrayOfTrips.map(trip =>{
+          //if no memories, don't attempt to draw anything memory related
+          if (!trip.memories.length) return
+          const randomColourValue = () => Math.floor(Math.random() * 255)
+          const polylineOptions = {
+            lineColour: `rgba(${randomColourValue()}, ${randomColourValue()}, ${randomColourValue()}, 0.8)`,
+          }
+          return (
+            <ul key={trip._id}>
+              {
+                trip.memories.map(location => (
+                  <Marker
+                    key={location._id}
+                    latitude={location.lat}
+                    longitude={location.long}
+                  >
+                    <span role="img" aria-label="map-marker" className="marker">{'📸'}</span>
+                  </Marker>
+                ))
+              }
+              {
+                Boolean(trip.memories.length > 1) && 
+              <TripPolyLine key={trip._id} trip={trip} options = {polylineOptions}/>
+              }
+            </ul>
+          )
+        })}
         {/* <MapController onClick={handleNewLocation}/> */}
         
       </ReactMapGL>

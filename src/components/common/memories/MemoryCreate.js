@@ -2,13 +2,13 @@ import { useState } from 'react'
 
 import { memoryCreate } from '../../../lib/api.js'
 import { logoImageLink } from '../../../lib/config.js'
-import RenderMap from '../maps/RenderMap.js'
 import { uploadImageMemory } from '../../../lib/imageHosting.js'
+import LocationPicker from '../maps/LocationPicker.js'
 
 
 const initialState = {
   name: 'A beautiful day',
-  location: '<location picker here>',
+  location: '',
   image: '',
   notes: '',
   lat: 0,
@@ -53,32 +53,50 @@ function MemoryCreate ({ tripId, addNewMemoryToTrip, toggleCreateMemoryForm }) {
 
   // Map information 
   const captureLocation = (location) => {
-    setFormData({ ...formData, long: location[0], lat: location[1] })
+    setFormData({ ...formData, ...location })
   }
-
   return (
 
     <form 
       className="container-fluid row"
       onSubmit={handleSubmit}>
-      <div className="form-group">
-        <label className="label" htmlFor="image" role="button">
-          <p>Share a photo?</p>
-          <img 
-            src={formData.image ? formData.image : logoImageLink} 
-            alt={formData.name} 
-            className='memory-edit-image' 
+      <div className='row'>
+        <div className="form-group col">
+          <label className="label" htmlFor="image" role="button">
+            <p>Share a photo?</p>
+            <img 
+              src={formData.image ? formData.image : logoImageLink} 
+              alt={formData.name} 
+              className='memory-edit-image' 
+            />
+          </label>
+          <input 
+            type="file" 
+            className='d-none'
+            id="image" 
+            accept="image/png, image/jpeg"
+            onChange={handleImageUpload} 
           />
-        </label>
-        <input 
-          type="file" 
-          className='d-none'
-          id="image" 
-          accept="image/png, image/jpeg"
-          onChange={handleImageUpload} 
-        />
-        {isUploadingImage && <p>Image uploading</p>}
+          {isUploadingImage && <p>Image uploading</p>}
+        </div>
+        <div className="form-group col">
+          <label htmlFor="location">Where were you?</label>
+          <input
+            type='text' 
+            name="location"
+            id="location"
+            placeholder='Search below or name your location!'
+            className={
+              `form-control 
+                ${(formErrors.location ) ? 'border-danger' : ''}
+                `}
+            value={formData.location}
+            onChange={handleChange} />
+          {formErrors.location && <p className="text-danger">{formErrors.location}</p>  }
+          <LocationPicker captureLocation={captureLocation} />
+        </div>
       </div>
+
       <div className="form-group">
         <label htmlFor="name">What happened?</label>
         <input
@@ -92,49 +110,6 @@ function MemoryCreate ({ tripId, addNewMemoryToTrip, toggleCreateMemoryForm }) {
           value={formData.name}
           onChange={handleChange} />
         {formErrors.name && <p className="text-danger">{formErrors.name}</p>  }
-      </div>
-      <div className="form-group">
-        <label htmlFor="location">Where were you?</label>
-        <RenderMap getLocationFromMap={captureLocation} />
-        <input
-          type='text' 
-          name="location"
-          id="location"
-          className={
-            `form-control 
-                ${(formErrors.name ) ? 'border-danger' : ''}
-                `}
-          value={formData.location}
-          onChange={handleChange} />
-        {formErrors.location && <p className="text-danger">{formErrors.location}</p>  }
-      </div>
-      <div className="form-group">
-        <label htmlFor="lat">LATITUDE</label>
-        <input
-          type='number' 
-          name="lat"
-          id="lat"
-          className={
-            `form-control 
-                ${(formErrors.lat ) ? 'border-danger' : ''}
-                `}
-          value={formData.lat}
-          onChange={handleChange} />
-        {formErrors.lat && <p className="text-danger">{formErrors.lat}</p>  }
-      </div>
-      <div className="form-group">
-        <label htmlFor="long">LONGITUDE</label>
-        <input
-          type='number' 
-          name="long"
-          id="long"
-          className={
-            `form-control 
-                ${(formErrors.long ) ? 'border-danger' : ''}
-                `}
-          value={formData.long}
-          onChange={handleChange} />
-        {formErrors.long && <p className="text-danger">{formErrors.long}</p>  }
       </div>
       <div className="form-group">
         <label htmlFor="visitDate">When were you there?</label>
@@ -170,7 +145,6 @@ function MemoryCreate ({ tripId, addNewMemoryToTrip, toggleCreateMemoryForm }) {
         </div>
         {formErrors.notes && <p className="text-danger">{formErrors.notes}</p>  }
       </div>
-      {/* </div> */}
       <div className='row'>
         {isUploadingImage && <p>Image uploading...</p>}
         <button 
