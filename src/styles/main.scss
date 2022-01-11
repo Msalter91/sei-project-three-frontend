@@ -2,6 +2,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Gochi+Hand&display=swap');
 @import 'react-map-gl-geocoder/dist/mapbox-gl-geocoder.css';
 
+$grid-breakpoints: (
+  xs: 0,
+  sm: 480px,
+  md: 1000px,
+  lg: 1024px
+);
 $placebook-title-font: 'Gochi Hand', cursive;
 $placebook-font-spacing: 0.2em;
 
@@ -196,7 +202,9 @@ form {
   justify-content: center;
   align-items: center;
   h2 {
+    font-family: 'gochi hand';
     color: white;
+    text-align: center;
   }
 }
 
@@ -225,15 +233,35 @@ form {
   
 }
 
-.carousel-caption {
-@media screen and (min-width: 25em){
-  html { font-size: calc( 16px + (24 - 16) * (100vw - 400px) / (800 - 400) ); }
+
+.country-card-container {
+  height: 20vh;
+  a {
+    text-decoration: none;
+  }
 }
 
-text-shadow: 0px 1px 1px rgba(0, 0, 0, 0.4); 
-
+.country-card-main {
+  height: 100%;
+  background-size: cover;
+  display: flex;
+  align-items: center;
 }
 
+.image-covering-text {
+  font-family: 'gochi hand';
+  font-weight: 900;
+  font-size: 3em;
+  color: white;
+  text-decoration: none;
+  text-align: center;
+  }
+  @supports (-webkit-text-stroke: 1px black) {
+    .image-covering-text {
+      -webkit-text-stroke: 1px black;
+      -webkit-text-fill-color: white;
+    }
+  }
 
 //* * * * * SINGLE COUNTRY  * * * * * 
 .header-splash-single {
@@ -383,5 +411,45 @@ label img {
   min-height: 200px;
   min-width: 200px;
 }
+
+//* * * * * SMALL MEMORY CARD * * * * * 
+.show-small-container {
+  width:300px;
+
+  .w-4em{
+    width: 3em;
+  }
+}
+
+
+@include media-breakpoint-down(md) {
+  .header-splash {
+    height: 10vh;
+  }
+  .col-md-10 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: none;
+  }
+  .country-card-container {
+    width: 100%;
+    border: 5px, solid, black;
+  }
+  .row{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+  }
+  .image-covering-text {
+    font-family: 'gochi hand';
+    font-size: 3em;
+    font-weight: 700;
+    color: white ;
+  }
+    
+  }
 
 // label.label img.memory-edit-image
