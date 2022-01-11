@@ -20,11 +20,9 @@ function cloudinaryUpload (presetName, url, image, presets = imagePresets) {
 }
 
 export function uploadImageMemory (image) {
-  const hostedImageUrl = cloudinaryUpload('memory', hostUrl, image)
-  return hostedImageUrl
+  return cloudinaryUpload('memory', hostUrl, image)
 }
 
 export function uploadImageProfile (image) {
-  const hostedImageUrl = cloudinaryUpload('profile', hostUrl, image)
-  return hostedImageUrl
+  return cloudinaryUpload('profile', hostUrl, image)
 }
