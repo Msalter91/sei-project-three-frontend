@@ -31,7 +31,6 @@ function RenderMap ({
   arrayOfTrips = [], 
   center = { lat: 0, long: 0 },
   initZoom = 1,
-  getLocationFromMap = ()=>{},
 }) {
   const aggregatedMemoriesForViewport = flattenArrayByPropertyOfMember(arrayOfTrips, 'memories')
   let locationStats = {}
@@ -46,13 +45,7 @@ function RenderMap ({
     }
   } 
 
-  function getCoordinates (e) {
-    console.log(e)
-    console.log('center:', mapRef.getCenter())
-    console.log('click:', e.lngLat)
-    getLocationFromMap(e.lngLat)
-  }
-
+  // todo: use fitbounds pattern from locationPicker to clean up
   // calculating viewport to fit multiple markers requires a viewport with known pixel size in order to prevent errors within WebMercatorViewport
   useEffect(() => {
     function handleResize() {      
@@ -133,7 +126,6 @@ function RenderMap ({
         mapStyle='mapbox://styles/mapbox/outdoors-v11'
         {...viewport}
         onViewportChange={newViewport => setViewport(newViewport)}
-        onClick={getCoordinates}
       >
         <Geocoder 
           mapRef={mapRef}
@@ -144,7 +136,6 @@ function RenderMap ({
         {hasMemories && arrayOfTrips.map(trip =>{
           //if no memories, don't attempt to draw anything memory related
           if (!trip.memories.length) return
-
           const polylineOptions = {
             lineColour: 'rgba(213, 184, 255, 0.8)',
           }
