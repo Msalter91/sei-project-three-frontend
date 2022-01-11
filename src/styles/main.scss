@@ -233,11 +233,18 @@ text-shadow: 0px 1px 1px rgba(0, 0, 0, 0.4);
 
 //* * * * * SINGLE COUNTRY  * * * * * 
 .header-splash-single {
-  height: 20vh;
+  // height: 35vh;
   overflow: hidden;
   img{
     width: 100%;
   }
+}
+
+.country-card-title {
+  text-align: center;
+  font-family: 'Gochi Hand', cursive;
+  font-size: 15px;
+  letter-spacing: 3px;
 }
 
 .info-container {
@@ -245,7 +252,7 @@ text-shadow: 0px 1px 1px rgba(0, 0, 0, 0.4);
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  border: 1px solid black;
+  // border: 1px solid black;
   
 }
 

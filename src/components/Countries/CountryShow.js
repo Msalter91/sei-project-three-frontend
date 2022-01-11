@@ -1,3 +1,4 @@
+
 import axios from 'axios'
 import React from 'react'
 import { logoImageLink } from '../../lib/config.js'
@@ -51,69 +52,89 @@ function CountryShow () {
   }
   console.log(countriesAndTrips)
 
+
   return (
-    <div className='container-fluid h-100'>
-      {isError ? (
-        <Error />
-      ) :
-        <><div className='row header-wrapper'>
-          <div className='col'>
-            <div className='header-splash-single'>
-              <img src={country && country.image} />
+ 
+    <div className="row py-2 px-4">
+      <div className="col-md-10 mx-auto">
+        <div className="bg-white shadow rounded overflow-hidden">
+          <div className="px-4 pt-0 pb-4 cover">
+            <div className="d-flex-body mb-1 text-white">
             </div>
           </div>
-        </div><div className='row country-info'>
-          <div className='col info-container'>
-            <h4>{country && country.name}</h4>
-            <p>code: {country && country.countrycode}</p>
-          </div>
-          <div className='col info-container'>
-            <h4>Languages</h4>
-            <p>{country && country.language}</p>
-          </div>
-          <div className='col info-container'>
-            <h4>Currency</h4>
-            <p>{country && country.currency}</p>
-          </div>
-        </div>
-        <div className="container pg-index">
-          <div className="gy-2 row row-cols-3">
-            
-            {!countriesAndTrips() || !countriesAndTrips()[0] && 
-            <Link  to={'/trips/new'}>
-              <div className="card">
-                <img className='' src={logoImageLink} alt="Card image cap"></img>
-                <div className="card-body">
-                  <h6 className="card-title">No adventures here yet!</h6>
-                  <a href="#" className="btn btn-primary">Be the first to share their trip</a>
+
+          {isError ? (
+            <Error />
+          ) :
+            <><div className='row header-wrapper mb-4'>
+
+              <div className='col'>
+                <div className='header-splash-single'>
+                  <img src={country && country.image} />
                 </div>
               </div>
-            </Link > 
-            }
-            {countriesAndTrips() && countriesAndTrips()[0] &&
-                countriesAndTrips().map((trip => {
-                  return (
-                    <Link key={trip._id} to={`/trips/${trip._id}`}>
+
+              <div className="px-4 py-1">
+                <div className="p-5 rounded shadow-sm bg-light mt-2 mb-2">
+                  <p className="font-italic mb-0"> LINK COUNTRY SUMMARY HERE</p>
+                </div>
+
+                <div className="single-country-text-group row">
+                  <div className="col-4 ">
+                    <div className="info-container p-1 rounded shadow-sm bg-light mt-2 mb-2">
+                      <h4>{country && country.name}</h4>
+                      <p>code: {country && country.countrycode}</p></div>
+                  </div>
+                  <div className="col-4">
+                    <div className="info-container p-1 rounded shadow-sm bg-light mt-2 mb-2">
+                      <h4>Languages</h4>
+                      <p>{country && country.language}</p>
+                    </div>
+                  </div>
+                  <div className="col-4">
+                    <div className="info-container p-1 rounded shadow-sm bg-light mt-2 mb-2">
+                      <h4>Currency</h4>
+                      <p>{country && country.currency}</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div><div className="container pg-index">
+              <div className="gy-2 row row-cols-3">
+
+                {!countriesAndTrips() || !countriesAndTrips()[0] &&
+                    <Link to={'/trips/new'}>
                       <div className="card">
-                        <img className='' src={trip.memories[0] ? trip.memories[0].image : 'https://static.toiimg.com/thumb/66440952/road-trip.jpg?width=1200&height=900'} alt="Card image cap"></img>
+                        <img className='' src={logoImageLink} alt="Card image cap"></img>
                         <div className="card-body">
-                          <h6 className="card-title">{trip.title}</h6>
-                          <a href="#" className="btn btn-primary">See their trip</a>
+                          <h6 className="country-card-title text-decoration-none">No adventures here yet!</h6>
+                          <a href="#" className="btn btn-outline-info btn-sm">Be the first to share their trip</a>
                         </div>
                       </div>
-                    </Link >
-                  )
-                }
-                ))}
-          </div>
+                    </Link>}
+                {countriesAndTrips() && countriesAndTrips()[0] &&
+                    countriesAndTrips().map((trip => {
+                      return (
+                        <Link key={trip._id} to={`/trips/${trip._id}`}>
+                          <div className="card">
+                            <img className='' src={trip.memories[0] ? trip.memories[0].image : 'https://static.toiimg.com/thumb/66440952/road-trip.jpg?width=1200&height=900'} alt="Card image cap"></img>
+                            <div className="card-body">
+                              <h6 className="country-card-title text-decoration-none">{trip.title}</h6>
+                              <a href="#" className="btn btn-outline-info btn-sm">See their trip</a>
+                            </div>
+                          </div>
+                        </Link>
+                      )
+                    }
+                    ))}
+                <br></br>
+              </div>
+            </div></>
+          }
         </div>
-        
-        </>
-    
-    
-      }
-      
+      </div>
     </div>
+    // </div>
   )
 
 }
