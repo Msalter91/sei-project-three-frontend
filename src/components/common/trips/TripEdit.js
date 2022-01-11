@@ -175,7 +175,7 @@ function TripEdit () {
                 </form>
               </div>
 
-
+              {/* * * MEMORIES SECTION * * */}
               <div className="col-md">
                 <div className="col-12 fluid"
                   // style={{ background: 'khaki' }}
@@ -183,7 +183,7 @@ function TripEdit () {
                   <div
                     className='d-flex flex-column'>
                   </div>
-                  <div className='custom-memories-container row'>
+                  <div className='trip-memories-container row mx-auto'>
                     {Boolean(formData.memories.length) &&
                       formData.memories.map(
                         (memory, index) => (

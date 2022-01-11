@@ -85,7 +85,7 @@ function MemoryCreate ({ tripId, addNewMemoryToTrip, toggleCreateMemoryForm }) {
             type='text' 
             name="location"
             id="location"
-            placeholder='Search below or name your location!'
+            placeholder='Name your location or search below!'
             className={
               `form-control 
                 ${(formErrors.location ) ? 'border-danger' : ''}
