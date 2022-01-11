@@ -85,7 +85,7 @@ function MemoryCreate ({ tripId, addNewMemoryToTrip, toggleCreateMemoryForm }) {
             type='text' 
             name="location"
             id="location"
-            placeholder='Search below or name your location!'
+            placeholder='Name your location or search below!'
             className={
               `form-control 
                 ${(formErrors.location ) ? 'border-danger' : ''}
@@ -149,7 +149,7 @@ function MemoryCreate ({ tripId, addNewMemoryToTrip, toggleCreateMemoryForm }) {
         {isUploadingImage && <p>Image uploading...</p>}
         <button 
           type="submit"
-          className={`btn btn-success ml-auto ${isUploadingImage && 'disabled'}`}
+          className={`btn btn-outline-info btn-sm ${isUploadingImage && 'disabled'}`}
           aria-disabled={isUploadingImage}
         >Save this memory!</button>
       </div>

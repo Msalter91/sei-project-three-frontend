@@ -11,6 +11,8 @@ $grid-breakpoints: (
 $placebook-title-font: 'Gochi Hand', cursive;
 $placebook-font-spacing: 0.2em;
 
+img { text-align: center;}
+
 //* * * * * N A V    B A R  * * * * * 
 
 button {
@@ -396,6 +398,12 @@ letter-spacing: 8px;
 //* * * * * T R I P  E D I T * * * * * 
 .edit-trip-map-container{
   height:500px
+}
+
+.title-trip-create {
+font-family: 'Gochi Hand', cursive;
+font-size: 30px;
+letter-spacing: 8px;
 }
 
 //* * * * * M E M O R Y  E D I T * * * * * 

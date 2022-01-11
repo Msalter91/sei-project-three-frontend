@@ -1,7 +1,7 @@
 function MemoryShowSmall ({ memory, handleSwitchToEdit }) {
   return (
     <div 
-      className="show-small-container placebook-form"
+      className="show-small-container d-flex flex-column placebook-form shadow rounded m-3 bg-light"
     >
       <div className='row'>
         <img src={memory.image} alt={memory.name} className='memory-edit-image image mx-auto' />
@@ -28,7 +28,7 @@ function MemoryShowSmall ({ memory, handleSwitchToEdit }) {
           </div>
         </div>
       </div>
-      <div className="memory-show-small-buttons row">
+      <div className="memory-show-small-buttons row mt-auto">
         <button className="btn btn-warning" onClick={handleSwitchToEdit}>Edit</button>
       </div>
     </div>
