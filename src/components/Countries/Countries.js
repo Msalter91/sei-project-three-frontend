@@ -64,21 +64,21 @@ function Countries() {
           </div>
         </div>
 
-        <div className="gy-2 row row-cols-3"
+        <div className="gy-2 row row-cols-3 country-stack"
           // style={{ border: 'px solid black' }}
         >
           {
             countries && (
               filteredCountries(countries).map(country=> {
-                return <div className=""
+                return <div className="country-card-container"
                   key={country.name}>
                 
                   <Link to={`/countries/${country._id}`}>
                     
-                    <div className="card">
-                      <p className="carousel-caption text-uppercase">{country.name}</p>
-                      <img className="rounded" loading="lazy" src={country.image}  
-                        alt="Card image cap"></img> 
+                    <div className="card country-card-main" style={{ backgroundImage: `url(${country.image})` }}>
+                      <h4 className="image-covering-text">{country.name}</h4>
+                      {/* <img className="rounded" loading="lazy" src={country.image}  
+                        alt="Card image cap"></img>  */}
                       {/* <div className="card-title"> */}
                       {/* <p className="text-uppercase">{country.name}</p> */}
                       {/* <div className="card-body"> */}
