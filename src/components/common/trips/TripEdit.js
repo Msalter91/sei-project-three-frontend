@@ -24,14 +24,16 @@ function TripEdit () {
   const [formErrors, setFormErrors] = useState(initialState)
   const { tripId } = useParams()
   const [isError, setIsError] = useState(false)
-  const [hasCreateMemory, setHasCreateMemory] = useState(false)
-
+  const [
+    isDisplayingCreateMemory, 
+    setIsDisplayingCreateMemory] = useState(false)
   // populate initial data
   const refreshFormDataFromApi = async ()=>{
     try {
       const getTripRes = await tripGetById(tripId)
       const newFormData = { ...formData,...getTripRes.data }
       setFormData(newFormData)
+      setIsDisplayingCreateMemory(!(newFormData.memories.length))
     } catch (err){
       setIsError(true)
     }
@@ -85,7 +87,7 @@ function TripEdit () {
     }
   }
   const toggleCreateMemoryForm = () =>{
-    setHasCreateMemory(!hasCreateMemory)
+    setIsDisplayingCreateMemory(!isDisplayingCreateMemory)
   }
   const updateClientsideMemory = (index) => {
     return function (newMemoryData) {
@@ -180,7 +182,7 @@ function TripEdit () {
               )}
             </div>
             <div className='create-memory-container row' >
-              {hasCreateMemory ?
+              {isDisplayingCreateMemory ?
                 <MemoryCreate 
                   tripId={tripId} 
                   addNewMemoryToTrip={addNewMemoryToTrip} 
@@ -192,12 +194,6 @@ function TripEdit () {
                 >Add a Memory</button>
               }
             </div>
-            {/* <div className='row'>
-              <button type="button" 
-                className="btn btn-primary"
-                onClick={newMemoryEditor}
-              >Add a Memory</button>
-            </div> */}
           </div>
         </div>
       )}
