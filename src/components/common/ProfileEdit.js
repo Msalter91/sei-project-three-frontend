@@ -7,6 +7,7 @@ import { makeCountryObject } from '../../lib/countryData.js'
 import { editUser } from '../../lib/api'
 import { useHistory } from 'react-router-dom'
 import { uploadImageProfile } from '../../lib/imageHosting'
+import { profileImageLink } from '../../lib/config'
 
 const initialState = {
   displayName: '',
@@ -163,23 +164,21 @@ function ProfileEdit() {
             </div>
             
             {isUploadingImage && <p>Image uploading</p>}
-            {formData.profileImage ?
-              <div>
-                <img src={formData.profileImage} alt="uploaded image"/>
-              </div>
-              :
-              <div className="field">
-                <label className="label" htmlFor="image">Profile Image</label>
-                <br></br>
-
-                <input type="file" id="image" accept="image/png, image/jpeg"
-                  onChange={handleImageUpload} />
-
-              </div>
-            }
+            <div className="field">
+              <label className="label" htmlFor="image">Profile Image</label>
+              <img 
+                src={formData.image ? formData.image : profileImageLink } 
+                alt={formData.name} 
+                className='memory-edit-image' 
+              />
+              <br></br>
+              <input type="file" id="image" accept="image/png, image/jpeg"
+                onChange={handleImageUpload} />
+            </div>
             <br></br>
             <div className="field col d-flex flex-column">
-              <button className="btn btn-outline-info btn-sm" type="submit">
+              {isUploadingImage && <p>Image uploading...</p>}
+              <button className={`btn btn-outline-info btn-sm ${isUploadingImage && 'disabled'}`} type="submit">
                 Submit
               </button>
               <button className="btn btn-outline-danger btn-sm">

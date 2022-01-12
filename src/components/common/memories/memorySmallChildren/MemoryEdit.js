@@ -52,9 +52,9 @@ function MemoryEdit ({ memory, handleSwitchToShow, updateClientsideMemory }) {
   }
 
   const captureLocation = (location) => {
-    setFormData({ ...formData, ...location })
+    setFormData({ ...formData, ...location  })
   }
-
+  console.log(formData)
   return (
     <form 
       className="container-fluid row placebook-form"

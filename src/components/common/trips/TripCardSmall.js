@@ -6,7 +6,6 @@ function randomDate(start, end) {
 
 
 function TripCardSmall ({ trip }) {
-  console.log(trip)
   return (
     <Link 
       to={`/trips/${trip._id}`}

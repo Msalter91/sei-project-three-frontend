@@ -56,7 +56,6 @@ function MemoryCreate ({ tripId, addNewMemoryToTrip, toggleCreateMemoryForm }) {
     setFormData({ ...formData, ...location })
   }
   return (
-
     <form 
       className="container-fluid row placebook-form"
       onSubmit={handleSubmit}>
