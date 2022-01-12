@@ -65,7 +65,7 @@ function ProfileEdit() {
     try {
       const res = await editUser(formData, getUserId())
       console.log(res)
-      history.push(`/profile/${getUserId()}`)
+      history.push('/profile')
     } catch (err) {
       setFormErrors(err.response.data.errors)
     }

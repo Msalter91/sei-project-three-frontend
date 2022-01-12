@@ -29,7 +29,7 @@ function App() {
         <Route exact path="/"><Home /></Route>
         <Route path="/aboutus"><AboutUs/></Route>
 
-        <Route exact path ="/profile/:usedId"><ProfileWithReact /></Route>
+        <Route exact path ="/profile"><ProfileWithReact /></Route>
         <Route path="/profile/:userId/edit"><ProfileEdit/></Route>
 
         <Route exact path="/countries"><Countries/></Route>
