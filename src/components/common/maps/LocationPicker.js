@@ -2,11 +2,12 @@ import { useState, useRef, useCallback } from 'react'
 import ReactMapGL, { Marker, WebMercatorViewport } from 'react-map-gl'
 import Geocoder from 'react-map-gl-geocoder'
 
-import { mapboxApiAccessToken } from '../../../lib/config.js'
+import { mapApiAccessToken, mapStyles } from '../../../lib/config.js'
 
 function LocationPicker ({ 
   center = { lat: 0, long: 0 },
   initZoom = 1,
+  mapStyle = 'default',
   captureLocation = ()=>{},
 }) {
   const [viewport, setViewport] = useState({
@@ -67,9 +68,9 @@ function LocationPicker ({
   return (
     <div className="map-container" style={{ height: '100%', width: '100%' }}>
       <ReactMapGL
-        mapboxApiAccessToken={mapboxApiAccessToken}
+        mapboxApiAccessToken={mapApiAccessToken}
         ref={mapRef}
-        mapStyle='mapbox://styles/mapbox/outdoors-v11'
+        mapStyle={mapStyles[mapStyle]}
         height="100%"
         width="100%"
         {...viewport}
@@ -78,7 +79,7 @@ function LocationPicker ({
         <Geocoder 
           mapRef={mapRef}
           onViewportChange={handleGeocoderViewportChange}
-          mapboxApiAccessToken={mapboxApiAccessToken}
+          mapboxApiAccessToken={mapApiAccessToken}
           position='top-left'
           onResult={handleGeocoderResult}
         />

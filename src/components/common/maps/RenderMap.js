@@ -2,9 +2,10 @@ import { useEffect, useState, useRef, useCallback } from 'react'
 import ReactMapGL, { Marker, WebMercatorViewport } from 'react-map-gl'
 import Geocoder from 'react-map-gl-geocoder'
 
-import { mapboxApiAccessToken } from '../../../lib/config.js'
 import { flattenArrayByPropertyOfMember } from '../../../lib/helpers.js'
 import TripPolyLine from './helpers/TripPolyLine.js'
+
+import { mapApiAccessToken, mapStyles } from '../../../lib/config.js'
 
 function getLocationArrayStats (array){
   const locationAggregates = array.reduce((acc, cur)=>{
@@ -31,6 +32,7 @@ function RenderMap ({
   arrayOfTrips = [], 
   center = { lat: 0, long: 0 },
   initZoom = 1,
+  mapStyle = 'default',
 }) {
   const aggregatedMemoriesForViewport = flattenArrayByPropertyOfMember(arrayOfTrips, 'memories')
   let locationStats = {}
@@ -121,16 +123,16 @@ function RenderMap ({
   return (
     <div ref={mapContainer} className="map-container" style={{ height: '100%', width: '100%' }}>
       <ReactMapGL
-        mapboxApiAccessToken={mapboxApiAccessToken}
+        mapboxApiAccessToken={mapApiAccessToken}
         ref={mapRef}
-        mapStyle='mapbox://styles/mapbox/outdoors-v11'
+        mapStyle={mapStyles[mapStyle]}
         {...viewport}
         onViewportChange={newViewport => setViewport(newViewport)}
       >
         <Geocoder 
           mapRef={mapRef}
           onViewportChange={handleGeocoderViewportChange}
-          mapboxApiAccessToken={mapboxApiAccessToken}
+          mapboxApiAccessToken={mapApiAccessToken}
           position='top-left'
         />
         {hasMemories && arrayOfTrips.map(trip =>{
