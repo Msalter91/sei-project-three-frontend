@@ -44,6 +44,7 @@ function LocationPicker ({
     bounds, viewport
   ) => new WebMercatorViewport(viewport).fitBounds(bounds)
   const handleGeocoderResult = ({ result })=>{
+    console.log(result)
     let newLocation = {}
     if (result.bbox){
       const { bbox } = result
@@ -60,7 +61,7 @@ function LocationPicker ({
       longitude: newLocation.longitude,
       zoom: newLocation.zoom,
     })
-    captureLocation({ location: result.text, lat: result.geometry.coordinates[1], long: result.geometry.coordinates[0] })
+    captureLocation({ location: result.text, lat: result.center[1], long: result.center[0] })
   }
 
   return (
