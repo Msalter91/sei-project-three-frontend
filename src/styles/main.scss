@@ -207,7 +207,13 @@ form {
   background-image: linear-gradient(
     rgba(0, 0, 0, 0.5),
     rgba(0, 0, 0, 0.5)
-  ), url('https://res.cloudinary.com/team-mad/image/upload/v1641486472/placebook-country-images/ATA_tta90o.jpg');
+  ), url(
+
+    'https://res.cloudinary.com/team-mad/image/upload/c_crop,h_694,w_1923/v1641485324/placebook-country-images/JPN_yr1pig.jpg,{overlay: new cloudinary.TextLayer().fontFamily(“Arial”).fontSize(20).fontWeight(“bold”).text(“JAPAN”)}).toHtml();'
+    );
+
+    // 'https://res.cloudinary.com/team-mad/image/upload/v1641486472/placebook-country-images/ATA_tta90o.jpg'
+
   background-position: center;
   background-size: cover;
   display: flex;

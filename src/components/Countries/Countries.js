@@ -34,26 +34,18 @@ function Countries() {
   }
 
   return (
-
     <div className="container">
-      <div className="col-md-10 mx-auto"
-      
-        // style={{ border: '1px solid red' }}
-      >
-        <div className='row header-wrapper'
-          // style={{ border: '1px solid green' }}
-        >
-          <div className='col'>
-            <div className='header-splash'>
-              <h2>Inspiration for your next memory</h2>
+      <div className="col-md-10 mx-auto">
+        <div className="bg-white rounded overflow-hidden">
+          <div className="pt-3 pb-2 cover mb-1">
+            <div className="d-flex-body text-white">
+              <h3 className="title text-uppercase text-center">Inspiration for your next memory</h3>
             </div>
           </div>
         </div>
-        <div className='row'
-          //  style={{ border: '1px solid blue' }}
-        >
-          <div className='col'>
-            <div className='country-search'>
+        <div className="row">
+          <div className="col">
+            <div className="country-search mb-1">
               <input
                 // className="rounded"
                 placeholder="Search by country"
@@ -77,13 +69,6 @@ function Countries() {
                     
                     <div className="card country-card-main" style={{ backgroundImage: `url(${country.image})` }}>
                       <h4 className="image-covering-text">{country.name}</h4>
-                      {/* <img className="rounded" loading="lazy" src={country.image}  
-                        alt="Card image cap"></img>  */}
-                      {/* <div className="card-title"> */}
-                      {/* <p className="text-uppercase">{country.name}</p> */}
-                      {/* <div className="card-body"> */}
-                      {/* </div> */}
-                      {/* </div> */}
                     </div>
                   </Link>
                 </div>
@@ -93,10 +78,6 @@ function Countries() {
         </div>
       </div>
     </div>
-  
   )
 }
 export default Countries
-
-{/* <div className="container pg-index">
-<div className="gy-2 row row-cols-3"> */}
