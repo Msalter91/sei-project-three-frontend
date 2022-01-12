@@ -41,7 +41,10 @@ function Nav() {
             Inspire Me</Link></li> 
           <li className="nav-item active">
             <Link to= "/trips/new" className="nav-link active">
-            Create a Trip</Link></li> 
+            Create a Trip</Link></li>
+          <li className="nav-item active">
+            <Link to= "/trips" className="nav-link active">
+            See Trips</Link></li>  
         </ul>
             
         <ul className="navbar-nav ms-auto">   
