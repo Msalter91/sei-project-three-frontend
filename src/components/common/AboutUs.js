@@ -1,15 +1,16 @@
 function AboutUs() {
   return (
     <div className="aboutus-bg clearfix container">
-      <img src="https://i.imgur.com/tNUbHb2.png" 
-        className="img-fluid history-img col-md-5 float-md-end mb-4 ms-md-4 " alt="aboutus-img" />
 
+      <img src="https://i.imgur.com/tNUbHb2.png" 
+        className="img-fluid col-md-5 float-md-end mb-5 ms-md-1  " alt="aboutus-img" />
 
       <div className="px-4 pt-0 pb-4 cover">
         <div className="reg-head">  
           <div className="aboutus-title text-white">Placebook</div>
         </div>
       </div>
+
       <div className="aboutus-text">
         <br></br>
         <p>A place to share travel memories</p>
@@ -18,15 +19,15 @@ function AboutUs() {
         <p>Placebook not only allows users to upload images, it can pinpoint all the beautiful places in the world yet to be seen not only as a picture, but with an opportunity to visit on your future travels!</p>
         <p>Join us on our journey to connect one another, photography has no boundaries. Express yourself without any restrictions.</p>
 
-        <div className="aboutus-gallery row justify-content-start gx-1">
+        <div className="d-flex flex flex-row aboutus-gallery row justify-content-start gx-1 fluid">
 
-          <div className="col">
+          <div className="col-4">
             <button 
-              className="card shadow mb-5 bg-body rounded"
+              className="card shadow rounded"
               data-bs-toggle="modal" 
               data-bs-target="#exampleModal1">
               <img src="https://i.imgur.com/zEhltnDb.jpg" className="card-img-top" alt="rainbowsky"/>
-              <div className="card-bodypb-0">
+              <div className="card-body p-3">
                 <p className="md-card-text">Travel</p>
               </div>
             </button>
@@ -48,11 +49,11 @@ function AboutUs() {
             
           <div className="col">
             <button 
-              className="card shadow mb-5 bg-body rounded" 
+              className="card shadow rounded" 
               data-bs-toggle="modal" 
               data-bs-target="#exampleModal2">
               <img src="https://i.imgur.com/bYxhlZ0b.png" className="card-img-top" alt="girl" />
-              <div className="card-bodypb-0">
+              <div className="card-body p-3">
                 <p className="md-card-text">Capture</p>
               </div>
             </button>
@@ -74,11 +75,11 @@ function AboutUs() {
 
           <div className="col">
             <button
-              className="card shadow mb-5 bg-body rounded" 
+              className="card shadow rounded" 
               data-bs-toggle="modal" 
               data-bs-target="#exampleModal3">
               <img src="https://i.imgur.com/PrLhxXeb.jpg" className="card-img-top" alt="noseehearspeak" />
-              <div className="card-bodypb-0">
+              <div className="card-body p-3">
                 <p className="md-card-text">Share</p>
               </div>
             </button>
@@ -98,6 +99,7 @@ function AboutUs() {
               </div>
             </div>
           </div>
+
 
         </div>
 

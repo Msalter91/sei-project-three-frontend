@@ -72,13 +72,13 @@ function CountryShow () {
               </div>
 
               <div className="px-4 py-1">
-                <div className="p-5 rounded shadow-sm bg-light mt-2 mb-2">
-                  <p className="font-italic mb-0">{country && country.summary}</p>
+                <div className="p-3 rounded shadow-sm bg-light mt-2 mb-2">
+                  <p className="font-italic mb-0 text-center">{country && country.summary}</p>
                 </div>
 
                 <div className="single-country-text-group row">
                   <div className="col-4 ">
-                    <div className="info-container p-1 rounded shadow-sm bg-light mt-2 mb-2">
+                    <div className="info-container p-1 rounded shadow-sm bg-light mt-1 mb-1">
                       <h4>{country && country.name}</h4>
                       <p>code: {country && country.countrycode}</p></div>
                   </div>
