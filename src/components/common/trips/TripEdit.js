@@ -128,7 +128,7 @@ function TripEdit () {
             </div>
 
             <div className="d-flex fluid row w-auto">
-              <div className="col fluid">
+              <div className="col fluid shadow rounded m-3 bg-light">
                 <form
                   onSubmit={handleSubmit}
                   className="col placebook-form fluid"
