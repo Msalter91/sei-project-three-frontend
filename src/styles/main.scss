@@ -2,6 +2,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Gochi+Hand&display=swap');
 @import 'react-map-gl-geocoder/dist/mapbox-gl-geocoder.css';
 
+.css-14el2xx-placeholder {
+  color: black;
+}
+
 $grid-breakpoints: (
   xs: 0,
   sm: 480px,

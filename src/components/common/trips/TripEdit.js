@@ -23,7 +23,9 @@ const initialState = {
 
 function TripEdit () {
   const [formData, setFormData] = useState(initialState)
-  const [countryValue, setCountryValue] = useState('')
+  const [countryValue, setCountryValue] = useState({
+    value: '',
+    label: '' })
   const notesRemainingChars = maxLengthNotes - formData.notes.length
   const [formErrors, setFormErrors] = useState(initialState)
   const { tripId } = useParams()
@@ -38,6 +40,9 @@ function TripEdit () {
       const newFormData = { ...formData,...getTripRes.data }
       setFormData(newFormData)
       setIsDisplayingCreateMemory(!(newFormData.memories.length))
+      setCountryValue({
+        value: newFormData.countryVisited,
+        label: newFormData.countryVisited })
     } catch (err){
       setIsError(true)
     }
@@ -107,8 +112,6 @@ function TripEdit () {
     }
   }
 
-  console.log(countryValue, countryOptions)
-
   return (
     <section className="section">
       {isError ? (
@@ -144,7 +147,7 @@ function TripEdit () {
                   <div className="form-group">
 
                     <label htmlFor="countryVisited">Where did you start?</label>
-                    <Select placeholder={formData && formData.countryVisited} options={countryOptions} value={countryValue} onChange={changeCountryHandler}  />
+                    <Select options={countryOptions} value={countryValue} onChange={changeCountryHandler}  />
                     {formErrors.countryVisited && <p className="text-danger">{formErrors.countryVisited}</p>}
 
                   </div>

@@ -1,9 +1,9 @@
 import axios from 'axios'
-import React, { useMemo, useState } from 'react'
+import React, { useState } from 'react'
 import Select from 'react-select'
 import { getUserId } from '../../lib/auth'
 
-import countryList from 'react-select-country-list'
+import { makeCountryObject } from '../../lib/countryData.js'
 import { editUser } from '../../lib/api'
 import { useHistory } from 'react-router-dom'
 import { uploadImageProfile } from '../../lib/imageHosting'
@@ -22,13 +22,15 @@ function ProfileEdit() {
 
   const history = useHistory()
 
-  const [countryValue, setCountryValue] = useState('')
+  const [countryValue, setCountryValue] = useState({
+    value: '',
+    label: '' })
   const [formData, setFormData] = React.useState({})
   const [user, setUser] = React.useState(null)
   const [formErrors, setFormErrors] = React.useState(initialState)
   const [isUploadingImage, setIsUploadingImage] = React.useState(false)
 
-  const countryOptions = useMemo(() => countryList().getData(), [])
+  const countryOptions = makeCountryObject()
 
   const changeCountryHandler = value => {
     setCountryValue(value)
@@ -41,6 +43,7 @@ function ProfileEdit() {
         const userData = await axios.get(`/api/profile/${getUserId()}`)
         setUser(userData.data)
         setFormData(userData.data)
+        setCountryValue( { label: userData.data.location, value: userData.data.location })
       } catch (err) {
         console.log(err)
       }
@@ -139,9 +142,9 @@ function ProfileEdit() {
             </div>
 
             <div className="field">
-              <label className="label">Country <p className='country-name'>Current Country: {user && user.location}</p></label>
+              <label className="label">Country</label>
               <div className="control">
-                { user && (<Select options={countryOptions} value={countryValue} onChange={changeCountryHandler} /> ) }
+                { user && (<Select options={countryOptions} value={countryValue} onChange={changeCountryHandler}/>  ) }
               </div>
             </div>
 
