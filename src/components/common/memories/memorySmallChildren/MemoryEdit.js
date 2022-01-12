@@ -52,7 +52,8 @@ function MemoryEdit ({ memory, handleSwitchToShow, updateClientsideMemory }) {
   }
 
   const captureLocation = (location) => {
-    setFormData({ ...formData, ...location })
+    console.log(location)
+    setFormData({ ...formData, ...location  })
   }
 
   return (
