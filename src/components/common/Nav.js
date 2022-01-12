@@ -3,7 +3,7 @@ import { Navbar } from 'react-bootstrap'
 import React from 'react'
 
 import { logoImageLink } from '../../lib/config'
-import { getUserId, isAuthenticated, removeToken } from '../../lib/auth'
+import { isAuthenticated, removeToken } from '../../lib/auth'
 
 
 function Nav() {
@@ -62,7 +62,7 @@ function Nav() {
               <Link to="/" className="navbar-item nav-link active" onClick={handleLogout}>
                 LOG OUT
               </Link>
-              <Link to={`/profile/${getUserId()}`} className="nav-link active">
+              <Link to={'/profile'} className="nav-link active">
                 Profile
               </Link>
             </>
