@@ -47,28 +47,23 @@ function Countries() {
           <div className="col">
             <div className="country-search mb-1">
               <input
-                // className="rounded"
+                className="rounded"
                 placeholder="Search by country"
-                onChange={handleSearch}
-              >
+                onChange={handleSearch}>
               </input>
             </div>
           </div>
         </div>
 
-        <div className="gy-2 row row-cols-3 country-stack"
-          // style={{ border: 'px solid black' }}
-        >
+        <div className="gy-2 row row-cols-3 country-stack">
           {
             countries && (
               filteredCountries(countries).map(country=> {
                 return <div className="country-card-container"
                   key={country.name}>
-                
                   <Link to={`/countries/${country._id}`}>
-                    
                     <div className="card country-card-main" style={{ backgroundImage: `url(${country.image})` }}>
-                      <h4 className="image-covering-text">{country.name}</h4>
+                      <h5 className="my-auto image-covering-text">{country.name}</h5>
                     </div>
                   </Link>
                 </div>

@@ -87,8 +87,6 @@ button {
   text-transform: uppercase;
   }
 
-
-
 //* * * * * A B O U T   U S * * * * * 
 
 .aboutus-title {
@@ -125,12 +123,7 @@ button {
   align-content: center;
   }
 
-
-
-
-
 //* * * * * R E G I S T R A T I O N  * * * * * 
-
 
 .reg-head {
   transform: translateY(1rem);
@@ -175,11 +168,6 @@ button {
   .control {
   font-size: 13px;
   }
-
-//   .section.registration {
-// align-self: center;
-//   margin: 20px;
-//   }
   
   .section.login {
   margin: 20px;
@@ -206,34 +194,16 @@ form {
 
 //* * * * * COUNTRIES  * * * * *
 
-.header-splash {
-  height: 25vh;
-  background-image: linear-gradient(
-    rgba(0, 0, 0, 0.5),
-    rgba(0, 0, 0, 0.5)
-  ), url(
-
-    'https://res.cloudinary.com/team-mad/image/upload/c_crop,h_694,w_1923/v1641485324/placebook-country-images/JPN_yr1pig.jpg,{overlay: new cloudinary.TextLayer().fontFamily(“Arial”).fontSize(20).fontWeight(“bold”).text(“JAPAN”)}).toHtml();'
-    );
-
-    // 'https://res.cloudinary.com/team-mad/image/upload/v1641486472/placebook-country-images/ATA_tta90o.jpg'
-
-  background-position: center;
-  background-size: cover;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   h2 {
     font-family: 'gochi hand';
     color: white;
     text-align: center;
   }
-}
 
 .country-search {
   display: flex;
   justify-content: flex-end;
-  padding: 3px;
+  padding: 5px;
 }
 .card {
   display: flex;
@@ -243,18 +213,11 @@ form {
     max-width: 100%;
     max-height: 100% ;
   }
-  // .card-body {
-  //   display: flex;
-  //   flex-direction: column;
-  //   justify-content: center;
-  //   align-items: center;
-  // }
 }
 .card-title {
   text-align: center;
   
 }
-
 
 .country-card-container {
   height: 20vh;
@@ -271,14 +234,16 @@ form {
 }
 
 .image-covering-text {
-  font-family: 'gochi hand';
-  font-weight: 900;
-  font-size: 3em;
+  font-family: 'arial';
+  font-weight: 850;
+  font-size: 3vh;
   color: white;
   text-decoration: none;
   text-align: center;
+  line-height: 3vh;
+  letter-spacing: 1px;
   }
-  @supports (-webkit-text-stroke: 1px black) {
+  @supports (-webkit-text-stroke: 1.5px black) {
     .image-covering-text {
       -webkit-text-stroke: 1px black;
       -webkit-text-fill-color: white;
@@ -305,9 +270,7 @@ form {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
-  // border: 1px solid black;
-  
+  align-items: center;  
 }
 
 //* * * * * MEMORY SHOW  * * * * *
@@ -473,8 +436,8 @@ label img {
     width: 100%;
   }
   .image-covering-text {
-    font-family: 'gochi hand';
-    font-size: 3em;
+    // font-family: 'gochi hand';
+    font-size: 2em;
     font-weight: 700;
     color: white ;
   }
