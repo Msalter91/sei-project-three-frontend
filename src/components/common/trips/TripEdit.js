@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { tripGetById, tripEdit } from '../../../lib/api'
+import { tripGetById, tripEdit, tripDelete } from '../../../lib/api'
 import { useParams } from 'react-router-dom'
 
 import { makeCountryObject } from '../../../lib/countryData.js'
@@ -9,6 +9,7 @@ import RenderMap from '../maps/RenderMap'
 import Error from '../Error'
 import MemoryCreate from '../memories/MemoryCreate'
 import MemorySmall from '../memories/MemorySmall'
+import { useHistory } from 'react-router-dom'
 
 const maxLengthTitle = 50
 const maxLengthNotes = 300
@@ -30,6 +31,7 @@ function TripEdit () {
   const [formErrors, setFormErrors] = useState(initialState)
   const { tripId } = useParams()
   const [isError, setIsError] = useState(false)
+  const history = useHistory()
   const [
     isDisplayingCreateMemory, 
     setIsDisplayingCreateMemory] = useState(false)
@@ -81,10 +83,18 @@ function TripEdit () {
 
   const handleSubmit = async e =>{
     e.preventDefault()
-    console.log('submitting:', formData)
     try {
       const res = await tripEdit(tripId, formData)
       console.log('Editing return:',res)
+    } catch (err) {
+      setFormErrors(err.response.data.errors)
+    }
+  }
+  const handleDeleteTripButton = async e =>{
+    e.preventDefault()
+    try {
+      tripDelete(tripId)
+      history.push('/trips')
     } catch (err) {
       setFormErrors(err.response.data.errors)
     }
@@ -174,8 +184,13 @@ function TripEdit () {
                   <div className='row mt-1'>
                     <button
                       type="submit"
-                      className="btn btn-outline-info btn-sm"
+                      className="btn btn-outline-info btn-sm col"
                     >Save your trip</button>
+                    <button
+                      type="button"
+                      className="btn btn-outline-danger btn-sm col-2"
+                      onClick={handleDeleteTripButton}
+                    >Delete trip</button>
                   </div>
                 </form>
               </div>
