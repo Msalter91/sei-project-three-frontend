@@ -2,6 +2,9 @@ import { useState, useEffect } from 'react'
 import { tripGetById, tripEdit } from '../../../lib/api'
 import { useParams } from 'react-router-dom'
 
+import { makeCountryObject } from '../../../lib/countryData.js'
+import Select from 'react-select'
+
 import RenderMap from '../maps/RenderMap'
 import Error from '../Error'
 import MemoryCreate from '../memories/MemoryCreate'
@@ -20,6 +23,7 @@ const initialState = {
 
 function TripEdit () {
   const [formData, setFormData] = useState(initialState)
+  const [countryValue, setCountryValue] = useState('')
   const notesRemainingChars = maxLengthNotes - formData.notes.length
   const [formErrors, setFormErrors] = useState(initialState)
   const { tripId } = useParams()
@@ -38,6 +42,8 @@ function TripEdit () {
       setIsError(true)
     }
   }
+
+  const countryOptions = makeCountryObject()
 
   useEffect(()=>{
     (async ()=>{
@@ -61,6 +67,11 @@ function TripEdit () {
       return
     }
     setFormData({ ...formData, [e.target.name]: value })
+  }
+
+  const changeCountryHandler = value => {
+    setFormData({ ...formData, countryVisited: value.value })
+    setCountryValue(value)
   }
 
   const handleSubmit = async e =>{
@@ -96,6 +107,8 @@ function TripEdit () {
     }
   }
 
+  console.log(countryValue, countryOptions)
+
   return (
     <section className="section">
       {isError ? (
@@ -118,7 +131,7 @@ function TripEdit () {
                   className="col placebook-form fluid"
                 >
                   <div className="form-group">
-                    <label htmlFor="title"></label>
+                    <label htmlFor="title">Give your trip a name</label>
                     <input
                       type="text"
                       name="title"
@@ -129,15 +142,11 @@ function TripEdit () {
                     {formErrors.title && <p className="text-danger">{formErrors.title}</p>}
                   </div>
                   <div className="form-group">
+
                     <label htmlFor="countryVisited">Where did you start?</label>
-                    <input
-                      type="text"
-                      name="countryVisited"
-                      id="countryVisited"
-                      className={`form-control ${formErrors.countryVisited ? 'border-danger' : ''}`}
-                      value={formData.countryVisited}
-                      onChange={handleChange} />
+                    <Select placeholder={formData && formData.countryVisited} options={countryOptions} value={countryValue} onChange={changeCountryHandler}  />
                     {formErrors.countryVisited && <p className="text-danger">{formErrors.countryVisited}</p>}
+
                   </div>
                   <div className="form-group">
                     <label htmlFor="notes">Tell the world about your trip!</label>
