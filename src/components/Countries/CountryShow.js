@@ -37,20 +37,17 @@ function CountryShow () {
     getTrips()
   }, [countryId])
 
-  console.log(trips)
-
   const countriesAndTrips = () => {
     if (country && trips) {
-      return trips.filter((trip => {
-        if (trips.countriesVisited) {
-          return trip.countryVisited.toLowerCase() === country.name.toLowerCase()
-        }
+      const matches = trips.filter((trip => {
+        console.log(trip.countryVisited, country.name)
+        return trip.countryVisited === country.name
       }))
+      return matches
     } else {
       return 
-    }
+    } 
   }
-  console.log(countriesAndTrips)
 
 
   return (
@@ -112,6 +109,7 @@ function CountryShow () {
                         </div>
                       </div>
                     </Link>}
+
                 {countriesAndTrips() && countriesAndTrips()[0] &&
                     countriesAndTrips().map((trip => {
                       return (
