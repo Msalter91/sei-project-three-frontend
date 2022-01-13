@@ -16,8 +16,8 @@ export function loginUser(formData) {
   return axios.post(`${baseUrl}/login`, formData)
 }
 
-export function getUser(userId) {
-  return axios.get(`${baseUrl}/profile/${userId}`)
+export function getUserProfile(userId) {
+  return axios.get(`${baseUrl}/profile/${userId}`,authHeader())
 }
 
 export function editUser(formData, userId) {
