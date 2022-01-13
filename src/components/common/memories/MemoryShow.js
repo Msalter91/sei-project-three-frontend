@@ -10,7 +10,7 @@ function MemoryShow () {
   const [memory, setMemory] = React.useState(null)
   const [user, setUser] = React.useState(null)
   const [trip, setTrip] = React.useState(null)
-  const [isError, setIsError] = useState(false)
+  const [isError, setIsError] = React.useState(false)
 
   React.useEffect(() => {
     const getMemory = async () => {
