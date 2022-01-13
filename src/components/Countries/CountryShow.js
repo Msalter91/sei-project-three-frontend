@@ -41,7 +41,6 @@ function CountryShow () {
   const countriesAndTrips = () => {
     if (country && trips) {
       const matches = trips.filter((trip => {
-        console.log(trip.countryVisited, country.name)
         return trip.countryVisited === country.name
       }))
       return matches
@@ -52,7 +51,6 @@ function CountryShow () {
 
 
   return (
- 
     <div className="row py-2 px-4">
       <div className="col-md-10 mx-auto">
         <div className="bg-white shadow rounded overflow-hidden">

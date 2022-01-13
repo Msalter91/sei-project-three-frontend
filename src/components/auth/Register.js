@@ -28,12 +28,9 @@ function Register() {
       await registerUser(formData)
       history.push('/login')
     } catch (err) {
-      console.log(err.response.data)
       setFormErrors(err.response.data.errors)
     }
   }
-
-  console.log('form data', formData)
 
   return (
 

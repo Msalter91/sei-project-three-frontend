@@ -65,8 +65,7 @@ function ProfileEdit() {
     formData.displayName = user.displayName
     formData.email = user.email
     try {
-      const res = await editUser(formData, getUserId())
-      console.log(res)
+      await editUser(formData, getUserId())
       history.push('/profile')
     } catch (err) {
       setFormErrors(err.response.data.errors)

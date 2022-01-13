@@ -37,7 +37,7 @@ function MemoryEdit ({ memory, handleSwitchToShow, updateClientsideMemory }) {
       updateClientsideMemory(formData)
       handleSwitchToShow()
     } catch (err) {
-      console.log('error response:', err)
+      //todo: if more serious error, then show error component or bounce to login
       setFormErrors(err.response.data.errors)
     }
   }

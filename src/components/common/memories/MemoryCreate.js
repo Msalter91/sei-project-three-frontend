@@ -30,7 +30,6 @@ function MemoryCreate ({ tripId, addNewMemoryToTrip, toggleCreateMemoryForm }) {
   }
   const handleSubmit = async e =>{
     e.preventDefault()
-    console.log('submitting:', { ...formData, pairedTrip: tripId })
     try {
       const res = await memoryCreate({ ...formData, pairedTrip: tripId })
       const newMemoryId = res.data._id

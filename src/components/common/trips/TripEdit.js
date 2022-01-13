@@ -86,8 +86,7 @@ function TripEdit () {
   const handleSubmit = async e =>{
     e.preventDefault()
     try {
-      const res = await tripEdit(tripId, formData)
-      console.log('Editing return:',res)
+      await tripEdit(tripId, formData)
     } catch (err) {
       setFormErrors(err.response.data.errors)
     }
