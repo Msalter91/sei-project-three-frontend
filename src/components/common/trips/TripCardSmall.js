@@ -13,9 +13,6 @@ function TripCardSmall ({ trip }) {
         className=" d-flex flex-column placebook-form shadow rounded m-2 bg-light">
 
         {/* //todo : replace with trip summary image*/}
-        {/* <div className='row'>
-        <img src={memory.image} alt={memory.name} className='memory-edit-image image mx-auto' />
-      </div> */}
         <div className="row">
           <div className="pt-3 pb-2 cover mb-1">
             <h5 className="text-center mb-0">{trip.title}</h5>
