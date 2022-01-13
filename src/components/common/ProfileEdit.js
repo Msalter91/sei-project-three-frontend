@@ -44,6 +44,7 @@ function ProfileEdit() {
   React.useEffect( ()=>{
     const getUser = async () => {
       try {
+        console.log(getUserId())
         const userData = await axios.get(`/api/profile/${getUserId()}`)
         setUser(userData.data)
         setFormData(userData.data)
