@@ -61,3 +61,12 @@ export function memoryCreate(formData){
 export function memoryDelete(memoryId){
   return axios.delete(`${baseUrl}/memories/${memoryId}`, authHeader())
 }
+
+// countries 
+export function getAllCountries(){
+  return axios.get(`${baseUrl}/countries/`)
+}
+
+export function countryGetById(countryId) {
+  return axios.get(`${baseUrl}/countries/${countryId}`)
+}

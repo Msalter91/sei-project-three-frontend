@@ -1,8 +1,8 @@
 import React from 'react'
-import axios from 'axios'
 
 import { Link } from 'react-router-dom'
 import Error from '../common/Error'
+import { getAllCountries } from '../../lib/api'
 
 function Countries() {
   const [isError, setIsError] = React.useState(false)
@@ -12,7 +12,7 @@ function Countries() {
   React.useEffect(()=> {
     const getCountryData = async() => {
       try {
-        const countryData = await axios.get('api/countries')
+        const countryData = await getAllCountries()
         setCountries(countryData.data) 
       } catch (err) {
         setIsError(true)
