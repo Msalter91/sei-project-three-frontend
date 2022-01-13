@@ -8,10 +8,6 @@ function authHeader () {
   }
 }
 
-// export function getAllTrips() {
-//   return axios.get(`${baseUrl}/trips`)
-// }
-
 export function registerUser(formData) {
   return axios.post(`${baseUrl}/register`, formData)
 }
@@ -23,9 +19,6 @@ export function loginUser(formData) {
 export function getUser(userId) {
   return axios.get(`${baseUrl}/profile/${userId}`)
 }
-// export function getUser(userId) {
-//   return axios.get(`${baseUrl}/profile/${userId}`)
-// }
 
 export function editUser(formData, userId) {
   return axios.put(`${baseUrl}/profile/${userId}`, formData)
