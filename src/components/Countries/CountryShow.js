@@ -1,7 +1,7 @@
 
 import axios from 'axios'
 import React from 'react'
-import { logoImageLink } from '../../lib/config.js'
+import { logoImageLink } from '../../config.js'
 import { useParams, Link } from 'react-router-dom'
 
 import Error from '../common/Error.js'

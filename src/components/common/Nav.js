@@ -2,7 +2,7 @@ import { Link, useHistory, useLocation } from 'react-router-dom'
 import { Navbar } from 'react-bootstrap'
 import React from 'react'
 
-import { logoImageLink } from '../../lib/config'
+import { logoImageLink } from '../../config'
 import { isAuthenticated, removeToken } from '../../lib/auth'
 
 

@@ -5,7 +5,7 @@ import Geocoder from 'react-map-gl-geocoder'
 import { flattenArrayByPropertyOfMember } from '../../../lib/helpers.js'
 import TripPolyLine from './helpers/TripPolyLine.js'
 
-import { mapApiAccessToken, mapStyles } from '../../../lib/config.js'
+import { mapApiAccessToken, mapStyles } from '../../../config.js'
 
 function getLocationArrayStats (array){
   const locationAggregates = array.reduce((acc, cur)=>{

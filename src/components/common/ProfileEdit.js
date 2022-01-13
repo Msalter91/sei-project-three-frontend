@@ -9,7 +9,7 @@ import { makeCountryObject } from '../../lib/countryData.js'
 import { editUser } from '../../lib/api'
 import { useHistory } from 'react-router-dom'
 import { uploadImageProfile } from '../../lib/imageHosting'
-import { profileImageLink } from '../../lib/config'
+import { profileImageLink } from '../../config'
 import { buttonStyle } from '../../lib/bootstrap-css-config'
 
 const initialState = {
