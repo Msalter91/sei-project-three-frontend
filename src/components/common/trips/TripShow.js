@@ -40,7 +40,7 @@ function TripShow () {
         <Error />
       ) : (
         <>
-          <div className="container fluid">
+          <div className="container">
             <div className="bg-white shadow rounded overflow-hidden">
               <div className="px-4 pt-1 pb-4 cover">
                 <div className="d-flex-body mb-0 text-white">
@@ -66,6 +66,7 @@ function TripShow () {
               </div>
             </div>
           </div>
+            
         </>
       )}
     </section>
