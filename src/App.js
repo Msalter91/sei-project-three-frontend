@@ -9,12 +9,11 @@ import CountryShow from './components/Countries/CountryShow'
 import MemoryShow from './components/common/memories/MemoryShow'
 
 import AboutUs from './components/common/AboutUs'
-import ProfileWithReact from './components/common/ProfileWIthReact'
+import ProfileWithReact from './components/common/Profile'
 import ProfileEdit from './components/common/ProfileEdit'
 import Register from './components/auth/Register'
 import Login from './components/auth/Login'
 
-import MapTest from './components/common/maps/MapTest'
 import TripEdit from './components/common/trips/TripEdit'
 import TripCreate from './components/common/trips/TripCreate'
 import TripShow from './components/common/trips/TripShow'
@@ -42,11 +41,8 @@ function App() {
         <Route path="/trips/:tripId/edit"><TripEdit /></Route>
         <Route path="/trips/:tripId/"><TripShow /></Route>
         <Route path="/trips/"><TripsIndexAsMap /></Route>
-        
-        <Route path="/maptest"><MapTest /></Route>
 
         <Route path="/memories/:memoryId"><MemoryShow /></Route>
-
 
       </Switch>
     </BrowserRouter>
