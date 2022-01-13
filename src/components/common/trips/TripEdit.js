@@ -11,6 +11,7 @@ import MemoryCreate from '../memories/MemoryCreate'
 import MemorySmall from '../memories/MemorySmall'
 import { useHistory } from 'react-router-dom'
 import { buttonStyle } from '../../../lib/bootstrap-css-config'
+import BinIcon from '../../Assets/BinIcon'
 
 const maxLengthTitle = 50
 const maxLengthNotes = 300
@@ -95,8 +96,10 @@ function TripEdit () {
     e.preventDefault()
     try {
       tripDelete(tripId)
+      //todo: toast - `Deleted Trip : ${formData.title}`
       history.push('/trips')
     } catch (err) {
+      console.log(err)
       setFormErrors(err.response.data.errors)
     }
   }
@@ -182,16 +185,18 @@ function TripEdit () {
                   <div className='edit-trip-map-container'>
                     <RenderMap arrayOfTrips={[formData]} />
                   </div>
-                  <div className='row mt-1'>
+                  <div className='row mt-1' style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
                     <button
                       type="submit"
-                      className="btn btn-outline-info btn-sm col"
+                      className={`btn ${buttonStyle.default} btn-sm col`}
                     >Save your trip</button>
                     <button
                       type="button"
-                      className="btn btn-outline-danger btn-sm col-2"
+                      className={`btn ${buttonStyle.danger} btn-sm col w-fit`}
                       onClick={handleDeleteTripButton}
-                    >Delete trip</button>
+                    >
+                      <BinIcon />
+                    </button>
                   </div>
                 </form>
               </div>

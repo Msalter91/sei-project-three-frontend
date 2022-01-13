@@ -48,8 +48,8 @@ export function tripGetById(tripId){
   return axios.get(`${baseUrl}/trips/${tripId}`)
 }
 
-export function tripDelete(formData){
-  return axios.delete(`${baseUrl}/memories/`, formData, authHeader())
+export function tripDelete(tripId){
+  return axios.delete(`${baseUrl}/trips/${tripId}`, authHeader())
 }
 
 // Memories
@@ -65,6 +65,6 @@ export function memoryCreate(formData){
   return axios.post(`${baseUrl}/memories/`, formData, authHeader())
 }
 
-export function memoryDelete(formData){
-  return axios.delete(`${baseUrl}/memories/`, formData, authHeader())
+export function memoryDelete(memoryId){
+  return axios.delete(`${baseUrl}/memories/${memoryId}`, authHeader())
 }
