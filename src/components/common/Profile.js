@@ -1,8 +1,8 @@
-// import axios from 'axios'
+import axios from 'axios'
 import { Link, useParams } from 'react-router-dom'
 import React from 'react'
 
-// import { getUserId } from '../../lib/auth.js'
+import { getUserId } from '../../lib/auth.js'
 import { buttonStyle } from '../../lib/bootstrap-css-config.js'
 import { getUserProfile } from '../../lib/api.js'
 
@@ -42,21 +42,22 @@ function Profile() {
     getUser()
   }, [userId] )
 
-  // React.useEffect( ()=>{
-  //   const getMemories = async () => {
-  //     try {
-  //       const memoryData = await axios.get('/api/memories')
-  //       const memoryArray = memoryData.data.filter(memory => memory.addedBy === getUserId())
-  //       setMemories(memoryArray)
-  //     } catch (err) {
-  //       console.log(err)
-  //     }
-  //   }
-  //   getMemories()
-  // }, [userId] )
+  React.useEffect( ()=>{
+    const getMemories = async () => {
+      try {
+        const memoryData = await axios.get('/api/memories')
+        const thisUserId = getUserId()
+        const memoryArray = memoryData.data.filter(memory => memory.addedBy === thisUserId)
+        setUser({ ...user, memories: memoryArray })
+      } catch (err) {
+        console.log(err)
+      }
+    }
+    getMemories()
+  }, [user] )
 
   console.log(user)
-
+  console.log(user.image)
   return (
     <div className="row py-5 px-4">
       <div className="col-md-7 mx-auto">
