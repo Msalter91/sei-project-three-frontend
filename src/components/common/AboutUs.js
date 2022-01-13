@@ -18,9 +18,7 @@ function AboutUs() {
         <p>Tell your story by sharing your images with other like-minded placebookers to find and visit those magical destinations.</p>
         <p>Placebook not only allows users to upload images, it can pinpoint all the beautiful places in the world yet to be seen not only as a picture, but with an opportunity to visit on your future travels!</p>
         <p>Join us on our journey to connect one another, photography has no boundaries. Express yourself without any restrictions.</p>
-
         <div className="d-flex flex flex-row aboutus-gallery row justify-content-start gx-1 fluid">
-
           <div className="col-4">
             <button 
               className="card shadow rounded"
@@ -32,7 +30,6 @@ function AboutUs() {
               </div>
             </button>
           </div>
-
           <div className="modal fade" id="exampleModal1" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div className="modal-dialog modal-dialog-centered">
               <div className="modal-content">
@@ -84,14 +81,12 @@ function AboutUs() {
               </div>
             </button>
           </div>
-
           <div className="modal fade" id="exampleModal3" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div className="modal-dialog modal-dialog-centered">
               <div className="modal-content">
                 <div className="modal-header">
                   <h5 className="modal-title">Mr Monopoly Street Art</h5>
                   <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                  
                 </div>
                 <div className="modal-body">
                   <img src= "https://i.imgur.com/PrLhxXe.jpg" width="100%" height="100%" className = "modal-img" alt="modal img" />
@@ -99,10 +94,7 @@ function AboutUs() {
               </div>
             </div>
           </div>
-
-
         </div>
-
       </div>
     </div>
   

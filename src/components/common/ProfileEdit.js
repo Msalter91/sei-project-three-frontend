@@ -186,9 +186,7 @@ function ProfileEdit() {
                 Cancel
               </button>
             </div>
-
           </form>
-
         </div>
       </div>
     </main>

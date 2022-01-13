@@ -162,8 +162,6 @@ function RenderMap ({
             </ul>
           )
         })}
-        {/* <MapController onClick={handleNewLocation}/> */}
-        
       </ReactMapGL>
     </div>
   )

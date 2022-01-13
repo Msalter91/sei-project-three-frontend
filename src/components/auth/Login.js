@@ -27,7 +27,6 @@ function Login() {
       getUserId()
       history.push('/profile')
     } catch (err) {
-      console.log(err.response.data)
       setIsError(true)
     }
   }
