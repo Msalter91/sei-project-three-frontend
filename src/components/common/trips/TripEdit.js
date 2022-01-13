@@ -11,7 +11,7 @@ import MemoryCreate from '../memories/MemoryCreate'
 import MemorySmall from '../memories/MemorySmall'
 import { useHistory } from 'react-router-dom'
 import { buttonStyle } from '../../../lib/bootstrap-css-config'
-import BinIcon from '../../Assets/BinIcon'
+import IconBin from '../../Assets/IconBin'
 
 const maxLengthTitle = 50
 const maxLengthNotes = 300
@@ -193,7 +193,7 @@ function TripEdit () {
                       className={`btn ${buttonStyle.danger} btn-sm col w-fit`}
                       onClick={handleDeleteTripButton}
                     >
-                      <BinIcon />
+                      <IconBin />
                     </button>
                   </div>
                 </form>
