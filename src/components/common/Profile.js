@@ -54,7 +54,9 @@ function Profile() {
       }
     }
     getMemories()
-  }, [user] )
+    // temporary usage until memories is populated by the DB
+    //eslint-disable-next-line
+  }, [] )
 
   console.log(user)
   console.log(user.image)

@@ -9,7 +9,7 @@ import CountryShow from './components/Countries/CountryShow'
 import MemoryShow from './components/common/memories/MemoryShow'
 
 import AboutUs from './components/common/AboutUs'
-import ProfileWithReact from './components/common/Profile'
+import Profile from './components/common/Profile'
 import ProfileEdit from './components/common/ProfileEdit'
 import Register from './components/auth/Register'
 import Login from './components/auth/Login'
@@ -28,7 +28,7 @@ function App() {
         <Route exact path="/"><Home /></Route>
         <Route path="/aboutus"><AboutUs/></Route>
 
-        <Route exact path ="/profile"><ProfileWithReact /></Route>
+        <Route exact path ="/profile"><Profile /></Route>
         <Route path="/profile/:userId/edit"><ProfileEdit/></Route>
 
         <Route exact path="/countries"><Countries/></Route>
