@@ -16,7 +16,7 @@ function Profile() {
   React.useEffect( ()=>{
     const getUser = async () => {
       try {
-        const userData = await axios.get('/api/profile')
+        const userData = await axios.get(`/api/profile/${getUserId()}`)
         setUser(userData.data)
       } catch (err) {
         console.log(err)
@@ -81,7 +81,7 @@ function Profile() {
               
               <div className="group-buttons">
                 <button>
-                  <Link to={'/profile/edit'} className="btn buttonStyle.default btn-sm justify-content-end">Edit Profile</Link>
+                  <Link to={`/profile/${getUserId()}/edit`} className="btn buttonStyle.default btn-sm justify-content-end">Edit Profile</Link>
                 </button>
               
                 <button>
