@@ -44,7 +44,6 @@ function ProfileEdit() {
   React.useEffect( ()=>{
     const getUser = async () => {
       try {
-        console.log(getUserId())
         const userData = await axios.get(`/api/profile/${getUserId()}`)
         setUser(userData.data)
         setFormData(userData.data)
@@ -69,7 +68,7 @@ function ProfileEdit() {
     formData.email = user.email
     try {
       await editUser(formData, getUserId())
-      history.push('/profile')
+      history.push(`/profile/${getUserId()}`)
     } catch (err) {
       setFormErrors(err.response.data.errors)
     }
