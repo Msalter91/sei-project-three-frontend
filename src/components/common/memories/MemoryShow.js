@@ -3,6 +3,7 @@ import React from 'react'
 import { Link, useParams } from 'react-router-dom'
 
 import { buttonStyle } from '../../../lib/bootstrap-css-config.js'
+import Error from '../Error.js'
 
 function MemoryShow () {
   const { memoryId } = useParams()
