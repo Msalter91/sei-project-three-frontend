@@ -1,7 +1,7 @@
 import axios from 'axios'
 import { getToken } from './auth'
+import { baseUrl } from '../config'
 
-export const baseUrl = '/api'
 function authHeader () {
   return {
     headers: { Authorization: `Bearer ${getToken()}` },
