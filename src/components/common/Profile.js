@@ -81,7 +81,7 @@ function Profile() {
               
               <div className="group-buttons">
                 <button>
-                  <Link to={`/profile/${getUserId()}/edit`} className="btn buttonStyle.default btn-sm justify-content-end">Edit Profile</Link>
+                  <Link to={`/profile/${getUserId()}/edit`} className={`btn ${buttonStyle.default} btn-sm justify-content-end`}> Edit Profile</Link>
                 </button>
               
                 <button>
