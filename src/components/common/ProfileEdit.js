@@ -1,8 +1,10 @@
 import axios from 'axios'
 import React, { useState } from 'react'
 import Select from 'react-select'
-import { getUserId } from '../../lib/auth'
 
+import Error from './Error'
+
+import { getUserId } from '../../lib/auth'
 import { makeCountryObject } from '../../lib/countryData.js'
 import { editUser } from '../../lib/api'
 import { useHistory } from 'react-router-dom'
@@ -21,15 +23,15 @@ const initialState = {
 }
 
 function ProfileEdit() {
-
   const history = useHistory()
-
   const [countryValue, setCountryValue] = useState({
     value: '',
     label: '' })
   const [formData, setFormData] = React.useState({})
   const [user, setUser] = React.useState(null)
   const [formErrors, setFormErrors] = React.useState(initialState)
+
+  const [isError, setIsError] = useState(false)
   const [isUploadingImage, setIsUploadingImage] = React.useState(false)
 
   const countryOptions = makeCountryObject()
@@ -47,7 +49,7 @@ function ProfileEdit() {
         setFormData(userData.data)
         setCountryValue( { label: userData.data.location, value: userData.data.location })
       } catch (err) {
-        console.log(err)
+        setIsError(true)
       }
     }
     getUser()
@@ -85,109 +87,113 @@ function ProfileEdit() {
 
   return (
     <main className="section profileEdit">
-      <div className="col">
-        <div className="card mx-auto mb-5 shadow-sm mb-2 bg-body rounded col">
+      {isError ? (
+        <Error />
+      ) : (
+        <div className="col">
+          <div className="card mx-auto mb-5 shadow-sm mb-2 bg-body rounded col">
           
-          <form onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit}>
 
-            <div className="field">
-              <label className="label">Display Name</label>
-              <div className="control">
-                <input
-                  className="input"
-                  placeholder={user && user.displayName}
-                  name="displayName"
-                  id="displayName"
-                  disabled= {true}
-                />
-              </div>
-            </div>
-
-            <div className="field">
-              <label className="label">Email</label>
-              <div className="control">
-                <input
-                  className="input"
-                  placeholder={user && user.email}
-                  name="email"
-                  id="email"
-                  disabled={true}
-                />
-              </div>
-            </div>
-
-            <div className="field">
-              <label className="label">First Name</label>
-              <div className="control">
-                <input
-                  className={`input ${formErrors.firstName && 'is-danger'}`}
-                  placeholder="Enter First Name"
-                  name="firstName"
-                  value={formData && formData.firstName}
-                  onChange={handleChange}
-                />
+              <div className="field">
+                <label className="label">Display Name</label>
+                <div className="control">
+                  <input
+                    className="input"
+                    placeholder={user && user.displayName}
+                    name="displayName"
+                    id="displayName"
+                    disabled= {true}
+                  />
+                </div>
               </div>
 
-            </div>
-            <div className="field">
-              <label className="label">Last Name</label>
-              <div className="control">
-                <input
-                  className={`input ${formErrors.lastName && 'is-danger'}`}
-                  placeholder="Enter Last Name"
-                  name="surname"
-                  value={formData && formData.surname}
-                  onChange={handleChange}
-                />
+              <div className="field">
+                <label className="label">Email</label>
+                <div className="control">
+                  <input
+                    className="input"
+                    placeholder={user && user.email}
+                    name="email"
+                    id="email"
+                    disabled={true}
+                  />
+                </div>
               </div>
-            </div>
 
-            <div className="field">
-              <label className="label">Country</label>
-              <div className="control">
-                { user && (<Select options={countryOptions} value={countryValue} onChange={changeCountryHandler}/>  ) }
-              </div>
-            </div>
+              <div className="field">
+                <label className="label">First Name</label>
+                <div className="control">
+                  <input
+                    className={`input ${formErrors.firstName && 'is-danger'}`}
+                    placeholder="Enter First Name"
+                    name="firstName"
+                    value={formData && formData.firstName}
+                    onChange={handleChange}
+                  />
+                </div>
 
-            <div className="field">
-              <label className="label">About</label>
-              <div className="control">
-                <textarea
-                  className="textarea"
-                  rows="4"
-                  placeholder="A little something about you..."
-                  name="about"
-                  onChange={handleChange}
-                  value={formData && formData.about}
-                />
               </div>
-            </div>
+              <div className="field">
+                <label className="label">Last Name</label>
+                <div className="control">
+                  <input
+                    className={`input ${formErrors.lastName && 'is-danger'}`}
+                    placeholder="Enter Last Name"
+                    name="surname"
+                    value={formData && formData.surname}
+                    onChange={handleChange}
+                  />
+                </div>
+              </div>
+
+              <div className="field">
+                <label className="label">Country</label>
+                <div className="control">
+                  { user && (<Select options={countryOptions} value={countryValue} onChange={changeCountryHandler}/>  ) }
+                </div>
+              </div>
+
+              <div className="field">
+                <label className="label">About</label>
+                <div className="control">
+                  <textarea
+                    className="textarea"
+                    rows="4"
+                    placeholder="A little something about you..."
+                    name="about"
+                    onChange={handleChange}
+                    value={formData && formData.about}
+                  />
+                </div>
+              </div>
             
-            {isUploadingImage && <p>Image uploading</p>}
-            <div className="field">
-              <label className="label" htmlFor="image">Profile Image</label>
-              <img 
-                src={formData.image ? formData.image : profileImageLink } 
-                alt={formData.name} 
-                className='memory-edit-image' 
-              />
+              {isUploadingImage && <p>Image uploading</p>}
+              <div className="field">
+                <label className="label" htmlFor="image">Profile Image</label>
+                <img 
+                  src={formData.image ? formData.image : profileImageLink } 
+                  alt={formData.name} 
+                  className='memory-edit-image' 
+                />
+                <br></br>
+                <input type="file" id="image" accept="image/png, image/jpeg"
+                  onChange={handleImageUpload} />
+              </div>
               <br></br>
-              <input type="file" id="image" accept="image/png, image/jpeg"
-                onChange={handleImageUpload} />
-            </div>
-            <br></br>
-            <div className="field col d-flex flex-column">
-              {isUploadingImage && <p>Image uploading...</p>}
-              <button className={`btn ${buttonStyle.default} btn-sm ${isUploadingImage && 'disabled'}`} type="submit">
+              <div className="field col d-flex flex-column">
+                {isUploadingImage && <p>Image uploading...</p>}
+                <button className={`btn ${buttonStyle.default} btn-sm ${isUploadingImage && 'disabled'}`} type="submit">
                 Submit
-              </button>
-              <button className={`btn ${buttonStyle.danger} btn-sm`}>
+                </button>
+                <button className={`btn ${buttonStyle.danger} btn-sm`}>
                 Cancel
-              </button>
-            </div>
-          </form>
+                </button>
+              </div>
+            </form>
+          </div>
         </div>
-      </div>
+      )}
     </main>
   )
 }

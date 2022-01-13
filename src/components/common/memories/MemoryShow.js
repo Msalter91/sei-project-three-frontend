@@ -10,6 +10,7 @@ function MemoryShow () {
   const [memory, setMemory] = React.useState(null)
   const [user, setUser] = React.useState(null)
   const [trip, setTrip] = React.useState(null)
+  const [isError, setIsError] = useState(false)
 
   React.useEffect(() => {
     const getMemory = async () => {
@@ -19,7 +20,7 @@ function MemoryShow () {
         setUser(memoryData.data.addedBy)
         setTrip(memoryData.data.pairedTrip)
       } catch (err) {
-        console.log(err)
+        setIsError(true)
       }
     }
     getMemory()
@@ -28,31 +29,35 @@ function MemoryShow () {
   const readableTime = new Date(Date.parse(memory ? memory.created_at : 1)).toLocaleString()
   
   return (
+    <>
+      {isError ? (
+        <Error />
+      ) : (
 
-    <div className="row py-4 px-4">
-      <div className="col-md-5 mx-auto">
+        <div className="row py-4 px-4">
+          <div className="col-md-5 mx-auto">
 
-        {/* <!-- Profile widget --> */}
+            {/* <!-- Profile widget --> */}
 
-        <div className="bg-white shadow rounded overflow-hidden">
-          <div className="px-4 pt-0 pb-4 cover">
-            <div className="d-flex align-items-end profile-head">
-              <div className="profile mr-3"><img src={user && user.image} alt="..." width="150" className="rounded mb-2 img-thumbnail"/>              
+            <div className="bg-white shadow rounded overflow-hidden">
+              <div className="px-4 pt-0 pb-4 cover">
+                <div className="d-flex align-items-end profile-head">
+                  <div className="profile mr-3"><img src={user && user.image} alt="..." width="150" className="rounded mb-2 img-thumbnail"/>              
+                  </div>
+                  <div className="d-flex-body mb-5 text-white">
+                    <h4 className="memsname text-uppercase mt-0 mb-0 ms-3">{user && user.displayName}</h4>
+                    <p className="memslocation text-capitalize small mb-4">
+                      <i className="fas fa-map-marker-alt mr-2 ms-3"></i>{user && user.location}</p>
+                  </div>
+                </div>
               </div>
-              <div className="d-flex-body mb-5 text-white">
-                <h4 className="memsname text-uppercase mt-0 mb-0 ms-3">{user && user.displayName}</h4>
-                <p className="memslocation text-capitalize small mb-4">
-                  <i className="fas fa-map-marker-alt mr-2 ms-3"></i>{user && user.location}</p>
-              </div>
-            </div>
-          </div>
-          <ul className="list-inline mb-0">
-            <br></br><br></br>
-          </ul>
-          <div className="py-4 px-4">
-            <div className="d-flex align-items-center justify-content-between mb-3">
-              <div className="fluid h-100">
-                {memory &&
+              <ul className="list-inline mb-0">
+                <br></br><br></br>
+              </ul>
+              <div className="py-4 px-4">
+                <div className="d-flex align-items-center justify-content-between mb-3">
+                  <div className="fluid h-100">
+                    {memory &&
           <div className="fluid">
             <div className="memstitle gy-1 row row-col text-wrap text-center text-capitalize">
               <h2>{memory && memory.name}</h2>
@@ -85,18 +90,21 @@ function MemoryShow () {
 
             </div>
           </div>}
-              </div>
-            </div>
-            <button>
-              <Link to={trip ? `/trips/${trip._id}/edit` : '/'}
-                className={`btn ${buttonStyle.default} btn-sm d-flex justify-content-center`}>
+                  </div>
+                </div>
+                <button>
+                  <Link to={trip ? `/trips/${trip._id}/edit` : '/'}
+                    className={`btn ${buttonStyle.default} btn-sm d-flex justify-content-center`}>
                   Edit / Delete Memory</Link>
-            </button>
-          </div>
+                </button>
+              </div>
 
+            </div>
+          </div>
         </div>
-      </div>
-    </div>
+    
+      )}
+    </>
   )
 }
 

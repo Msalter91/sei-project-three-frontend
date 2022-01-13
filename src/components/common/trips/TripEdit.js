@@ -98,8 +98,7 @@ function TripEdit () {
       //todo: toast - `Deleted Trip : ${formData.title}`
       history.push('/trips')
     } catch (err) {
-      console.log(err)
-      setFormErrors(err.response.data.errors)
+      setIsError(true)
     }
   }
 
