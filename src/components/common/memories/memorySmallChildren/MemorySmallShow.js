@@ -1,3 +1,5 @@
+import { buttonStyle } from '../../../../lib/bootstrap-css-config.js'
+
 function MemoryShowSmall ({ memory, handleSwitchToEdit }) {
   return (
     <div 
@@ -29,7 +31,7 @@ function MemoryShowSmall ({ memory, handleSwitchToEdit }) {
         </div>
       </div>
       <div className="memory-show-small-buttons row mt-auto">
-        <button className="btn btn-warning" onClick={handleSwitchToEdit}>Edit</button>
+        <button className={`btn ${buttonStyle.default}`} onClick={handleSwitchToEdit}>Edit</button>
       </div>
     </div>
   )

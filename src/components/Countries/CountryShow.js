@@ -5,6 +5,7 @@ import { logoImageLink } from '../../lib/config.js'
 import { useParams, Link } from 'react-router-dom'
 
 import Error from '../common/Error.js'
+import { buttonStyle } from '../../lib/bootstrap-css-config.js'
 
 function CountryShow () {
   const { countryId } = useParams()
@@ -105,7 +106,7 @@ function CountryShow () {
                         <img className='' src={logoImageLink} alt="Card image cap"></img>
                         <div className="card-body">
                           <h6 className="country-card-title text-decoration-none">No adventures here yet!</h6>
-                          <a href="#" className="btn btn-outline-info btn-sm">Be the first to share their trip</a>
+                          <a href="#" className={`btn ${buttonStyle.default} btn-sm`}>Be the first to share their trip</a>
                         </div>
                       </div>
                     </Link>}
@@ -118,7 +119,7 @@ function CountryShow () {
                             <img className='' src={trip.memories[0] ? trip.memories[0].image : 'https://static.toiimg.com/thumb/66440952/road-trip.jpg?width=1200&height=900'} alt="Card image cap"></img>
                             <div className="card-body">
                               <h6 className="country-card-title text-decoration-none">{trip.title}</h6>
-                              <a href="#" className="btn btn-outline-info btn-sm">See their trip</a>
+                              <a href="#" className={`btn ${buttonStyle.default} btn-sm`}>See their trip</a>
                             </div>
                           </div>
                         </Link>

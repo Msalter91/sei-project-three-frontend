@@ -2,7 +2,8 @@ import axios from 'axios'
 import { Link, useParams } from 'react-router-dom'
 
 import React from 'react'
-import { getUserId } from '../../lib/auth'
+import { getUserId } from '../../lib/auth.js'
+import { buttonStyle } from '../../lib/bootstrap-css-config.js'
 
 
 function Profile() {
@@ -72,7 +73,6 @@ function Profile() {
             <div className="p-3 rounded shadow-sm bg-light">
               <p className="font-italic mb-0"> {user && user.about}</p>
               <br></br>
-           
             </div>
           </div>
           <div className="py-1 px-4">
@@ -81,11 +81,11 @@ function Profile() {
               
               <div className="group-buttons">
                 <button>
-                  <Link to={`/profile/${getUserId()}/edit`} className="btn btn-outline-info btn-sm justify-content-end">Edit Profile</Link>
+                  <Link to={`/profile/${getUserId()}/edit`} className="btn buttonStyle.default btn-sm justify-content-end">Edit Profile</Link>
                 </button>
               
                 <button>
-                  <Link to={'/trips/new'} className="btn btn-outline-info btn-sm me-3">Create New Memory</Link>
+                  <Link to={'/trips/new'} className={`btn ${buttonStyle.default} btn-sm me-3`}>Create New Memory</Link>
                 </button>
               </div>
             </div>

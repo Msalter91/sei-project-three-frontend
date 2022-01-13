@@ -1,6 +1,7 @@
 import { useState } from 'react'
 
 import { memoryCreate } from '../../../lib/api.js'
+import { buttonStyle } from '../../../lib/bootstrap-css-config.js'
 import { logoImageLink } from '../../../lib/config.js'
 import { uploadImageMemory } from '../../../lib/imageHosting.js'
 import LocationPicker from '../maps/LocationPicker.js'
@@ -148,7 +149,7 @@ function MemoryCreate ({ tripId, addNewMemoryToTrip, toggleCreateMemoryForm }) {
         {isUploadingImage && <p>Image uploading...</p>}
         <button 
           type="submit"
-          className={`btn btn-outline-info btn-sm ${isUploadingImage && 'disabled'}`}
+          className={`btn ${buttonStyle.default} btn-sm ${isUploadingImage && 'disabled'}`}
           aria-disabled={isUploadingImage}
         >Save this memory!</button>
       </div>

@@ -8,6 +8,7 @@ import { editUser } from '../../lib/api'
 import { useHistory } from 'react-router-dom'
 import { uploadImageProfile } from '../../lib/imageHosting'
 import { profileImageLink } from '../../lib/config'
+import { buttonStyle } from '../../lib/bootstrap-css-config'
 
 const initialState = {
   displayName: '',
@@ -178,10 +179,10 @@ function ProfileEdit() {
             <br></br>
             <div className="field col d-flex flex-column">
               {isUploadingImage && <p>Image uploading...</p>}
-              <button className={`btn btn-outline-info btn-sm ${isUploadingImage && 'disabled'}`} type="submit">
+              <button className={`btn ${buttonStyle.default} btn-sm ${isUploadingImage && 'disabled'}`} type="submit">
                 Submit
               </button>
-              <button className="btn btn-outline-danger btn-sm">
+              <button className={`btn ${buttonStyle.danger} btn-sm`}>
                 Cancel
               </button>
             </div>

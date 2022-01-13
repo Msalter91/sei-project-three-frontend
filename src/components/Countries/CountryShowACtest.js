@@ -39,11 +39,11 @@
               
 //             <div className="group-buttons">
 //               {/* <button>
-//                 <Link to={`/profile/${getUserId()}/edit`} className="btn btn-outline-info btn-sm justify-content-end">Edit Profile</Link>
+//                 <Link to={`/profile/${getUserId()}/edit`} className="btn ${buttonStyle.default} btn-sm justify-content-end">Edit Profile</Link>
 //               </button>
               
 //               <button>
-//                 <Link to={'/trips/new'} className="btn btn-outline-info btn-sm me-3">Create New Memory</Link>
+//                 <Link to={'/trips/new'} className="btn ${buttonStyle.default} btn-sm me-3">Create New Memory</Link>
 //               </button> */}
 //             </div>
 //           </div>

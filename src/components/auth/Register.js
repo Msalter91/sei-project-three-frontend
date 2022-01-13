@@ -1,7 +1,8 @@
 import React from 'react'
 import { useHistory } from 'react-router/'
 import { Link } from 'react-router-dom'
-import { registerUser } from '../../lib/api'
+import { registerUser } from '../../lib/api.js'
+import { buttonStyle } from '../../lib/bootstrap-css-config.js'
 
 const initialState = {
   displayName: '',
@@ -120,7 +121,7 @@ function Register() {
                 <p className="help text-danger">{formErrors.passwordConfirmation}</p>
               )}
               <div className="mb-4">
-                <button type="submit" className="btn btn-outline-info btn-sm">
+                <button type="submit" className={`btn ${buttonStyle.default} btn-sm`}>
               Register Me!</button>
               </div>
             </form>

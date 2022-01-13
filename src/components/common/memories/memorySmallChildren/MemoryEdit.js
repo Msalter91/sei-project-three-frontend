@@ -1,6 +1,7 @@
 import { useState } from 'react'
 
 import { memoryEdit } from '../../../../lib/api.js'
+import { buttonStyle } from '../../../../lib/bootstrap-css-config.js'
 import { logoImageLink } from '../../../../lib/config.js'
 import { uploadImageMemory } from '../../../../lib/imageHosting.js'
 import LocationPicker from '../../maps/LocationPicker.js'
@@ -147,7 +148,7 @@ function MemoryEdit ({ memory, handleSwitchToShow, updateClientsideMemory }) {
         {isUploadingImage && <p>Image uploading...</p>}
         <button 
           type="submit"
-          className={`btn btn-success ml-auto ${isUploadingImage && 'disabled'}`}
+          className={`btn ${buttonStyle.default} ml-auto col ${isUploadingImage && 'disabled'}`}
           aria-disabled={isUploadingImage}
         >Save this memory!</button>
       </div>

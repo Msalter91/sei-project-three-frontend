@@ -1,8 +1,9 @@
 import React from 'react'
 import { useHistory } from 'react-router'
 import { Link } from 'react-router-dom'
-import { loginUser } from '../../lib/api'
-import { getUserId, setToken } from '../../lib/auth'
+import { loginUser } from '../../lib/api.js'
+import { getUserId, setToken } from '../../lib/auth.js'
+import { buttonStyle } from '../../lib/bootstrap-css-config.js'
 
 function Login() {
   const history = useHistory()
@@ -49,7 +50,6 @@ function Login() {
               </div>
             </div>
           </div>
-
           <div className="d-flex flex-column bd-highlight mb-3">
             <form className="p-2 bd-highlight text-center" onSubmit={handleSubmit}>
               
@@ -67,7 +67,6 @@ function Login() {
               {isError.email && (
                 <p className="help text-danger">{isError.email}</p>
               )}
-
               <label className="label" htmlFor="password">
               Password</label>
               <div className="control mb-3">
@@ -85,21 +84,18 @@ function Login() {
               )}
 
               <div className="mb-4">
-                <button type="submit" className="btn btn-outline-info btn-sm">
+                <button type="submit" className={`btn btn-sm ${buttonStyle.default}`}>
               Log me In!</button>
               </div>
             </form>
-
             <p className="alt-login text-muted">
                 Don&apos;t have an account? <Link to="/register">
                 <br></br>Sign up Here!</Link>
             </p>
           </div>
-
         </div>
       </div>
-    </div>
- 
+    </div> 
   )
 }
 export default Login

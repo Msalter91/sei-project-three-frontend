@@ -10,6 +10,7 @@ import Error from '../Error'
 import MemoryCreate from '../memories/MemoryCreate'
 import MemorySmall from '../memories/MemorySmall'
 import { useHistory } from 'react-router-dom'
+import { buttonStyle } from '../../../lib/bootstrap-css-config'
 
 const maxLengthTitle = 50
 const maxLengthNotes = 300
@@ -196,9 +197,7 @@ function TripEdit () {
               </div>
               {/* * * MEMORIES SECTION * * */}
               <div className="col-md">
-                <div className="col-12 fluid"
-                  // style={{ background: 'khaki' }}
-                >
+                <div className="col-12 fluid">
                   <div
                     className='d-flex flex-column'>
                   </div>
@@ -221,9 +220,10 @@ function TripEdit () {
                         addNewMemoryToTrip={addNewMemoryToTrip}
                         toggleCreateMemoryForm={toggleCreateMemoryForm} /> :
                       <button type="button"
-                        className="btn btn-outline-info btn-sm"
+                        className={`btn ${buttonStyle.default} btn-sm`}
                         onClick={toggleCreateMemoryForm}
-                      >Add a Memory</button>}
+                      >Add a Memory</button>
+                    }
                   </div>
                 </div>
 
