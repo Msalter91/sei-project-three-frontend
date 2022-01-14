@@ -1,4 +1,3 @@
-import axios from 'axios'
 import React, { useState } from 'react'
 import Select from 'react-select'
 
@@ -6,7 +5,7 @@ import Error from './Error'
 
 import { getUserId } from '../../lib/auth'
 import { makeCountryObject } from '../../lib/countryData.js'
-import { editUser } from '../../lib/api'
+import { editUser, getUserProfile } from '../../lib/api'
 import { useHistory } from 'react-router-dom'
 import { uploadImageProfile } from '../../lib/imageHosting'
 import { profileImageLink } from '../../config'
@@ -23,12 +22,14 @@ const initialState = {
 }
 
 function ProfileEdit() {
+  console.log('edit')
   const history = useHistory()
+  const userId = getUserId()
   const [countryValue, setCountryValue] = useState({
     value: '',
     label: '' })
-  const [formData, setFormData] = React.useState({})
-  const [user, setUser] = React.useState(null)
+  const [formData, setFormData] = React.useState(initialState)
+  // const [user, setUser] = React.useState(null)
   const [formErrors, setFormErrors] = React.useState(initialState)
 
   const [isError, setIsError] = useState(false)
@@ -44,10 +45,9 @@ function ProfileEdit() {
   React.useEffect( ()=>{
     const getUser = async () => {
       try {
-        const userData = await axios.get(`/api/profile/${getUserId()}`)
-        setUser(userData.data)
-        setFormData(userData.data)
-        setCountryValue( { label: userData.data.location, value: userData.data.location })
+        const res = await getUserProfile('')
+        setFormData(formData=>({ ...formData, ...res.data }))
+        res.data.location && setCountryValue( { label: res.data.location, value: res.data.location })
       } catch (err) {
         setIsError(true)
       }
@@ -64,10 +64,8 @@ function ProfileEdit() {
 
   const handleSubmit = async e => {
     e.preventDefault()
-    formData.displayName = user.displayName
-    formData.email = user.email
     try {
-      await editUser(formData, getUserId())
+      await editUser(formData, userId)
       history.push('/profile')
     } catch (err) {
       setFormErrors(err.response.data.errors)
@@ -100,7 +98,7 @@ function ProfileEdit() {
                 <div className="control">
                   <input
                     className="input"
-                    placeholder={user && user.displayName}
+                    placeholder={formData.displayName}
                     name="displayName"
                     id="displayName"
                     disabled= {true}
@@ -113,7 +111,7 @@ function ProfileEdit() {
                 <div className="control">
                   <input
                     className="input"
-                    placeholder={user && user.email}
+                    placeholder={formData.email}
                     name="email"
                     id="email"
                     disabled={true}
@@ -128,7 +126,7 @@ function ProfileEdit() {
                     className={`input ${formErrors.firstName && 'is-danger'}`}
                     placeholder="Enter First Name"
                     name="firstName"
-                    value={formData && formData.firstName}
+                    value={formData.firstName}
                     onChange={handleChange}
                   />
                 </div>
@@ -141,7 +139,7 @@ function ProfileEdit() {
                     className={`input ${formErrors.lastName && 'is-danger'}`}
                     placeholder="Enter Last Name"
                     name="surname"
-                    value={formData && formData.surname}
+                    value={formData.surname}
                     onChange={handleChange}
                   />
                 </div>
@@ -150,7 +148,7 @@ function ProfileEdit() {
               <div className="field">
                 <label className="label">Country</label>
                 <div className="control">
-                  { user && (<Select options={countryOptions} value={countryValue} onChange={changeCountryHandler}/>  ) }
+                  <Select options={countryOptions} value={countryValue} onChange={changeCountryHandler}/>
                 </div>
               </div>
 
@@ -163,7 +161,7 @@ function ProfileEdit() {
                     placeholder="A little something about you..."
                     name="about"
                     onChange={handleChange}
-                    value={formData && formData.about}
+                    value={formData.about}
                   />
                 </div>
               </div>

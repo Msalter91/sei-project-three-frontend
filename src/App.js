@@ -28,9 +28,9 @@ function App() {
         <Route exact path="/"><Home /></Route>
         <Route path="/aboutus"><AboutUs/></Route>
 
-        <SecureRoute exact path ="/profile"><Profile /></SecureRoute>
+        <SecureRoute path="/profile/edit"><ProfileEdit /></SecureRoute>
         <Route path="/profile/:userId"><Profile /></Route>
-        <Route path="/profile/:userId/edit"><ProfileEdit/></Route>
+        <SecureRoute path="/profile"><Profile /></SecureRoute>
 
         <Route exact path="/countries"><Countries/></Route>
         <Route path="/countries/:countryId"><CountryShow/></Route>
