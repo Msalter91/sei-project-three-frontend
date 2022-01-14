@@ -18,17 +18,18 @@ import TripEdit from './components/common/trips/TripEdit'
 import TripCreate from './components/common/trips/TripCreate'
 import TripShow from './components/common/trips/TripShow'
 import TripsIndexAsMap from './components/common/trips/TripsIndexAsMap'
+import SecureRoute from './components/common/SecureRoute'
 
 function App() {
   return (
-    // <h1>Hello World</h1>
     <BrowserRouter>
       <Nav/>
       <Switch>
         <Route exact path="/"><Home /></Route>
         <Route path="/aboutus"><AboutUs/></Route>
 
-        <Route exact path ="/profile"><Profile /></Route>
+        <SecureRoute exact path ="/profile"><Profile /></SecureRoute>
+        <Route path="/profile/:userId"><Profile /></Route>
         <Route path="/profile/:userId/edit"><ProfileEdit/></Route>
 
         <Route exact path="/countries"><Countries/></Route>
