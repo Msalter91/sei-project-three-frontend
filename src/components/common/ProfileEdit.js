@@ -3,7 +3,6 @@ import Select from 'react-select'
 
 import Error from './Error'
 
-import { getUserId } from '../../lib/auth'
 import { makeCountryObject } from '../../lib/countryData.js'
 import { editUser, getUserProfile } from '../../lib/api'
 import { useHistory } from 'react-router-dom'
@@ -22,14 +21,11 @@ const initialState = {
 }
 
 function ProfileEdit() {
-  console.log('edit')
   const history = useHistory()
-  const userId = getUserId()
   const [countryValue, setCountryValue] = useState({
     value: '',
     label: '' })
   const [formData, setFormData] = React.useState(initialState)
-  // const [user, setUser] = React.useState(null)
   const [formErrors, setFormErrors] = React.useState(initialState)
 
   const [isError, setIsError] = useState(false)
@@ -42,7 +38,7 @@ function ProfileEdit() {
     setFormData({ ...formData, location: value.label })
   }
 
-  React.useEffect( ()=>{
+  React.useEffect(()=>{
     const getUser = async () => {
       try {
         const res = await getUserProfile('')
@@ -65,7 +61,7 @@ function ProfileEdit() {
   const handleSubmit = async e => {
     e.preventDefault()
     try {
-      await editUser(formData, userId)
+      await editUser(formData, formData._id)
       history.push('/profile')
     } catch (err) {
       setFormErrors(err.response.data.errors)
