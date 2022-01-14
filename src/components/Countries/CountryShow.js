@@ -38,6 +38,7 @@ function CountryShow () {
     getTrips()
   }, [countryId])
 
+  //todo: convert to api call, push filtering back to DB
   const countriesAndTrips = () => {
     if (country && trips) {
       const matches = trips.filter((trip => {
@@ -104,7 +105,7 @@ function CountryShow () {
                         <img className='' src={logoImageLink} alt="Card image cap"></img>
                         <div className="card-body">
                           <h6 className="country-card-title text-decoration-none">No adventures here yet!</h6>
-                          <a href="#" className={`btn ${buttonStyle.default} btn-sm`}>Be the first to share their trip</a>
+                          <button className={`btn ${buttonStyle.default} btn-sm`}>Be the first to share your trip</button>
                         </div>
                       </div>
                     </Link>}
@@ -117,7 +118,7 @@ function CountryShow () {
                             <img className='' src={trip.memories[0] ? trip.memories[0].image : 'https://static.toiimg.com/thumb/66440952/road-trip.jpg?width=1200&height=900'} alt="Card image cap"></img>
                             <div className="card-body">
                               <h6 className="country-card-title text-decoration-none">{trip.title}</h6>
-                              <a href="#" className={`btn ${buttonStyle.default} btn-sm`}>See their trip</a>
+                              <button className={`btn ${buttonStyle.default} btn-sm`}>See their trip</button>
                             </div>
                           </div>
                         </Link>
