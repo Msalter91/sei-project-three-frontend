@@ -1,7 +1,7 @@
 import { buttonStyle } from '../../../../lib/bootstrap-css-config.js'
 import { isOwner } from '../../../../lib/auth.js'
 
-function MemoryShowSmall ({ memory, handleSwitchToEdit }) {
+function MemorySmallShow ({ memory, handleSwitchToEdit }) {
   const showEdit = !!handleSwitchToEdit && isOwner(memory.addedBy)
 
   return (
@@ -42,4 +42,4 @@ function MemoryShowSmall ({ memory, handleSwitchToEdit }) {
   )
 }
 
-export default MemoryShowSmall
+export default MemorySmallShow

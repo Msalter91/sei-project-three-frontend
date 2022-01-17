@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import MemoryEdit from './memorySmallChildren/MemoryEdit.js'
-import MemoryShowSmall from './memorySmallChildren/MemoryShowSmall.js'
+import MemorySmallShow from './memorySmallChildren/MemorySmallShow'
 
 
 function MemorySmall ({ memory, updateClientsideMemory }){
@@ -16,7 +16,7 @@ function MemorySmall ({ memory, updateClientsideMemory }){
   return (
     <>
       { isShowMode ?
-        <MemoryShowSmall 
+        <MemorySmallShow 
           memory={memory} 
           handleSwitchToEdit={handleSwitchToEdit}
         /> :
