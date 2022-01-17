@@ -5,6 +5,7 @@ import { buttonStyle } from '../../../lib/bootstrap-css-config.js'
 import { logoImageLink } from '../../../config.js'
 import { uploadImageMemory } from '../../../lib/imageHosting.js'
 import LocationPicker from '../maps/LocationPicker.js'
+import IconBin from '../../Assets/IconBin.js'
 
 
 const initialState = {
@@ -148,9 +149,15 @@ function MemoryCreate ({ tripId, addNewMemoryToTrip, toggleCreateMemoryForm }) {
         {isUploadingImage && <p>Image uploading...</p>}
         <button 
           type="submit"
-          className={`btn ${buttonStyle.default} btn-sm ${isUploadingImage && 'disabled'}`}
+          className={`btn ${buttonStyle.default} col btn-sm ${isUploadingImage && 'disabled'}`}
           aria-disabled={isUploadingImage}
         >Save this memory!</button>
+        <button 
+          type="button"
+          className={`btn w-fit ${buttonStyle.danger} col ${isUploadingImage && 'disabled'}`}
+          aria-disabled={isUploadingImage}
+          onClick={toggleCreateMemoryForm}
+        ><IconBin /></button>
       </div>
     </form>
   )

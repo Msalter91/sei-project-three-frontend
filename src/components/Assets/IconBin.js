@@ -5,7 +5,6 @@ function IconBin(options){
     ...options,
     style: { width: '1.5em', height: '1.5em', marginBottom: '0.1em' }, 
   })
-  //todo: defaults for stroke+fill
   return (
     <svg
       {...options}

@@ -98,7 +98,7 @@ function CountryShow () {
               </div>
             </div><div className="container pg-index">
               <div className="gy-2 row row-cols-3">
-
+                {/* todo: calling filter function 5 times here.  Refector to store result in a const and refilter at most once per render */}
                 {!countriesAndTrips() || !countriesAndTrips()[0] &&
                     <Link to={'/trips/new'}>
                       <div className="card">

@@ -1,6 +1,9 @@
 import { buttonStyle } from '../../../../lib/bootstrap-css-config.js'
+import { isOwner } from '../../../../lib/auth.js'
 
 function MemoryShowSmall ({ memory, handleSwitchToEdit }) {
+  const showEdit = !!handleSwitchToEdit && isOwner(memory.addedBy)
+
   return (
     <div 
       className="show-small-container d-flex flex-column placebook-form shadow rounded m-3 bg-light"
@@ -30,9 +33,11 @@ function MemoryShowSmall ({ memory, handleSwitchToEdit }) {
           </div>
         </div>
       </div>
-      <div className="memory-show-small-buttons row mt-auto">
-        <button className={`btn ${buttonStyle.default}`} onClick={handleSwitchToEdit}>Edit</button>
-      </div>
+      {showEdit && (
+        <div className="memory-show-small-buttons row mt-auto">
+          <button className={`btn ${buttonStyle.default}`} onClick={handleSwitchToEdit}>Edit</button>
+        </div>
+      )}
     </div>
   )
 }
