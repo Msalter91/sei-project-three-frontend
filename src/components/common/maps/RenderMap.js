@@ -33,6 +33,7 @@ function RenderMap ({
   center = { lat: 0, long: 0 },
   initZoom = 1,
   mapStyle = 'default',
+  showSearch = false,
 }) {
   const aggregatedMemoriesForViewport = flattenArrayByPropertyOfMember(arrayOfTrips, 'memories')
   let locationStats = {}
@@ -129,12 +130,12 @@ function RenderMap ({
         {...viewport}
         onViewportChange={newViewport => setViewport(newViewport)}
       >
-        <Geocoder 
+        {showSearch && <Geocoder 
           mapRef={mapRef}
           onViewportChange={handleGeocoderViewportChange}
           mapboxApiAccessToken={mapApiAccessToken}
           position='top-left'
-        />
+        />}
         {hasMemories && arrayOfTrips.map(trip =>{
           //if no memories, don't attempt to draw anything memory related
           if (!trip.memories.length) return
