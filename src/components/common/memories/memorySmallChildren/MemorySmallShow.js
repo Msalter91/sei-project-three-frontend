@@ -19,7 +19,7 @@ function MemorySmallShow ({ memory, handleSwitchToEdit }) {
           <div>
             {[
               [memory.location, 'At:'], 
-              [memory.visitDate, 'On:']
+              [memory.visitDate.toLocaleString(), 'On:']
             ].map(field=>(
               <div key={field[0]} className="row">
                 <h6 className="w-4em pr-0 mr-0">{field[1]}</h6>
