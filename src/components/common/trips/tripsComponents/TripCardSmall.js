@@ -6,16 +6,13 @@ function randomDate(start, end) {
 
 
 function TripCardSmall ({ trip, coloredBorder }) {
-  // console.log(coloredBorder)
-  // console.log(trip.lineColor)
   return (
     <div 
-      className="show-small-container" 
+      className="show-small-container"
     >
       <Link 
         to={`/trips/${trip._id}`}
         className=" d-flex flex-column placebook-form shadow rounded m-2 bg-light"
-        // style={coloredBorder && `borderColor=${trip.lineColor}`}  //comment this out to get the page working!
       >
         {/* //todo : replace with trip summary image*/}
         <div className="row">
@@ -24,18 +21,21 @@ function TripCardSmall ({ trip, coloredBorder }) {
           </div>
         </div>
         <div className="row text-center">
-          <div className="col text-center mb-0">
+          <div 
+            className="col mb-0"
+            style={coloredBorder && { border: `5px solid ${trip.lineColor}` }}
+          >
             <div>
               {[
                 [trip.countryVisited, 'In:'], 
                 [randomDate(new Date(2012, 0, 1), new Date()).toLocaleDateString(), 'On:']
               ].map(field=>(
-                <div key={field[0]} className="row text-center mb-0">
-                  <h6 className="text-center w-4em pr-0 mr-0 mb-0">{field[1]}</h6>
-                  <p className="col text-center pl-0 ml-0 mb-0">{field[0]}</p>
+                <div key={`${trip._id}${field[0]}`} className="row mb-0">
+                  <h6 className="w-4em pr-0 mr-0 mb-0">{field[1]}</h6>
+                  <p className="col pl-0 ml-0 mb-0">{field[0]}</p>
                 </div>  
               ))}
-              <div className="row text-center mb-0 mt-0 pt-0 pb-0">
+              <div className="row mb-0 mt-0 pt-0 pb-0">
                 <h6 >I remember:</h6>
                 <p >{trip.notes}</p>
               </div>
