@@ -89,7 +89,7 @@ function RenderMap ({
     longitude: center.long,
     zoom: initZoom,
     bearing: 0,
-    pitch: 50,
+    pitch: 40,
   })
 
   // todo: use fitbounds pattern from locationPicker to clean up
@@ -104,12 +104,12 @@ function RenderMap ({
         [locationStats.longMax, locationStats.latMax]
       ],
       {
-        padding: mapContainer.current.offsetWidth * 0.05,
+        padding: mapContainer.current.offsetWidth * -0.01,
       }
     )
     setViewport({ 
       ...viewport,
-      latitude: fittedLat,
+      latitude: fittedLat - 10,
       longitude: fittedlong,
       zoom: fittedZoom })
   }
@@ -119,8 +119,7 @@ function RenderMap ({
     }
   // Want this hook to ONLY re-render on formData change, therefore accept non-exhaustive dependency
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [arrayOfTrips.memories])
-
+  }, [arrayOfTrips])
   return (
     <div ref={mapContainer} className="map-container" style={{ height: '100%', width: '100%' }}>
       <ReactMapGL
