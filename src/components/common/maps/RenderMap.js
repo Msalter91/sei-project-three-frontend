@@ -95,6 +95,10 @@ function RenderMap ({
   // todo: use fitbounds pattern from locationPicker to clean up
   function fitViewPort () {
     const fittedVp = new WebMercatorViewport(viewport)
+    const mapPadding = Math.min(
+      mapContainer.current.offsetWidth, 
+      mapContainer.current.offsetHeight
+    ) * 0.02
     const { 
       latitude: fittedLat, 
       longitude: fittedlong, 
@@ -104,12 +108,13 @@ function RenderMap ({
         [locationStats.longMax, locationStats.latMax]
       ],
       {
-        padding: mapContainer.current.offsetWidth * -0.01,
+        padding: mapPadding,
       }
     )
     setViewport({ 
       ...viewport,
-      latitude: fittedLat - 10,
+      // adjust latitude to fit markers above locations
+      latitude: fittedLat - 5,
       longitude: fittedlong,
       zoom: fittedZoom })
   }

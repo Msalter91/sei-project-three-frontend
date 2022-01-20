@@ -38,7 +38,10 @@ function TripEdit () {
   const history = useHistory()
   const [
     isDisplayingCreateMemory, 
-    setIsDisplayingCreateMemory] = useState(false)
+    setIsDisplayingCreateMemory
+  ] = useState(false)
+  const lineColor = 'rgba(131,238,255,0.8)'
+
   // populate initial data
   const refreshFormDataFromApi = async ()=>{
     try {
@@ -190,7 +193,7 @@ function TripEdit () {
                     {formErrors.notes && <p className="text-danger">{formErrors.notes}</p>}
                   </div>
                   <div className='edit-trip-map-container'>
-                    <RenderMap arrayOfTrips={[formData]} />
+                    <RenderMap arrayOfTrips={[{ ...formData, lineColor: lineColor }]} />
                   </div>
                   <div className='row mt-1' style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
                     <button
