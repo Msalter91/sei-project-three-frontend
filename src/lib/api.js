@@ -1,7 +1,6 @@
 import axios from 'axios'
 import { baseUrl } from '../config'
 import { getToken } from './auth'
-import { baseUrl } from '../config'
 
 function authHeader () {
   return {

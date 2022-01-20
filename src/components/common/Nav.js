@@ -65,7 +65,7 @@ function Nav() {
               <Link to="/" className="navbar-item nav-link active" onClick={handleLogout}>
                 LOG OUT
               </Link>
-              <Link to={`/profile/${getUserId()}`} className="nav-link active">
+              <Link to={'/profile}'} className="nav-link active">
                 Profile
               </Link>
             </>
