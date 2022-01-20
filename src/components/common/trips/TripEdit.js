@@ -14,6 +14,7 @@ import { buttonStyle } from '../../../lib/bootstrap-css-config'
 import IconBin from '../../Assets/IconBin'
 import { removeSingleIndexFromArray } from '../../../lib/helpers'
 import MemorySmallAddMemoryButton from './tripsComponents/TripEditAddMemoryButton'
+import { mapDefaultPolylineColor } from '../../../config'
 
 const maxLengthTitle = 50
 const maxLengthNotes = 300
@@ -40,7 +41,7 @@ function TripEdit () {
     isDisplayingCreateMemory, 
     setIsDisplayingCreateMemory
   ] = useState(false)
-  const lineColor = 'rgba(131,238,255,0.8)'
+  const lineColor = mapDefaultPolylineColor
 
   // populate initial data
   const refreshFormDataFromApi = async ()=>{

@@ -1,7 +1,8 @@
 import { Source, Layer } from 'react-map-gl'
+import { mapDefaultPolylineColor } from '../../../../config'
 
 const defaultOptions = { 
-  lineColor: 'rgba(213, 184, 255, 0.8)',
+  lineColor: mapDefaultPolylineColor,
   lineWidth: 4,
 }
 

@@ -1,6 +1,7 @@
 export const logoImageLink = 'https://i.imgur.com/ElzRumx.png'
-
 export const profileImageLink = 'https://i.imgur.com/vX6eUuR.png'
+
+export const mapDefaultPolylineColor = 'rgba(131,238,255,0.8)'
 
 export const mapApiAccessToken = process.env.REACT_APP_MAPS_API_KEY
 
