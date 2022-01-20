@@ -1,8 +1,17 @@
 import { useEffect, useState } from 'react'
+
 import { getAllTrips } from '../../../lib/api'
 import Error from '../Error'
+import { randomRGBA } from '../maps/helpers/helpers'
 import RenderMap from '../maps/RenderMap'
-import TripCardSmall from './TripCardSmall'
+import TripCardSmall from './tripsComponents/TripCardSmall'
+
+const attachLineColorToTrips = (trips) => {
+  return trips.map(trip => {
+    trip.lineColor = randomRGBA({ alpha: 0.8 })
+    return trip
+  })
+}
 
 function TripsIndexAsMap () {
   const [tripList, setTripList] = useState([])
@@ -12,7 +21,8 @@ function TripsIndexAsMap () {
     const getTripList = async()=>{
       try {
         const res = await getAllTrips()
-        setTripList(res.data)
+        const tripsWithLineColor = attachLineColorToTrips(res.data)
+        setTripList(tripsWithLineColor)
       } catch (err){
         setIsError(true)
       }
@@ -32,7 +42,7 @@ function TripsIndexAsMap () {
           <div className='row'>
             {
               Boolean(tripList.length) && tripList.map(trip =>(
-                <TripCardSmall key={trip._id} trip={trip}/>
+                <TripCardSmall key={trip._id} trip={trip} coloredBorder/>
               ))
             }
           </div>

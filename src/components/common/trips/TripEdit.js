@@ -11,7 +11,10 @@ import MemoryCreate from '../memories/MemoryCreate'
 import MemorySmall from '../memories/MemorySmall'
 import { useHistory } from 'react-router-dom'
 import { buttonStyle } from '../../../lib/bootstrap-css-config'
-import BinIcon from '../../Assets/BinIcon'
+import IconBin from '../../Assets/IconBin'
+import { removeSingleIndexFromArray } from '../../../lib/helpers'
+import MemorySmallAddMemoryButton from './tripsComponents/TripEditAddMemoryButton'
+import { mapDefaultPolylineColor } from '../../../config'
 
 const maxLengthTitle = 50
 const maxLengthNotes = 300
@@ -36,7 +39,10 @@ function TripEdit () {
   const history = useHistory()
   const [
     isDisplayingCreateMemory, 
-    setIsDisplayingCreateMemory] = useState(false)
+    setIsDisplayingCreateMemory
+  ] = useState(false)
+  const lineColor = mapDefaultPolylineColor
+
   // populate initial data
   const refreshFormDataFromApi = async ()=>{
     try {
@@ -78,7 +84,7 @@ function TripEdit () {
     setFormData({ ...formData, [e.target.name]: value })
   }
 
-  const changeCountryHandler = value => {
+  const handleChangeCountry = value => {
     setFormData({ ...formData, countryVisited: value.value })
     setCountryValue(value)
   }
@@ -91,10 +97,9 @@ function TripEdit () {
       setFormErrors(err.response.data.errors)
     }
   }
-  const handleDeleteTripButton = async e =>{
-    e.preventDefault()
+  const handleDeleteTripButton = async () =>{
     try {
-      tripDelete(tripId)
+      await tripDelete(tripId)
       //todo: toast - `Deleted Trip : ${formData.title}`
       history.push('/trips')
     } catch (err) {
@@ -118,12 +123,20 @@ function TripEdit () {
     setIsDisplayingCreateMemory(!isDisplayingCreateMemory)
   }
   const updateClientsideMemory = (index) => {
+    // build function to allow memory components to update trip data without re-fetching.
     return function (newMemoryData) {
-      formData.memories[index] = newMemoryData
-      setFormData({ ...formData })
+      if (newMemoryData._id){
+        formData.memories[index] = newMemoryData
+        setFormData({ ...formData })
+      } else {
+        setFormData({ 
+          ...formData, 
+          memories: removeSingleIndexFromArray(formData.memories, index),
+        })
+      }
     }
   }
-
+  
   return (
     <section className="section">
       {isError ? (
@@ -140,7 +153,7 @@ function TripEdit () {
             </div>
 
             <div className="d-flex fluid row w-auto">
-              <div className="col fluid shadow rounded m-3 bg-light">
+              <div className="col-5 fluid shadow rounded m-3 bg-light">
                 <form
                   onSubmit={handleSubmit}
                   className="col placebook-form fluid"
@@ -159,7 +172,7 @@ function TripEdit () {
                   <div className="form-group">
 
                     <label htmlFor="countryVisited">Where did you start?</label>
-                    <Select options={countryOptions} value={countryValue} onChange={changeCountryHandler}  />
+                    <Select options={countryOptions} value={countryValue} onChange={handleChangeCountry}  />
                     {formErrors.countryVisited && <p className="text-danger">{formErrors.countryVisited}</p>}
 
                   </div>
@@ -181,7 +194,7 @@ function TripEdit () {
                     {formErrors.notes && <p className="text-danger">{formErrors.notes}</p>}
                   </div>
                   <div className='edit-trip-map-container'>
-                    <RenderMap arrayOfTrips={[formData]} />
+                    <RenderMap arrayOfTrips={[{ ...formData, lineColor: lineColor }]} />
                   </div>
                   <div className='row mt-1' style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
                     <button
@@ -193,7 +206,7 @@ function TripEdit () {
                       className={`btn ${buttonStyle.danger} btn-sm col w-fit`}
                       onClick={handleDeleteTripButton}
                     >
-                      <BinIcon />
+                      <IconBin />
                     </button>
                   </div>
                 </form>
@@ -214,18 +227,14 @@ function TripEdit () {
                             updateClientsideMemory={updateClientsideMemory(index)} />
                         )
                       )}
-                  </div>
-
-                  <div className='create-memory-container row'>
-                    {isDisplayingCreateMemory ?
+                    {!isDisplayingCreateMemory ? 
+                      <MemorySmallAddMemoryButton 
+                        className={'col'}
+                        onClick={toggleCreateMemoryForm} /> :
                       <MemoryCreate
                         tripId={tripId}
                         addNewMemoryToTrip={addNewMemoryToTrip}
-                        toggleCreateMemoryForm={toggleCreateMemoryForm} /> :
-                      <button type="button"
-                        className={`btn ${buttonStyle.default} btn-sm`}
-                        onClick={toggleCreateMemoryForm}
-                      >Add a Memory</button>
+                        toggleCreateMemoryForm={toggleCreateMemoryForm} />
                     }
                   </div>
                 </div>

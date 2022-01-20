@@ -5,7 +5,7 @@ import { tripGetById } from '../../../lib/api.js'
 import Error from '../Error.js'
 
 import RenderMap from '../maps/RenderMap.js'
-import MemorySmall from '../memories/MemorySmall.js'
+import MemorySmallShow from '../memories/memorySmallChildren/MemorySmallShow.js'
 
 const initialState = {
   title: '',
@@ -61,7 +61,7 @@ function TripShow () {
               </div>
               <div className='custom-memories-container row'>
                 {Boolean(tripData.memories.length) && tripData.memories.map(
-                  memory => <MemorySmall key={memory._id} memory={memory} />
+                  memory => <MemorySmallShow key={memory._id} memory={memory} />
                 )}
               </div>
             </div>

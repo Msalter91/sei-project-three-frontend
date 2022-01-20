@@ -1,7 +1,8 @@
 import { Source, Layer } from 'react-map-gl'
+import { mapDefaultPolylineColor } from '../../../../config'
 
 const defaultOptions = { 
-  lineColour: 'rgba(213, 184, 255, 0.8)',
+  lineColor: mapDefaultPolylineColor,
   lineWidth: 4,
 }
 
@@ -22,9 +23,9 @@ function TripPolyLine({
     },
   }
   return (
-    <Source id="polylineLayer" type="geojson" data={polylineData}>
+    <Source id={`polylineLayer${trip._id}`} type="geojson" data={polylineData}>
       <Layer
-        id="lineLayer"
+        id={`lineLayer${trip._id}`}
         type="line"
         source="my-data"
         layout={{
@@ -32,7 +33,7 @@ function TripPolyLine({
           'line-cap': 'round',
         }}
         paint={{
-          'line-color': options.lineColour, 
+          'line-color': options.lineColor, 
           'line-width': options.lineWidth,
         }}
       />

@@ -1,13 +1,14 @@
 import axios from 'axios'
 import React from 'react'
 import { Link, useParams } from 'react-router-dom'
+import { isOwner } from '../../../lib/auth.js'
 
 import { buttonStyle } from '../../../lib/bootstrap-css-config.js'
 import Error from '../Error.js'
 
 function MemoryShow () {
   const { memoryId } = useParams()
-
+  const _isOwner = isOwner(memoryId)
   const [memory, setMemory] = React.useState(null)
   const [user, setUser] = React.useState(null)
   const [trip, setTrip] = React.useState(null)
@@ -93,11 +94,13 @@ function MemoryShow () {
           </div>}
                   </div>
                 </div>
-                <button>
-                  <Link to={trip ? `/trips/${trip._id}/edit` : '/'}
-                    className={`btn ${buttonStyle.default} btn-sm d-flex justify-content-center`}>
+                {_isOwner && (
+                  <button>
+                    <Link to={trip ? `/trips/${trip._id}/edit` : '/'}
+                      className={`btn ${buttonStyle.default} btn-sm d-flex justify-content-center`}>
                   Edit / Delete Memory</Link>
-                </button>
+                  </button>
+                )}
               </div>
 
             </div>

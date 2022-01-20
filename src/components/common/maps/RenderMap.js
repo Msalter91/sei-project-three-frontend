@@ -5,7 +5,7 @@ import Geocoder from 'react-map-gl-geocoder'
 import { flattenArrayByPropertyOfMember } from '../../../lib/helpers.js'
 import TripPolyLine from './helpers/TripPolyLine.js'
 
-import { mapApiAccessToken, mapStyles } from '../../../lib/config.js'
+import { mapApiAccessToken, mapStyles } from '../../../config.js'
 
 function getLocationArrayStats (array){
   const locationAggregates = array.reduce((acc, cur)=>{
@@ -33,11 +33,13 @@ function RenderMap ({
   center = { lat: 0, long: 0 },
   initZoom = 1,
   mapStyle = 'default',
+  showSearch = false,
 }) {
   const aggregatedMemoriesForViewport = flattenArrayByPropertyOfMember(arrayOfTrips, 'memories')
   let locationStats = {}
   const mapContainer = useRef()
   const mapRef = useRef()
+  const minimumAutoFitZoom = 4
 
   const hasMemories = Boolean(aggregatedMemoriesForViewport.length)
   if (hasMemories){
@@ -88,12 +90,16 @@ function RenderMap ({
     longitude: center.long,
     zoom: initZoom,
     bearing: 0,
-    pitch: 50,
+    pitch: 40,
   })
 
   // todo: use fitbounds pattern from locationPicker to clean up
   function fitViewPort () {
     const fittedVp = new WebMercatorViewport(viewport)
+    const mapPadding = Math.min(
+      mapContainer.current.offsetWidth, 
+      mapContainer.current.offsetHeight
+    ) * 0.02
     const { 
       latitude: fittedLat, 
       longitude: fittedlong, 
@@ -103,14 +109,20 @@ function RenderMap ({
         [locationStats.longMax, locationStats.latMax]
       ],
       {
-        padding: mapContainer.current.offsetWidth * 0.05,
+        padding: mapPadding,
       }
+    )
+    const zoomAdjustedForMinimum = Math.min(
+      fittedZoom,
+      minimumAutoFitZoom
     )
     setViewport({ 
       ...viewport,
-      latitude: fittedLat,
+      // adjust latitude to fit markers above locations
+      latitude: fittedLat - 5,
       longitude: fittedlong,
-      zoom: fittedZoom })
+      zoom: zoomAdjustedForMinimum,
+    })
   }
   useEffect(()=>{
     if (hasMemories){
@@ -118,8 +130,7 @@ function RenderMap ({
     }
   // Want this hook to ONLY re-render on formData change, therefore accept non-exhaustive dependency
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [arrayOfTrips.memories])
-
+  }, [arrayOfTrips])
   return (
     <div ref={mapContainer} className="map-container" style={{ height: '100%', width: '100%' }}>
       <ReactMapGL
@@ -129,18 +140,17 @@ function RenderMap ({
         {...viewport}
         onViewportChange={newViewport => setViewport(newViewport)}
       >
-        <Geocoder 
+        {showSearch && <Geocoder 
           mapRef={mapRef}
           onViewportChange={handleGeocoderViewportChange}
           mapboxApiAccessToken={mapApiAccessToken}
           position='top-left'
-        />
+        />}
         {hasMemories && arrayOfTrips.map(trip =>{
           //if no memories, don't attempt to draw anything memory related
           if (!trip.memories.length) return
-          const randomColourValue = () => Math.floor(Math.random() * 255)
           const polylineOptions = {
-            lineColour: `rgba(${randomColourValue()}, ${randomColourValue()}, ${randomColourValue()}, 0.8)`,
+            lineColor: trip.lineColor,
           }
           return (
             <ul key={trip._id}>
@@ -157,7 +167,7 @@ function RenderMap ({
               }
               {
                 Boolean(trip.memories.length > 1) && 
-              <TripPolyLine key={trip._id} trip={trip} options = {polylineOptions}/>
+              <TripPolyLine key={trip._id} trip={trip} options={polylineOptions}/>
               }
             </ul>
           )

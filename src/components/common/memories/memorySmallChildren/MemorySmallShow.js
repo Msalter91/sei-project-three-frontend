@@ -1,6 +1,9 @@
 import { buttonStyle } from '../../../../lib/bootstrap-css-config.js'
+import { isOwner } from '../../../../lib/auth.js'
 
-function MemoryShowSmall ({ memory, handleSwitchToEdit }) {
+function MemorySmallShow ({ memory, handleSwitchToEdit }) {
+  const showEdit = !!handleSwitchToEdit && isOwner(memory.addedBy)
+
   return (
     <div 
       className="show-small-container d-flex flex-column placebook-form shadow rounded m-3 bg-light"
@@ -16,7 +19,7 @@ function MemoryShowSmall ({ memory, handleSwitchToEdit }) {
           <div>
             {[
               [memory.location, 'At:'], 
-              [memory.visitDate, 'On:']
+              [memory.visitDate.toLocaleString(), 'On:']
             ].map(field=>(
               <div key={field[0]} className="row">
                 <h6 className="w-4em pr-0 mr-0">{field[1]}</h6>
@@ -30,11 +33,13 @@ function MemoryShowSmall ({ memory, handleSwitchToEdit }) {
           </div>
         </div>
       </div>
-      <div className="memory-show-small-buttons row mt-auto">
-        <button className={`btn ${buttonStyle.default}`} onClick={handleSwitchToEdit}>Edit</button>
-      </div>
+      {showEdit && (
+        <div className="memory-show-small-buttons row mt-auto">
+          <button className={`btn ${buttonStyle.default}`} onClick={handleSwitchToEdit}>Edit</button>
+        </div>
+      )}
     </div>
   )
 }
 
-export default MemoryShowSmall
+export default MemorySmallShow

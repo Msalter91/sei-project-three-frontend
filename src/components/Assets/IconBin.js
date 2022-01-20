@@ -1,11 +1,10 @@
 // CREDIT: https://uxwing.com/recycle-bin-line-icon/
 
-function BinIcon(options){
+function IconBin(options){
   !options.style && (options = { 
     ...options,
     style: { width: '1.5em', height: '1.5em', marginBottom: '0.1em' }, 
   })
-  //todo: defaults for stroke+fill
   return (
     <svg
       {...options}
@@ -17,4 +16,4 @@ function BinIcon(options){
   )
 }
 
-export default BinIcon
+export default IconBin

@@ -9,7 +9,7 @@ import CountryShow from './components/Countries/CountryShow'
 import MemoryShow from './components/common/memories/MemoryShow'
 
 import AboutUs from './components/common/AboutUs'
-import ProfileWithReact from './components/common/Profile'
+import Profile from './components/common/Profile'
 import ProfileEdit from './components/common/ProfileEdit'
 import Register from './components/auth/Register'
 import Login from './components/auth/Login'
@@ -18,18 +18,19 @@ import TripEdit from './components/common/trips/TripEdit'
 import TripCreate from './components/common/trips/TripCreate'
 import TripShow from './components/common/trips/TripShow'
 import TripsIndexAsMap from './components/common/trips/TripsIndexAsMap'
+import SecureRoute from './components/common/SecureRoute'
 
 function App() {
   return (
-    // <h1>Hello World</h1>
     <BrowserRouter>
       <Nav/>
       <Switch>
         <Route exact path="/"><Home /></Route>
         <Route path="/aboutus"><AboutUs/></Route>
 
-        <Route exact path ="/profile/:userId"><ProfileWithReact /></Route>
-        <Route path="/profile/:userId/edit"><ProfileEdit/></Route>
+        <SecureRoute path="/profile/edit"><ProfileEdit /></SecureRoute>
+        <Route path="/profile/:userId"><Profile /></Route>
+        <SecureRoute path="/profile"><Profile /></SecureRoute>
 
         <Route exact path="/countries"><Countries/></Route>
         <Route path="/countries/:countryId"><CountryShow/></Route>
@@ -38,7 +39,7 @@ function App() {
         <Route path="/login"><Login/></Route>
 
         <Route path="/trips/new"><TripCreate /></Route>
-        <Route path="/trips/:tripId/edit"><TripEdit /></Route>
+        <SecureRoute path="/trips/:tripId/edit"><TripEdit /></SecureRoute>
         <Route path="/trips/:tripId/"><TripShow /></Route>
         <Route path="/trips/"><TripsIndexAsMap /></Route>
 

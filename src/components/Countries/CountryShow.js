@@ -1,5 +1,5 @@
 import React from 'react'
-import { logoImageLink } from '../../lib/config.js'
+import { logoImageLink } from '../../config.js'
 import { useParams, Link } from 'react-router-dom'
 
 import Error from '../common/Error.js'
@@ -37,6 +37,7 @@ function CountryShow () {
     getTrips()
   }, [countryId])
 
+  //todo: convert to api call, push filtering back to DB
   const countriesAndTrips = () => {
     if (country && trips) {
       const matches = trips.filter((trip => {
@@ -96,14 +97,14 @@ function CountryShow () {
               </div>
             </div><div className="container pg-index">
               <div className="gy-2 row row-cols-3">
-
+                {/* todo: calling filter function 5 times here.  Refector to store result in a const and refilter at most once per render */}
                 {!countriesAndTrips() || !countriesAndTrips()[0] &&
                     <Link to={'/trips/new'}>
                       <div className="card">
                         <img className='' src={logoImageLink} alt="Card image cap"></img>
                         <div className="card-body">
                           <h6 className="country-card-title text-decoration-none">No adventures here yet!</h6>
-                          <a href="#" className={`btn ${buttonStyle.default} btn-sm`}>Be the first to share their trip</a>
+                          <button className={`btn ${buttonStyle.default} btn-sm`}>Be the first to share your trip</button>
                         </div>
                       </div>
                     </Link>}
@@ -116,7 +117,7 @@ function CountryShow () {
                             <img className='' src={trip.memories[0] ? trip.memories[0].image : 'https://static.toiimg.com/thumb/66440952/road-trip.jpg?width=1200&height=900'} alt="Card image cap"></img>
                             <div className="card-body">
                               <h6 className="country-card-title text-decoration-none">{trip.title}</h6>
-                              <a href="#" className={`btn ${buttonStyle.default} btn-sm`}>See their trip</a>
+                              <button className={`btn ${buttonStyle.default} btn-sm`}>See their trip</button>
                             </div>
                           </div>
                         </Link>

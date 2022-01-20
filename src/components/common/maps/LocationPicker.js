@@ -2,7 +2,7 @@ import { useState, useRef, useCallback } from 'react'
 import ReactMapGL, { Marker, WebMercatorViewport } from 'react-map-gl'
 import Geocoder from 'react-map-gl-geocoder'
 
-import { mapApiAccessToken, mapStyles } from '../../../lib/config.js'
+import { mapApiAccessToken, mapStyles } from '../../../config.js'
 
 function LocationPicker ({ 
   center = { lat: 0, long: 0 },
