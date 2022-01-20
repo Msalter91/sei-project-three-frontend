@@ -39,6 +39,7 @@ function RenderMap ({
   let locationStats = {}
   const mapContainer = useRef()
   const mapRef = useRef()
+  const minimumAutoFitZoom = 4
 
   const hasMemories = Boolean(aggregatedMemoriesForViewport.length)
   if (hasMemories){
@@ -111,12 +112,17 @@ function RenderMap ({
         padding: mapPadding,
       }
     )
+    const zoomAdjustedForMinimum = Math.min(
+      fittedZoom,
+      minimumAutoFitZoom
+    )
     setViewport({ 
       ...viewport,
       // adjust latitude to fit markers above locations
       latitude: fittedLat - 5,
       longitude: fittedlong,
-      zoom: fittedZoom })
+      zoom: zoomAdjustedForMinimum,
+    })
   }
   useEffect(()=>{
     if (hasMemories){
