@@ -35,7 +35,7 @@ function Profile() {
   React.useEffect( ()=>{
     const getUser = async () => {
       try {
-        const res = await getUserProfile(userId)
+        const res = await getUserProfile(getUserId())
         setUser(res.data)
       } catch (err) {
         console.log(err)
