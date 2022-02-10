@@ -63,6 +63,8 @@ function Profile() {
     // temporary usage until memories is populated by the DB
     //eslint-disable-next-line
   }, [userId] )
+
+  console.log(user)
   
   return (
     <>
@@ -89,7 +91,7 @@ function Profile() {
               <div className="bg-light p-3 d-flex justify-content-end text-center">
                 <ul className="list-inline mb-0">
                   <li className="list-inline-item">
-                    <h5 className="font-weight-bold mb-0 d-block">{user.memories.length}</h5><small className="text-muted"> <i className="fas fa-image mr-1"></i>Memories</small>
+                    <h5 className="font-weight-bold mb-0 d-block">{memoriesArray.length}</h5><small className="text-muted"> <i className="fas fa-image mr-1"></i>Memories</small>
                   </li>
               
                 </ul>
