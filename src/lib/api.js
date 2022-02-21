@@ -62,6 +62,10 @@ export function memoryDelete(memoryId){
   return axios.delete(`${baseUrl}/memories/${memoryId}`, authHeader())
 }
 
+export function memoryGetAll(){
+  return axios.get(`${baseUrl}/memories/`)
+}
+
 // countries 
 export function getAllCountries(){
   return axios.get(`${baseUrl}/countries/`)

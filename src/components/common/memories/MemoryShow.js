@@ -1,8 +1,7 @@
-import axios from 'axios'
 import React from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { isOwner } from '../../../lib/auth.js'
-
+import { memoryGetById } from '../../../lib/api.js'
 import { buttonStyle } from '../../../lib/bootstrap-css-config.js'
 import Error from '../Error.js'
 
@@ -17,7 +16,7 @@ function MemoryShow () {
   React.useEffect(() => {
     const getMemory = async () => {
       try {
-        const memoryData = await axios.get(`/api/memories/${memoryId}`)
+        const memoryData = await memoryGetById(memoryId)
         setMemory(memoryData.data)
         setUser(memoryData.data.addedBy)
         setTrip(memoryData.data.pairedTrip)
